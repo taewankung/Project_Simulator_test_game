@@ -1,0 +1,6 @@
+*.rar
+*.zip
+*.blend1
+*.swp
+*.pyc
+__pycache__

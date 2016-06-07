@@ -29,7 +29,7 @@ class GameLogicMonitor(threading.Thread):
                 print('register new game logic by GameLogicMonitor')
             time.sleep(1)
 
-class ApaimaneeMOBAClient(metaclass=Singleton):
+class ApaimaneeMOBAClient(metaclass = Singleton):
     def __init__(self, client_id,
             host='localhost', port=1883,
             room_id=None):

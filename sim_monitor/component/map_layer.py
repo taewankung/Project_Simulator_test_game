@@ -10,7 +10,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 #
-
+from ..sim_client.client_map import ApaimaneeMOBAClient
 import cocos
 colors =['blue','red','yellow','green','orange']
 lvl_tower = ['lvl1','lvl2','lvl3']
@@ -19,7 +19,7 @@ class MapLayer(cocos.layer.Layer):
         super(MapLayer,self).__init__()
         self.sprite_hero_team1 = [cocos.sprite.Sprite('sim_monitor/res/star_%s.png' % color) for color in colors]
         self.sprite_hero_team2 =[cocos.sprite.Sprite('sim_monitor/res/pentagon_%s.png'%color) for color in colors]
-
+        self.ac = ApaimaneeMOBAClient()
         self.sprite_tower_team1 = {
                                    'top': {
                                             'lvl1':cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),

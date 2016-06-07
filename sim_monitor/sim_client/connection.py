@@ -10,8 +10,8 @@ from .client_map import ApaimaneeMOBAClient
 
 def initial_game():
     # print("arg:", sys.argv)
-    parser = argparse.ArgumentParser(prog='ApaimaneeMOBA',
-                                     description='Apaimanee MOBA Game')
+    parser = argparse.ArgumentParser(prog='Sim_map',
+                                     description='Simulation of Moba game')
     parser.add_argument('blend', nargs='?',
                         help='')
     parser.add_argument('--client_id', nargs='?', const='test_client_id',
@@ -58,43 +58,4 @@ def initial_game():
     global send_initial
     send_initial = True
     logger.info('Apaimanee Game initial ready')
-
-
 send_initial = False
-
-def loading_scene():
-    owner = {}
-    if 'start_time' in owner:
-        ac = ApaimaneeMOBAClient()
-        if ac.game_logic.status == 'play':
-
-            logger = logging.getLogger('apmn')
-            logger.info('Play game')
-
-            cont.activate(scene_act)
-
-        diff_time = datetime.datetime.now() - start_time
-        print('wait for play singnal', diff_time.seconds)
-        if diff_time.seconds % 20 == 0:
-            global send_initial
-            if not send_initial:
-                ac.game_client.game.initial()
-                send_initial = True
-        else:
-           send_initial = False
-
-        if diff_time > datetime.timedelta(minutes=2):
-            print('time out')
-            ac.disconnect()
-
-
-    else:
-        try:
-            initial_game()
-
-        except Exception as e:
-            logger = logging.getLogger('apmn')
-            print('Initial Fail:', e)
-            logger.exception(e)
-        owner['start_time'] = datetime.datetime.now()
-

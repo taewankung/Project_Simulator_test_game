@@ -3,4 +3,5 @@
 *.blend1
 *.swp
 *.pyc
+*.egg-info
 __pycache__

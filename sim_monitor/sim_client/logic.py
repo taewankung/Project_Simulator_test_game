@@ -31,6 +31,8 @@ class GameLogic:
         msg = json.dumps(args)
    #     bge.logic.sendMessage('remote', msg, object_id)
 
+    def update_game(self,game_space):
+        self.game_space = game_space
 
     def move_hero(self, x, y, player_id):
         hero_stat = self.game_space['heros'][player_id]

@@ -123,7 +123,9 @@ class MapLayer(cocos.layer.Layer):
 #            print( ac.game_logic.game_space["tower_team2"][tw]["name"])
 #            print(pos)
             self.set_position(ac.game_logic.game_space["tower_team2"][tw]["name"],pos)
-
+#        self.ac.game_client.game.move_hero(0,0);
+        if len(ac.game_logic.game_space["creep_team1"]) != 0 :
+            print(">X<")
 
     def set_position(self,name , position):
         if name in self.sprite_tower_team1:

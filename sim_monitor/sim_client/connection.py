@@ -38,7 +38,7 @@ def initial_game():
     args = parser.parse_args()
 
     logging.config.fileConfig(args.log)
-    logger = logging.getLogger('apmn')
+    logger = logging.getLogger('Naga')
 
     logger.info('Apaimanee Game start')
     logger.info('Try to connect to host {} port {} client_id {} room_id {}'.format(args.host, args.port, args.client_id, args.room_id))

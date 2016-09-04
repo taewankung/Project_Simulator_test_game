@@ -1,4 +1,4 @@
-from apmn_client import client as aclient
+from naga_client import client as aclient
 from .logic import GameLogic
 import threading
 import time
@@ -37,7 +37,7 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
         self._host = host
         self._port = port
         self._room_id = room_id
-        self.game_client = aclient.ApaimaneeClient(self._client_id,
+        self.game_client = aclient.NagaClient(self._client_id,
                 self._host, self._port)
         self.game_logic = GameLogic(self.game_client)
 

@@ -147,8 +147,10 @@ class MapLayer(cocos.layer.Layer):
                     if game_space["creep_team1"][creep]["alive"]:
                         print("{0},{1}".format(game_space["creep_team1"][creep]["pos_x"],
                                         game_space["creep_team1"][creep]["pos_y"]))
-                        self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
-                        self.add(self.sprite_creep_team1[creep])
+                        if creep not in self.sprite_creep_team1:
+                            self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
+                            self.sprite_creep_team1[creep].scale = 0.1
+                            self.add(self.sprite_creep_team1[creep])
                         self.set_position(
                                         self.sprite_creep_team1[creep],
                                         game_space["creep_team1"][creep]['pos_x'],

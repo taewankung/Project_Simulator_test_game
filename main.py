@@ -28,6 +28,6 @@ if __name__ == "__main__":
     first_scene = ConnectionScene()
     # And now, start the application, starting with main_scene
     cocos.director.director.run(first_scene)
-
+    connector.disconnect()
     # or you could have written, without so many comments:
     #      director.run( cocos.scene.Scene( HelloWorld() ) )

@@ -47,14 +47,14 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
         self.game_logic.game_client = self.game_client
         self.game_client.gm.register(self.game_logic)
 
-        # self.glm = GameLogicMonitor(self.game_client, self.game_client)
-        # self.glm.start()
+ #       self.glm = GameLogicMonitor(self.game_client, self.game_client)
+ #       self.glm.start()
 
     def disconnect(self):
         self.game_client.disconnect()
-        # if self.glm:
-            # self.glm.running = False
-            # self.glm.join()
-            # self.glm = None
+#        if self.glm:
+#            self.glm.running = False
+#            self.glm.join()
+#            self.glm = None
 
 

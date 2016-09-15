@@ -1,4 +1,4 @@
-from naga_client import client
+from nagaclient import client
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 class HeroController:
     '''

@@ -32,7 +32,9 @@ def initial_game():
     parser.add_argument('--log', nargs='?', const='logging.conf',
                         default='logging.conf',
                         help='ApamneeMOBA API logging')
-
+    parser.add_argument('--load', nargs='?', const='sim_monitor.sim_client.test',
+                        default='sim_monitor.sim_client.test',
+                        help='load file')
 
 
     args = parser.parse_args()
@@ -58,4 +60,5 @@ def initial_game():
     global send_initial
     send_initial = True
     logger.info('Apaimanee Game initial ready')
+    return args.load
 send_initial = False

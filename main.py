@@ -11,12 +11,20 @@ import time
 import datetime
 from threading import Thread
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from optparse import OptionParser
 
 import cocos
 
-
 if __name__ == "__main__":
     global send_initial
+    #  parser = OptionParser()
+    #  parser.add_option("-f", "--file", dest="filename",
+                  #  help="write report to FILE", metavar="FILE")
+    #  parser.add_option("-q", "--quiet",
+                  #  action="store_false", dest="verbose", default=True,
+                  #  help="don't print status messages to stdout")
+
+#    (options, args) = parser.parse_args()
     send_initial = False
     start_time = None
     connector = Connector()

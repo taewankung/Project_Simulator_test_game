@@ -14,4 +14,6 @@ sim_monitor/model/status.py
 sim_monitor/sim_client/__init__.py
 sim_monitor/sim_client/client_map.py
 sim_monitor/sim_client/connection.py
+sim_monitor/sim_client/executor.py
 sim_monitor/sim_client/logic.py
+sim_monitor/sim_client/test.py

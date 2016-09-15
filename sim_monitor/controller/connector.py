@@ -10,16 +10,20 @@ from sim_monitor.sim_client.executor import Executor
 class Connector(Thread):
     def __init__(self):
         super().__init__()
-        self.running = True
+        self.running = False
         self.ac = None
+        self.ex = Executor()
+        self.ex_file = ""
 
     def run(self):
         print("connecting")
         self.connect()
         self.ac = ApaimaneeMOBAClient()
         self.ac.game_client.game.update()
-        self.ex = Executor()
-        self.ex.run()
+        self.ex.load_file(self.ex_file)
+#        while(status.connect):
+#            self.ex.run()
+
 
     def connect(self):
         global send_initial
@@ -45,7 +49,7 @@ class Connector(Thread):
                     ac.disconnect()
             else:
                 try:
-                    initial_game()
+                    self.ex_file = initial_game()
                 except Exception as e:
                     print('Initial Fail:', e)
                 start_time = datetime.datetime.now()
@@ -53,6 +57,7 @@ class Connector(Thread):
     def disconnect(self):
         try:
             self.ac.disconnect()
+            status.connect = False
         except Exception as e:
             print("Exeption: "+e)
             print("apaimanee client not load or haven't connection")

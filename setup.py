@@ -11,7 +11,8 @@ CONTROLLER = True
 COMPUTE_NODE = True
 
 requires = [
-    'paho-mqtt'
+    'paho-mqtt',
+    'cocos2d'
 ]
 
 

@@ -1,4 +1,4 @@
-from naga_client import client as aclient
+from nagaclient import client as aclient
 from .logic import GameLogic
 import threading
 import time

@@ -8,7 +8,6 @@ import cocos
 
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 from sim_monitor.component.layer.connection_layer import ConnectionLayer
-from sim_monitor.component.layer.HUD import HUD
 from sim_monitor.model.gamemodel import GameModel
 from sim_monitor.controller.gamectrl import GameCtrl
 from sim_monitor.model.status import status

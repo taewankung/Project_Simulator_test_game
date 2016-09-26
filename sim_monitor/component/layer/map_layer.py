@@ -39,7 +39,11 @@ class MapLayer(cocos.layer.Layer):
         self.bg = BackgroundMap()
         self.add(self.bg)
         self.is_event_handler = True
+        self.count_hero_team1 = 0
+        self.count_hero_team2 = 0
         self.sprite_hero_team1 = [cocos.sprite.Sprite('sim_monitor/res/star_%s.png' % color) for color in colors]
+        self.hero_team1 = {}
+        self.hero_team2 = {}
         self.sprite_hero_team2 = [cocos.sprite.Sprite('sim_monitor/res/pentagon_%s.png' % color) for color in colors]
         self.ac = None
         self.sprite_creep_team1 = {}
@@ -70,13 +74,13 @@ class MapLayer(cocos.layer.Layer):
         self.timer = 0
         # add Hero symbol
 
-        for hero_team1 in self.sprite_hero_team1:
-            hero_team1.scale = 0.10
-            self.add(hero_team1)
+        #  for hero_team1 in self.sprite_hero_team1:
+            #  hero_team1.scale = 0.30
+            #  self.add(hero_team1)
 
-        for hero_team2 in self.sprite_hero_team2:
-            hero_team2.scale = 0.10
-            self.add(hero_team2)
+        #  for hero_team2 in self.sprite_hero_team2:
+            #  hero_team2.scale = 0.30
+            #  self.add(hero_team2)
 
         # add tower symbol
         for tw in self.sprite_tower_team1:
@@ -113,8 +117,10 @@ class MapLayer(cocos.layer.Layer):
         for tw in ac.game_logic.game_space["tower_team2"]:
             pos = (ac.game_logic.game_space["tower_team2"][tw]['pos_x'],
                    ac.game_logic.game_space["tower_team2"][tw]['pos_y'])
-
             self.set_position_tower(ac.game_logic.game_space["tower_team2"][tw]["name"], pos)
+        for hero in ac.game_logic.game_space["hero_team1"]:
+            pos = ( ac.game_logic.game_space["hero_team1"][hero]['pos_x'],
+                     ac.game_logic.game_space["hero_team1"][hero]['pos_y'])
         self.schedule(self.step)
 
     def set_position_tower(self, name, position):
@@ -135,6 +141,15 @@ class MapLayer(cocos.layer.Layer):
             self.timer = 0
             if self.ac is not None:
                 game_space = self.ac.game_logic.game_space
+                for hero in game_space["hero_team1"]:
+                    if hero not in self.hero_team1:
+                        self.count_hero_team1 += 1
+                        self.hero_team1[hero] = self.sprite_hero_team1[self.count_hero_team1-1]
+                        self.hero_team1[hero].scale = 0.3
+                        pos = (game_space["hero_team1"][hero]['pos_x'],
+                           game_space["hero_team1"][hero]['pos_y'])
+                        self.hero_team1[hero].position = pos
+                        self.add(self.hero_team1[hero])
                 for tw in game_space["tower_team1"]:
                     pos = (game_space["tower_team1"][tw]['pos_x'],
                            game_space["tower_team1"][tw]['pos_y'])
@@ -145,8 +160,8 @@ class MapLayer(cocos.layer.Layer):
                     self.set_position_tower(game_space["tower_team2"][tw]["name"], pos)
                 for creep in game_space["creep_team1"]:
                     if game_space["creep_team1"][creep]["alive"]:
-                        print("{0},{1}".format(game_space["creep_team1"][creep]["pos_x"],
-                                        game_space["creep_team1"][creep]["pos_y"]))
+                        #print("{0},{1}".format(game_space["creep_team1"][creep]["pos_x"],
+                        #                game_space["creep_team1"][creep]["pos_y"]))
                         if creep not in self.sprite_creep_team1:
                             self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
                             self.sprite_creep_team1[creep].scale = 0.1
@@ -157,3 +172,10 @@ class MapLayer(cocos.layer.Layer):
                                         game_space["creep_team1"][creep]['pos_y'])
                     else:
                         self.sprite_creep_team1.pop(creep)
+
+                for hero_id in game_space["hero_team1"]:
+                    if game_space["hero_team1"][hero]["alive"]:
+                        self.set_position(
+                                        self.hero_team1[hero],
+                                        game_space["hero_team1"][hero_id]['pos_x'],
+                                        game_space["hero_team1"][hero_id]['pos_y'])

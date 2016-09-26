@@ -12,7 +12,7 @@ class Connector(Thread):
         super().__init__()
         self.running = False
         self.ac = None
-        self.ex = Executor()
+        self.ex = None
         self.ex_file = ""
 
     def run(self):
@@ -21,8 +21,8 @@ class Connector(Thread):
         self.ac = ApaimaneeMOBAClient()
         self.ac.game_client.game.update()
         self.ex.load_file(self.ex_file)
-#        while(status.connect):
-#            self.ex.run()
+        while(status.connect):
+            self.ex.run()
 
 
     def connect(self):
@@ -35,6 +35,7 @@ class Connector(Thread):
                 if ac.game_logic.status == 'play':
                     print("//////////////////PLAY/////////////////")
                     status.connect = True
+                    self.ex = Executor()
                 diff_time = datetime.datetime.now() - start_time
                 time.sleep(1)
                 print('wait for play singnal', diff_time.seconds)

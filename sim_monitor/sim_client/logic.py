@@ -14,7 +14,6 @@ class GameLogic:
     def start_game(self):
         self.status = 'play'
 
-
     def initial_game(self, players, player, game_space):
         if players is None:
             return
@@ -36,7 +35,7 @@ class GameLogic:
 
     def move_hero(self, x, y, player_id):
         hero_stat = self.game_space['heros'][player_id]
-        hero_stat['target'] = dict(x=x,y=y)
+        #hero_stat['target'] = dict(x=x,y=y)
 
         move_msg = json.dumps(dict(method='move_hero', x=x, y=y, player_id=player_id))
   #      bge.logic.sendMessage('remote', move_msg, hero_stat['name'].lower())

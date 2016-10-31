@@ -46,7 +46,7 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
         self.game_client.gm.start_game(self._room_id)
         self.game_logic.game_client = self.game_client
         self.game_client.gm.register(self.game_logic)
-
+#        print(self._client_id)
  #       self.glm = GameLogicMonitor(self.game_client, self.game_client)
  #       self.glm.start()
 

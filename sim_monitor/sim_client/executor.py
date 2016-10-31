@@ -34,7 +34,7 @@ class Executor:
                 try:
                     self.hero.run()
                 except Exception as e :
-                    print(e)
+                    print("Exeception in Executor"+e)
         time.sleep(1)
         pass
 

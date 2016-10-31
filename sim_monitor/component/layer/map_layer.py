@@ -21,13 +21,13 @@ colors = ["red", "orange", "green", "blue", "yellow"]
 class BackgroundMap(cocos.layer.Layer):
     def __init__(self):
         super().__init__()
-        self.img = pyglet.resource.image('sim_monitor/res/Labelled_Map.png')
+        #  self.img = pyglet.resource.image('sim_monitor/res/Labelled_Map.png')
 
-    def draw(self):
-        glPushMatrix()
-        self.transform()
-        self.img.blit(0, 0)
-        glPopMatrix()
+    #  def draw(self):
+        #  glPushMatrix()
+        #  self.transform()
+        #  self.img.blit(0, 0)
+        #  glPopMatrix()
 
 
 class MapLayer(cocos.layer.Layer):
@@ -174,8 +174,8 @@ class MapLayer(cocos.layer.Layer):
                         self.sprite_creep_team1.pop(creep)
 
                 for hero_id in game_space["hero_team1"]:
-                    if game_space["hero_team1"][hero]["alive"]:
+                    if game_space["hero_team1"][hero_id]["alive"]:
                         self.set_position(
-                                        self.hero_team1[hero],
+                                        self.hero_team1[hero_id],
                                         game_space["hero_team1"][hero_id]['pos_x'],
                                         game_space["hero_team1"][hero_id]['pos_y'])

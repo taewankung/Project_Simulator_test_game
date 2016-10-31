@@ -21,8 +21,11 @@ class Connector(Thread):
         self.ac = ApaimaneeMOBAClient()
         self.ac.game_client.game.update()
         self.ex.load_file(self.ex_file)
+        print(status.connect)
         while(status.connect):
             self.ex.run()
+            #  for hero in self.ac.game_logic.game_space["hero_team1"]:
+                #  print(self.ac.game_logic.game_space["hero_team1"][hero]["pos_x"])
 
 
     def connect(self):
@@ -32,6 +35,7 @@ class Connector(Thread):
         while not status.connect:
             if start_time is not None:
                 ac = ApaimaneeMOBAClient()
+                print(ac._client_id)
                 if ac.game_logic.status == 'play':
                     print("//////////////////PLAY/////////////////")
                     status.connect = True
@@ -60,6 +64,6 @@ class Connector(Thread):
             self.ac.disconnect()
             status.connect = False
         except Exception as e:
-            print("Exeption: "+e)
+            print("Exeption conector: "+e)
             print("apaimanee client not load or haven't connection")
 

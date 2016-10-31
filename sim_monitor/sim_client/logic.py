@@ -34,10 +34,11 @@ class GameLogic:
         self.game_space = game_space
 
     def move_hero(self, x, y, player_id):
-        hero_stat = self.game_space['heros'][player_id]
+        pass
+        #hero_stat = self.game_space['heros'][player_id]
         #hero_stat['target'] = dict(x=x,y=y)
 
-        move_msg = json.dumps(dict(method='move_hero', x=x, y=y, player_id=player_id))
+        #move_msg = json.dumps(dict(method='move_hero', x=x, y=y, player_id=player_id))
   #      bge.logic.sendMessage('remote', move_msg, hero_stat['name'].lower())
 
 

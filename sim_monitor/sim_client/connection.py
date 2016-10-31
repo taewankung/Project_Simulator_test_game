@@ -49,13 +49,12 @@ def initial_game():
     ac = ApaimaneeMOBAClient(args.client_id,
                              args.host, int(args.port),
                              args.room_id)
-
     gc = ac.game_client
     gc.user.loggedin_info = dict(token=args.token)
     gc.room.current_room = dict(room_id=args.room_id)
-
+    #  print(gc.user.loggedin_info)
+    print(ac._client_id)
     ac.connect()
-
     gc.game.initial()
     global send_initial
     send_initial = True

@@ -9,11 +9,15 @@ import sys
 import os
 import time
 import datetime
+import logging
+import logging.config
 from threading import Thread
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 from optparse import OptionParser
 
 import cocos
+
+logger = logging.getLogger('sim_map')
 
 if __name__ == "__main__":
     global send_initial
@@ -29,6 +33,7 @@ if __name__ == "__main__":
     start_time = None
     connector = Connector()
     connector.start()
+    logger.info("Hello")
     # director init takes the same arguments as pyglet.window
     cocos.director.director.init(resizable=True,width = 1000, height=1000)
     # We create a new layer, an instance of HelloWorld

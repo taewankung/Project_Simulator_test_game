@@ -30,13 +30,11 @@ class Executor:
     def run(self):
         if status.connect and self.ac.game_logic.status == "play":
             diff_time = datetime.datetime.now() - self.ready_time
-            if diff_time.seconds % 1 == 0 and diff_time.seconds >0:
-                try:
-                    self.hero.run()
-                except Exception as e :
-                    print("Exeception in Executor"+e)
-        time.sleep(1)
-        pass
+            #if diff_time.seconds % 1 == 0 and diff_time.seconds >0:
+            try:
+                self.hero.run()
+            except Exception as e :
+                print("Exeception in Executor"+e)
 
 #  if __name__ == "__main__":
       #  ex = Executor("api_game.apaimanee","api_game")

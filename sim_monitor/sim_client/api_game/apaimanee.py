@@ -6,6 +6,8 @@ class HeroController:
     '''
     def __init__(self):
         self.ac = ApaimaneeMOBAClient()
+        self.player = self.ac.game_logic.player
+        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         '''
         Hero_obj is Object in class the game.
         '''
@@ -38,7 +40,11 @@ class HeroController:
     def move(self,pos_x,pos_y):
         '''
         The movement method move the actor.
+        pos_x is integer
+        pos_y is integer
         '''
+        #print("{0},{1}".format(self.status["pos_x"],self.status["pos_y"]))
+        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.ac.game_client.game.move_hero(x = pos_x, y = pos_y)
         pass
 

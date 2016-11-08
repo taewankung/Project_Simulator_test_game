@@ -137,7 +137,7 @@ class MapLayer(cocos.layer.Layer):
 
     def step(self, dt):
         self.timer += dt
-        if self.timer > 1:
+        if self.timer > 0.01:
             self.timer = 0
             if self.ac is not None:
                 game_space = self.ac.game_logic.game_space

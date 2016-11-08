@@ -27,7 +27,7 @@ class GameLogicMonitor(threading.Thread):
             if self.game_client.gm.game_logic is None:
                 self.game_client.gm.register(self.game_logic)
                 print('register new game logic by GameLogicMonitor')
-            time.sleep(1)
+            time.sleep(0.001)
 
 class ApaimaneeMOBAClient(metaclass = Singleton):
     def __init__(self, client_id,

@@ -8,9 +8,13 @@ class HeroController:
         self.ac = ApaimaneeMOBAClient()
         self.player = self.ac.game_logic.player
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+        self.rev_message = self.ac.game_logic.rev_message
         '''
         Hero_obj is Object in class the game.
         '''
+    def update_message(self):
+        self.rev_message = self.ac.game_logic.rev_message
+
 
     def attack(self, Enemy):
         '''
@@ -37,7 +41,7 @@ class HeroController:
         '''
         pass
 
-    def move(self,pos_x,pos_y):
+    def move(self,pos_x,pos_y,msg=""):
         '''
         The movement method move the actor.
         pos_x is integer
@@ -45,7 +49,7 @@ class HeroController:
         '''
         #print("{0},{1}".format(self.status["pos_x"],self.status["pos_y"]))
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
-        self.ac.game_client.game.move_hero(x = pos_x, y = pos_y)
+        self.ac.game_client.game.move_hero(x = pos_x, y = pos_y,msg=msg)
         pass
 
 class UsingItem:
@@ -128,6 +132,11 @@ class HeroStatus:
     The HeroStatus class is monitor for look status or return status of hero
     object in the game.
     '''
+    def __init__(self):
+        self.ac = ApaimaneeMOBAClient()
+        self.player = self.ac.game_logic.player
+        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+
     def __init__(self,hero):
         '''
         Hero is Class in Hero class in the game.

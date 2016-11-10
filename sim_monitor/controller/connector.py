@@ -12,7 +12,6 @@ class Connector(Thread):
         super().__init__()
         self.running = False
         self.ac = None
-        self.ex = None
         self.ex_file = ""
 
     def run(self):
@@ -20,10 +19,10 @@ class Connector(Thread):
         self.connect()
         self.ac = ApaimaneeMOBAClient()
         self.ac.game_client.game.update()
-        self.ex.load_file(self.ex_file)
+        self.ac.ex.load_file(self.ex_file)
 #        print(status.connect)
 #        while(status.connect):
-        self.ex.run()
+        self.ac.ex.run()
             #  for hero in self.ac.game_logic.game_space["hero_team1"]:
                 #  print(self.ac.game_logic.game_space["hero_team1"][hero]["pos_x"])
 
@@ -38,7 +37,7 @@ class Connector(Thread):
                 if ac.game_logic.status == 'play':
                     print("//////////////////PLAY/////////////////")
                     status.connect = True
-                    self.ex = Executor()
+#                    self.ac.ex.run()
                 diff_time = datetime.datetime.now() - start_time
                 time.sleep(1)
                 print('wait for play singnal', diff_time.seconds)

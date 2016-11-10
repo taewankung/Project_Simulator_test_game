@@ -11,6 +11,8 @@ class GameLogic:
         self.game_space = None
         self.game_client = game_client
 
+        self.rev_message = ""
+
     def start_game(self):
         self.status = 'play'
 
@@ -32,6 +34,10 @@ class GameLogic:
 
     def update_game(self,game_space):
         self.game_space = game_space
+
+    def complete_command(self,msg):
+        self.rev_message = msg
+        print("complete")
 
     def move_hero(self, x, y, player_id):
         pass

@@ -1,6 +1,7 @@
 from nagaclient import client as aclient
 from .logic import GameLogic
 import threading
+from .executor import Executor
 import time
 
 class Singleton(type):
@@ -40,6 +41,7 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
         self.game_client = aclient.NagaClient(self._client_id,
                 self._host, self._port)
         self.game_logic = GameLogic(self.game_client)
+        self.ex = Executor()
 
     def connect(self):
         self.game_client.initial(True)

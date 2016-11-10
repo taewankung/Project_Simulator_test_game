@@ -37,7 +37,7 @@ class Executor(threading.Thread):
             try:
                 self.hero.run()
             except Exception as e :
-                print("Exeception in Executor"+e)
+                print("Exeception in Executor"+str(e))
 
 #  if __name__ == "__main__":
       #  ex = Executor("api_game.apaimanee","api_game")

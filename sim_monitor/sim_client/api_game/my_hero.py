@@ -1,5 +1,8 @@
 
 class MyHero:
+    '''
+    This class implementation for Executor in display program execute run method.
+    '''
     def __init__(self):
         pass
 

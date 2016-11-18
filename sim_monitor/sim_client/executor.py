@@ -1,3 +1,5 @@
+import shutil,errno
+import os
 import inspect
 import importlib
 from .api_game.my_hero import MyHero
@@ -6,6 +8,14 @@ import time
 from sim_monitor.model.status import status
 #from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 import threading
+
+def copy_file(src, dst):
+    try:
+        shutil.copytree(src, dst)
+    except OSError as exc: # python >2.5
+        if exc.errno == errno.ENOTDIR:
+            shutil.copy(src, dst)
+        else: raise
 
 class Executor(threading.Thread):
     def __init__(self):
@@ -16,6 +26,13 @@ class Executor(threading.Thread):
         #self.ac = ApaimaneeMOBAClient()
 
     def load_file(self,module=""):
+        string = ''
+        #for text in module.split('.'):
+        #    string = string+'/'+text
+        print(module)
+        copy_file(module,str(os.getcwd())+'/sim_monitor/sim_client/ex_code')
+        my_file = module.split('/')[-1]
+        module="sim_monitor.sim_client.ex_code."+my_file.split('.')[0]
         try:
             self.ex_lib = importlib.import_module(module)
             print("load_module complete")

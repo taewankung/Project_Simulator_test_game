@@ -1,7 +1,7 @@
 #import bge
 import time
 import datetime
-
+import os
 import logging
 import logging.config
 import sys
@@ -33,7 +33,7 @@ def initial_game():
                         default='logging.conf',
                         help='ApamneeMOBA API logging')
     parser.add_argument('--load', nargs='?', const='sim_monitor.sim_client.test',
-                        default='sim_monitor.sim_client.test',
+                        default=str(os.getcwd())+'/sim_monitor/sim_client/test.py',
                         help='load file')
 
 

@@ -1,5 +1,11 @@
-from nagaclient import client
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
+from nagaclient import client
+'''
+warning:
+    if you want to use loop for ever you must be use timer.sleep(0.001)
+    because loop forever can your disply program not optimize if not delay.
+'''
+
 class HeroController:
     '''
     The HeroController class is controlling the actor in serveral events.
@@ -12,14 +18,25 @@ class HeroController:
         '''
         Hero_obj is Object in class the game.
         '''
+
+    def update_status(self):
+        '''
+        This method use to update status from server for HeroController.
+        '''
+        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+
     def update_message(self):
+        '''
+        This method use to update message from server for handle event when your hero found some event.
+        '''
         self.rev_message = self.ac.game_logic.rev_message
 
 
-    def attack(self, Enemy):
+    def attack(self, Enemy,msg=""):
         '''
         The attack method is controlling the actor to attack Enemy.
         '''
+        self.ac.game_client.game.attack(Enemy,msg)
         pass
 
     def use_skill(self, target, hero_skill = 0):
@@ -44,12 +61,18 @@ class HeroController:
     def move(self,pos_x,pos_y,msg=""):
         '''
         The movement method move the actor.
-        pos_x is integer
-        pos_y is integer
+        argument in function have 3 argument: pos_x,pos_y
+
+        pos_x is integer or float for position x,
+        pos_y is integer or float for position y,
+        msg is string for message which want to server send when this function done.
+
+        recommend:
+            Server will send message "found enemy" when unit found enemy for you want to handle that event.
         '''
         #print("{0},{1}".format(self.status["pos_x"],self.status["pos_y"]))
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
-        self.ac.game_client.game.move_hero(x = pos_x, y = pos_y,msg=msg)
+        self.ac.game_client.game.move_hero(x=pos_x, y=pos_y,msg=msg)
         pass
 
 class UsingItem:
@@ -137,11 +160,11 @@ class HeroStatus:
         self.player = self.ac.game_logic.player
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
 
-    def __init__(self,hero):
-        '''
-        Hero is Class in Hero class in the game.
-        '''
-        self.hero = hero
+#    def __init__(self,hero):
+#        '''
+#        Hero is Class in Hero class in the game.
+#        '''
+#        self.hero = hero
 #    @property
     def get_hp(self):
         '''

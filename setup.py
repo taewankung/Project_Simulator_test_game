@@ -12,7 +12,8 @@ COMPUTE_NODE = True
 
 requires = [
     'paho-mqtt',
-    'cocos2d'
+    'cocos2d',
+    'sphinx'
 ]
 
 

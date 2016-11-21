@@ -28,7 +28,7 @@ class GameModel(pyglet.event.EventDispatcher):
         else:
             self.ac = ApaimaneeMOBAClient()
             time.sleep(2)
-        self.dispatch_event("check_connecting")
+            self.dispatch_event("check_connecting")
 
 
 GameModel.register_event_type('check_connecting')

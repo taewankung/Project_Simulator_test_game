@@ -17,6 +17,7 @@ from optparse import OptionParser
 
 import cocos
 
+from cocos.director import director
 logger = logging.getLogger('sim_map')
 
 if __name__ == "__main__":
@@ -34,8 +35,12 @@ if __name__ == "__main__":
     connector = Connector()
     connector.start()
     logger.info("Hello")
+
+
     # director init takes the same arguments as pyglet.window
-    cocos.director.director.init(resizable=True,width = 1000, height=1000)
+    cocos.director.director.init(resizable=True,width = 1920, height=1080)
+    cocos.director.director.window.set_fullscreen(False)
+    x,y = cocos.director.director.get_window_size()
     # We create a new layer, an instance of HelloWorld
     # A scene that contains the layer hello_layer
     first_scene = ConnectionScene()

@@ -32,7 +32,7 @@ class x(MyHero):
                 if len(self.status["near_enemy"]) !=0:
                     self.controller.attack(self.status["near_enemy"][0],"attack")
                 self.controller.move(20,250,"start")
-                print(self.status["near_enemy"])
+                #print(self.status["near_enemy"])
                 self.controller.rev_message = ""
             self.controller.update_message()
             self.controller.update_status()

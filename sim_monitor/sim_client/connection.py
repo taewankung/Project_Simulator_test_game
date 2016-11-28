@@ -12,8 +12,8 @@ def initial_game():
     # print("arg:", sys.argv)
     parser = argparse.ArgumentParser(prog='Sim_map',
                                      description='Simulation of Moba game')
-    parser.add_argument('blend', nargs='?',
-                        help='')
+    #  parser.add_argument('blend', nargs='?',
+                        #  help='')
     parser.add_argument('--client_id', nargs='?', const='test_client_id',
                         default='test_client_id',
                         help='ApaimaneeMOBA client_id')
@@ -32,8 +32,9 @@ def initial_game():
     parser.add_argument('--log', nargs='?', const='logging.conf',
                         default='logging.conf',
                         help='ApamneeMOBA API logging')
-    parser.add_argument('--load', nargs='?', const='sim_monitor.sim_client.test',
-                        default=str(os.getcwd())+'/sim_monitor/sim_client/test.py',
+    path = str(os.getcwd())
+    parser.add_argument('--load', nargs='?', const=path+'/sim_monitor/sim_client/test.py',
+                        default=path+'/sim_monitor/sim_client/test.py',
                         help='load file')
 
 

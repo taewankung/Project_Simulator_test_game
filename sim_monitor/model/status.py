@@ -5,6 +5,7 @@ class Status:
         self.start = False
         self.message = ""
         self.ac = None
+        self.hero_key = None
 
 status = Status()
 ac = status.ac

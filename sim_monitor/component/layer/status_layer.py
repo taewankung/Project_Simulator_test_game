@@ -10,6 +10,7 @@ from cocos.text import *
 from cocos.layer import *
 from cocos.actions import *
 from sim_monitor.model.status import status
+from .hp_bar import Bar
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -62,7 +63,9 @@ class StatusLayer(cocos.layer.ColorLayer):
         super().__init__(r,b,g,a, width=width, height=height)
         self.text_hero = cocos.text.Label(name, font_size = 20)
         self.text_hp = cocos.text.Label('HP: ', font_size = 15)
+        self.hp_bar = Bar()
         self.text_mana = cocos.text.Label('MANA: ', font_size = 15)
+        self.mana_bar = Bar(0,0,255,100)
         self.is_event_handler = True
         self.hero_key = hero_key
         self.ac = ApaimaneeMOBAClient()
@@ -74,23 +77,29 @@ class StatusLayer(cocos.layer.ColorLayer):
 
         self.text_hero.position = (0, 150)
         self.text_hp.position = (0, 120)
+        self.hp_bar.position = (40,120)
         self.text_mana.position = (0, 100)
+        self.mana_bar.position = (70,100)
         self.button.set_local(self.local_x+self.x, self.local_y+self.y)
-        self.button.position=(5,0)  
+        self.button.position=(5,0)
         self.add(self.text_hero,1)
-        self.add(self.text_hp,1)
-        self.add(self.text_mana,1)
+        self.add(self.text_hp,2)
+        self.add(self.text_mana,2)
         self.add(self.button,0)
+        self.add(self.hp_bar,1)
+        self.add(self.mana_bar,1)
 
         self.schedule(self.step)
         print(self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key])
 
 
     def update_status(self):
-        
-
         hp = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_hp']
+        max_hp = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_hp']
         mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_mana']
+        max_mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_mana']
+        self.hp_bar.update(hp,max_hp)
+        self.mana_bar.update(mana,max_mana)
         self.text_hp.element.text = 'HP: ' + str(hp)
         self.text_mana.element.text = 'MANA: ' + str(mana)
 

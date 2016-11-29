@@ -10,7 +10,7 @@ from cocos.text import *
 from cocos.layer import *
 from cocos.actions import *
 from sim_monitor.model.status import status
-from .hp_bar import Bar
+from .bar import Bar
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 

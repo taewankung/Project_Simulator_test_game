@@ -12,7 +12,6 @@ class x(MyHero):
         super().__init__()
         self.controller = HeroController()
         time.sleep(5)
-        pass
 
     def move(self):
         #if self.controller.ac.game_logic.game_space[""]

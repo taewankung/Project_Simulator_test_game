@@ -1,0 +1,13 @@
+<WarningPopup>:
+    title:'warning'
+    size_hint:(None,None)
+    size:(200,100)
+    StackLayout:
+        id: warning_popup
+        Label:
+            text:'can not import file'
+            font_size: 20
+        Button:
+            id: ok_button
+            text:'ok'
+            on_press: root.on_ok()

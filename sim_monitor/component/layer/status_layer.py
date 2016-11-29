@@ -90,7 +90,7 @@ class StatusLayer(cocos.layer.ColorLayer):
         self.add(self.mana_bar,1)
 
         self.schedule(self.step)
-        print(self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key])
+#        print(self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key])
 
 
     def update_status(self):

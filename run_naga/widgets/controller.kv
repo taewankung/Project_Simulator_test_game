@@ -1,0 +1,77 @@
+#:kivy 1.0
+<NagaController>:
+    BoxLayout:
+        padding: 20
+        orientation: 'vertical'
+        StackLayout:
+            orientation: 'tb-lr'
+#            Button:
+#                id: run_env
+#                text: "Run environment"
+#                size_hint_x:None
+#                size_hint_y:None
+#                size:(150,50)
+#                font_size: 20
+#                on_press: root.active_env()
+            StackLayout:
+                orientation: 'lr-tb'
+                Button:
+                    id: browser_c1_button
+                    text: "Browse"
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: root.on_browse('client1')
+                TextInput:
+                    id: file_client1
+                    text:"run_naga/api_code/test.py"
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                Button:
+                    id: run_client1
+                    text: "Run client1"
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(150,50)
+                    font_size: 20
+                    on_press: root.run_client1()
+
+                Button:
+                    id: browser_c2_button
+                    text: "Browse"
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: root.on_browse('client2')
+                TextInput:
+                    id: file_client2
+                    text:"run_naga/api_code/test.py"
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size: 20
+                    size:(200,50)
+                Button:
+                    id: run_client2
+                    text: "Run client2"
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(150,50)
+                    font_size: 20
+                    on_press: root.run_client2()
+
+                Label:
+                    id: host_label
+                    text: 'Host:'
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    font_size: 20
+                    size:(200,50)
+                TextInput:
+                    id: host
+                    text:"localhost"
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size: 20
+                    size:(200,50)

@@ -11,9 +11,9 @@ CONTROLLER = True
 COMPUTE_NODE = True
 
 requires = [
-    'paho-mqtt',
-    'cocos2d',
-    'sphinx'
+    'pygame',
+    'cython',
+    'kivy'
 ]
 
 
@@ -25,13 +25,12 @@ setup(name='sim_map',
       classifiers=[
           "Programming Language :: Python :: 3",
       ],
-      author='Aran Khunaree',
-      author_email='alunnice2537@gmail.com',
+      author='Phutthewan Yangyuenyong',
+      author_email='taewankung@gmail.com',
       scripts=scripts,
       license='xxx License',
       packages=find_packages(),
-  #    url='https://github.com/NiNiiWs/apaimanee-client.git',
-      keywords='MOBA, GAME',
+      keywords='Runing naga project',
       #      packages=find_packages(),
       include_package_data=True,
       zip_safe=False,

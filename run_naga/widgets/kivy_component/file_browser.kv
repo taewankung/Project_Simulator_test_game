@@ -1,0 +1,31 @@
+<FileBrowser>:
+    StackLayout:
+        orientation: 'tb-lr'
+        FileChooserIconView:
+            id: browse_chooser
+            size_hint: (1,0.85)
+            on_selection:root.on_selection()
+
+        BoxLayout:
+            size_hint: (1,0.1)
+            Label:
+                text: 'Name'
+                size_hint: (None,None)
+                size: (100,30)
+            TextInput:
+                id: file_selected_input
+                size_hint: (0.50,None)
+                size: (50,30)
+                font_size: 15
+            Button:
+                id: _ok
+                text: 'OK'
+                size_hint: (None,None)
+                size: (50,30)
+                on_press: root.on_ok()
+            Button:
+                id: _cancel
+                text: 'Cancel'
+                size_hint: (None,None)
+                size: (50,30)
+                on_press: root.on_cancel()

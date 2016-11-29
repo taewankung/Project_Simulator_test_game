@@ -32,6 +32,7 @@ class Executor(threading.Thread):
         print(module)
         copy_file(module,str(os.getcwd())+'/sim_monitor/sim_client/ex_code')
         my_file = module.split('/')[-1]
+        print(my_file.split('.')[0])
         module="sim_monitor.sim_client.ex_code."+my_file.split('.')[0]
         try:
             self.ex_lib = importlib.import_module(module)
@@ -43,7 +44,7 @@ class Executor(threading.Thread):
 
         except ValueError:
             print("cannot import module: "+module)
-            return self.ex_lib
+            #return self.ex_lib
         return self.ex_lib
 
     def run(self):

@@ -11,7 +11,7 @@ from .client_map import ApaimaneeMOBAClient
 def initial_game():
     # print("arg:", sys.argv)
     parser = argparse.ArgumentParser(prog='Sim_map',
-                                     description='Simulation of Moba game')
+                                     description='Simulation of MOBA game')
     #  parser.add_argument('blend', nargs='?',
                         #  help='')
     parser.add_argument('--client_id', nargs='?', const='test_client_id',

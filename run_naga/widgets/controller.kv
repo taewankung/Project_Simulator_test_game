@@ -5,14 +5,6 @@
         orientation: 'vertical'
         StackLayout:
             orientation: 'tb-lr'
-#            Button:
-#                id: run_env
-#                text: "Run environment"
-#                size_hint_x:None
-#                size_hint_y:None
-#                size:(150,50)
-#                font_size: 20
-#                on_press: root.active_env()
             StackLayout:
                 orientation: 'lr-tb'
                 Button:
@@ -24,7 +16,7 @@
                     on_press: root.on_browse('client1')
                 TextInput:
                     id: file_client1
-                    text:"run_naga/api_code/test.py"
+                    text:"sim_monitor/sim_client/test.py"
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -47,7 +39,7 @@
                     on_press: root.on_browse('client2')
                 TextInput:
                     id: file_client2
-                    text:"run_naga/api_code/test.py"
+                    text:"sim_monitor/sim_client/test.py"
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size: 20

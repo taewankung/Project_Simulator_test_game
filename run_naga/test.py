@@ -35,6 +35,7 @@ class x(MyHero):
                 #print(self.status["near_enemy"])
                 self.controller.rev_message = ""
             self.controller.update_message()
+	    print(self.controller.rev_message)
             self.controller.update_status()
             time.sleep(0.01)
 

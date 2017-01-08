@@ -158,10 +158,10 @@ class MapLayer(cocos.layer.Layer):
                     pos = (game_space["tower_team2"][tw]['pos_x'],
                            game_space["tower_team2"][tw]['pos_y'])
                     self.set_position_tower(game_space["tower_team2"][tw]["name"], pos)
+#//////////////////////////////Creep display/////////////////////////////////////////////
+#//////////////////////////////Creep_team1///////////////////////////////////////////////
                 for creep in game_space["creep_team1"]:
                     if game_space["creep_team1"][creep]["alive"]:
-                        #print("{0},{1}".format(game_space["creep_team1"][creep]["pos_x"],
-                        #                game_space["creep_team1"][creep]["pos_y"]))
                         if creep not in self.sprite_creep_team1:
                             self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
                             self.sprite_creep_team1[creep].scale = 0.1
@@ -171,11 +171,58 @@ class MapLayer(cocos.layer.Layer):
                                         game_space["creep_team1"][creep]['pos_x'],
                                         game_space["creep_team1"][creep]['pos_y'])
                     else:
-                        self.sprite_creep_team1.pop(creep)
+                        if creep in self.sprite_creep_team1:
+                            self.sprite_creep_team1[creep].visible = False
 
+#///////////////////////////////Creep_team2/////////////////////////////////////////////
+                for creep in game_space["creep_team2"]:
+                    if game_space["creep_team2"][creep]["alive"]:
+                        if creep not in self.sprite_creep_team2:
+                            self.sprite_creep_team2[creep] = cocos.sprite.Sprite('sim_monitor/res/square_red.png')
+                            self.sprite_creep_team2[creep].scale = 0.1
+                            self.add(self.sprite_creep_team2[creep])
+                        self.set_position(
+                                        self.sprite_creep_team2[creep],
+                                        game_space["creep_team2"][creep]['pos_x'],
+                                        game_space["creep_team2"][creep]['pos_y'])
+                    else:
+                        if creep in self.sprite_creep_team2:
+                            self.sprite_creep_team2[creep].visible = False
+
+#///////////////////////////////////Hero_display////////////////////////////////////////////////
+#//////////////////////////////////Hero_team1//////////////////////////////////////////////////
                 for hero_id in game_space["hero_team1"]:
                     if game_space["hero_team1"][hero_id]["alive"]:
+                        self.hero_team1[hero_id].visible = True
                         self.set_position(
                                         self.hero_team1[hero_id],
                                         game_space["hero_team1"][hero_id]['pos_x'],
                                         game_space["hero_team1"][hero_id]['pos_y'])
+                    else:
+                        self.hero_team1[hero_id].visible = False
+
+#////////////////////////////////Hero_team2///////////////////////////////////////////////////
+                for hero_id in game_space["hero_team2"]:
+                    if game_space["hero_team2"][hero_id]["alive"]:
+                        self.hero_team2[hero_id].visible = True
+                        self.set_position(
+                                        self.hero_team1[hero_id],
+                                        game_space["hero_team2"][hero_id]['pos_x'],
+                                        game_space["hero_team2"][hero_id]['pos_y'])
+                    else:
+                        self.hero_team2[hero_id].visible = False
+#///////////////////////////////////Tower_distplay////////////////////////////////////////////
+#///////////////////////////////////Tower_team1///////////////////////////////////////////////
+                for tw_id in game_space["tower_team1"]:
+                    tw_name = game_space["tower_team1"][tw_id]['name']
+                    if game_space["tower_team1"][tw_id]["alive"]:
+                        self.sprite_tower_team1[tw_name].visible = True
+                    else:
+                        self.sprite_tower_team1[tw_name].visible = False
+#///////////////////////////////////Tower_team2///////////////////////////////////////////////
+                for tw_id in game_space["tower_team2"]:
+                    tw_name = game_space["tower_team2"][tw_id]['name']
+                    if game_space["tower_team2"][tw_id]["alive"]:
+                        self.sprite_tower_team2[tw_name].visible = True
+                    else:
+                        self.sprite_tower_team2[tw_name].visible = False

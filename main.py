@@ -13,7 +13,8 @@ import logging
 import logging.config
 from threading import Thread
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from optparse import OptionParser
+import argparse
+#from optparse import OptionParser
 
 import cocos
 
@@ -30,6 +31,14 @@ if __name__ == "__main__":
                   #  help="don't print status messages to stdout")
 
 #    (options, args) = parser.parse_args()
+    #  parser = argparse.ArgumentParser(prog='Sim_map',
+                                     #  description='Simulation of MOBA game'
+                                    #  )
+    #  parser.add_argument('--test', nargs='?', const='test',
+                              #  default='test',
+                              #  help='ApaimaneeMOBA client_id')
+    #  args=parser.parse_args()
+    #  print(args)
     send_initial = False
     start_time = None
     connector = Connector()
@@ -38,7 +47,7 @@ if __name__ == "__main__":
 
 
     # director init takes the same arguments as pyglet.window
-    cocos.director.director.init(width = 1920, height=1080)
+    cocos.director.director.init(width = 960, height=1080)
     cocos.director.director.window.set_fullscreen(False)
     x,y = cocos.director.director.get_window_size()
     # We create a new layer, an instance of HelloWorld

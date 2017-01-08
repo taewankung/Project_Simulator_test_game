@@ -28,12 +28,21 @@ class x(MyHero):
             if self.controller.rev_message == "go_to_500_250":
                 self.controller.move(100,250,"go_to_100_250")
             if self.controller.rev_message == "found_enemy":
-                if len(self.status["near_enemy"]) !=0:
-                    self.controller.attack(self.status["near_enemy"][0],"attack")
-                self.controller.move(20,250,"start")
+                #print(self.status["near_enemy_list"])
+                if len(self.status["near_enemy_list"]) !=0:
+                    self.controller.attack(self.status["near_enemy_list"][0],"attack")
+                #self.controller.move(10,250,"start")
                 #print(self.status["near_enemy"])
-                self.controller.rev_message = ""
+                #self.controller.rev_message = ""
+ #           if self.controller.rev_message == 'died':
+#                print(self.status['gold'])
+            if self.controller.rev_message == 'reborn':
+                if self.status['alive']:
+                    self.controller.move(1000,1000,"start")
+
+
             self.controller.update_message()
+            #print(self.controller.rev_message)
             self.controller.update_status()
             time.sleep(0.01)
 

@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
 
     # director init takes the same arguments as pyglet.window
-    cocos.director.director.init(width = 960, height=1080)
+    cocos.director.director.init(width = 1920, height=1080)
     cocos.director.director.window.set_fullscreen(False)
     x,y = cocos.director.director.get_window_size()
     # We create a new layer, an instance of HelloWorld

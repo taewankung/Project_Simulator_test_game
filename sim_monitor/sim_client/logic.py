@@ -39,9 +39,6 @@ class GameLogic:
         self.rev_message = msg
         print(msg+':'+'complete')
 
-    def move_hero(self, x, y, player_id):
-        pass
-
 
     def skill_action(self, skill, player_id):
         hero_stat = self.game_space['heros'][player_id]

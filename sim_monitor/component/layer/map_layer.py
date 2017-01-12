@@ -150,6 +150,16 @@ class MapLayer(cocos.layer.Layer):
                            game_space["hero_team1"][hero]['pos_y'])
                         self.hero_team1[hero].position = pos
                         self.add(self.hero_team1[hero])
+                for hero in game_space["hero_team2"]:
+                    if hero not in self.hero_team2:
+                        self.count_hero_team2 += 1
+                        self.hero_team2[hero] = self.sprite_hero_team2[self.count_hero_team2-1]
+                        self.hero_team2[hero].scale = 0.3
+                        pos = (game_space["hero_team2"][hero]['pos_x'],
+                           game_space["hero_team2"][hero]['pos_y'])
+                        self.hero_team2[hero].position = pos
+                        self.add(self.hero_team2[hero])
+
                 for tw in game_space["tower_team1"]:
                     pos = (game_space["tower_team1"][tw]['pos_x'],
                            game_space["tower_team1"][tw]['pos_y'])
@@ -206,7 +216,7 @@ class MapLayer(cocos.layer.Layer):
                     if game_space["hero_team2"][hero_id]["alive"]:
                         self.hero_team2[hero_id].visible = True
                         self.set_position(
-                                        self.hero_team1[hero_id],
+                                        self.hero_team2[hero_id],
                                         game_space["hero_team2"][hero_id]['pos_x'],
                                         game_space["hero_team2"][hero_id]['pos_y'])
                     else:

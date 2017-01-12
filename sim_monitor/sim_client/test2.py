@@ -3,7 +3,6 @@ import os
 import subprocess
 import inspect
 import sys
-from .api_game.apaimanee import HeroController
 from .api_game.my_hero import MyHero
 
 class x(MyHero):

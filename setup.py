@@ -12,7 +12,7 @@ COMPUTE_NODE = True
 
 requires = [
     'pygame',
-    'cython',
+    'Cython',
     'kivy'
 ]
 

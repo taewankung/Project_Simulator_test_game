@@ -37,10 +37,4 @@ class GameLogic:
 
     def complete_command(self,msg):
         self.rev_message = msg
-        print(msg+':'+'complete')
-
-
-    def skill_action(self, skill, player_id):
-        hero_stat = self.game_space['heros'][player_id]
-        skill_msg = json.dumps(dict(method='skill_action', skill=skill, player_id=player_id))
- #       bge.logic.sendMessage('remote', skill_msg, hero_stat['name'].lower())
+        print(str(self.player['username'])+':'+msg+' '+'complete')

@@ -15,9 +15,6 @@ class HeroController:
         self.player = self.ac.game_logic.player
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message
-        '''
-        Hero_obj is Object in class the game.
-        '''
 
     def update_status(self):
         '''
@@ -35,15 +32,31 @@ class HeroController:
     def attack(self, Enemy,msg=""):
         '''
         The attack method is controlling the actor to attack Enemy.
+
+        Enemy is string
+        msg is string
         '''
         self.ac.game_client.game.attack(Enemy,msg)
         pass
 
-    def use_skill(self, target, hero_skill = 0):
+    def upgrade_skill(self,skill_num,msg="upgrade_skill"):
+        '''
+        The upgrade_skill is method which used to upgrade skill of hero.
+
+        Note: If u don't upgrade skill,the hero will can't use skill because his skill has level 0.
+        '''
+        if self.status["skill_point"] >=0:
+            self.ac.game_client.game.upgrade_skill(skill_num,msg)
+
+
+    def use_skill(self,skill_num,target=None,msg="use_skill"):
         '''
         The use_skill method is controlling the actor use skill which actor
         have to target.
         '''
+        if skill_num in range(0,3) and self.status["skill_cooldown"][skill_num] <= 0 and self.status['skills'][skill_num]['skill_type']!='buff_passive':
+            self.ac.game_client.game.use_skill(skill_num,target,msg)
+#            print('used skill:{}'.format(self.status['skills'][skill_num]['name']))
         pass
 
     def is_enemy(self,unit):
@@ -58,7 +71,7 @@ class HeroController:
         '''
         pass
 
-    def move(self,pos_x,pos_y,msg=""):
+    def move(self,pos_x,pos_y,msg="move"):
         '''
         The movement method move the actor.
         argument in function have 3 argument: pos_x,pos_y
@@ -189,6 +202,6 @@ class HeroStatus:
         '''
                 The get_enemy_hp method return hp in enemy in enemy_list attibute
             of Hero class.
-            if enemy is'nt in enemy_list will return 0.
+            if enemy is not in enemy_list will return 0.
         '''
         pass

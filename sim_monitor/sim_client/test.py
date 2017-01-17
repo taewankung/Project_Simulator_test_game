@@ -16,7 +16,7 @@ class x(MyHero):
         #if self.controller.ac.game_logic.game_space[""]
         self.controller.move(500,350,"come_to_duel")
         while True:
-            status = self.controller.status
+            #status = self.controller.status
             if self.controller.rev_message == "found_enemy":
       #          print([u for u in self.status["near_enemy_list"]])
                 if len(status["near_enemy_list"]) !=0:
@@ -38,7 +38,9 @@ class x(MyHero):
             time.sleep(0.01)
 
     def upgrade_skill(self):
-        time.sleep(2)
+#        time.sleep(1)
+#        self.controller.select_hero('Sinsamut')
+        time.sleep(1)
         self.controller.upgrade_skill(1)
         time.sleep(3)
 

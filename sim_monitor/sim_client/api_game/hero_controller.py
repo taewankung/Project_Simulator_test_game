@@ -13,14 +13,17 @@ class HeroController:
     def __init__(self):
         self.ac = ApaimaneeMOBAClient()
         self.player = self.ac.game_logic.player
-        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+#        print(self.ac.game_logic.game_space)
+        if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
+            self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message
 
     def update_status(self):
         '''
         This method use to update status from server for HeroController.
         '''
-        self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+        if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
+            self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
 
     def update_message(self):
         '''
@@ -28,22 +31,33 @@ class HeroController:
         '''
         self.rev_message = self.ac.game_logic.rev_message
 
+    #  def select_hero(self,hero_name):
+        #  '''
+        #  The select_hero use for select hero.
+
+        #  type of parameter:
+            #  hero_name is string
+        #  '''
+        #  self.ac.game_client.game.select_hero(hero_name)
 
     def attack(self, Enemy,msg=""):
         '''
         The attack method is controlling the actor to attack Enemy.
 
-        Enemy is string
-        msg is string
+        type of parameter:
+            Enemy is string
+            msg is string
         '''
         self.ac.game_client.game.attack(Enemy,msg)
-        pass
 
     def upgrade_skill(self,skill_num,msg="upgrade_skill"):
         '''
         The upgrade_skill is method which used to upgrade skill of hero.
 
         Note: If u don't upgrade skill,the hero will can't use skill because his skill has level 0.
+        type of parameter:
+            skill_num is integer
+            msg is string
         '''
         if self.status["skill_point"] >=0:
             self.ac.game_client.game.upgrade_skill(skill_num,msg)
@@ -53,6 +67,9 @@ class HeroController:
         '''
         The use_skill method is controlling the actor use skill which actor
         have to target.
+        type of parameter:
+            skill_num is integer
+            msg is string
         '''
         if skill_num in range(0,3) and self.status["skill_cooldown"][skill_num] <= 0 and self.status['skills'][skill_num]['skill_type']!='buff_passive':
             self.ac.game_client.game.use_skill(skill_num,target,msg)
@@ -76,9 +93,10 @@ class HeroController:
         The movement method move the actor.
         argument in function have 3 argument: pos_x,pos_y
 
-        pos_x is integer or float for position x,
-        pos_y is integer or float for position y,
-        msg is string for message which want to server send when this function done.
+        type of parameter:
+            pos_x is integer or float for position x,
+            pos_y is integer or float for position y,
+            msg is string for message which want to server send when this function done.
 
         recommend:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.

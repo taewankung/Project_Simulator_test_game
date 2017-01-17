@@ -23,11 +23,17 @@ class GameLogicMonitor(threading.Thread):
         self.running = True
 
     def run(self):
+#        test =True
         while(self.running):
-            print("checking")
+#            print("checking")
             if self.game_client.gm.game_logic is None:
                 self.game_client.gm.register(self.game_logic)
                 print('register new game logic by GameLogicMonitor')
+                #  if test:
+                    #  test =False
+                    #  print('testing create')
+                    #  self.game_client.room.create_room('my_room')
+
             time.sleep(0.001)
 
 class ApaimaneeMOBAClient(metaclass = Singleton):
@@ -45,12 +51,13 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
 
     def connect(self):
         self.game_client.initial(True)
+#        self.game_client.room.create_room('check')
         self.game_client.gm.start_game(self._room_id)
         self.game_logic.game_client = self.game_client
         self.game_client.gm.register(self.game_logic)
 #        print(self._client_id)
- #       self.glm = GameLogicMonitor(self.game_client, self.game_client)
- #       self.glm.start()
+#        self.glm = GameLogicMonitor(self.game_client, self.game_client)
+#        self.glm.start()
 
     def disconnect(self):
         self.game_client.disconnect()

@@ -20,7 +20,10 @@ class x(MyHero):
             if self.controller.rev_message == "found_enemy":
       #          print([u for u in self.status["near_enemy_list"]])
                 if len(status["near_enemy_list"]) !=0:
+
+
                     self.controller.use_skill(1,status["near_enemy_list"][0],"start")
+
                     self.controller.attack(status["near_enemy_list"][0])
             if self.controller.rev_message == "battle":
                 if len(status["near_enemy_list"]) !=0:
@@ -33,13 +36,11 @@ class x(MyHero):
             if self.controller.rev_message == 'reborn':
                 if status['alive']:
                     self.controller.move(500,350,"come_to_duel")
-
             self.controller.update_message()
             self.controller.update_status()
             time.sleep(0.01)
 
     def upgrade_skill(self):
-#        time.sleep(1)
         time.sleep(2)
         self.controller.upgrade_skill(1)
         time.sleep(3)

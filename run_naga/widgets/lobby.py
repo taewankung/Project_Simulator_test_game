@@ -27,6 +27,7 @@ class RoomButton(Button):
         self.manager.current_room_id = self.room_id
         self.manager.client_game.room.join_game(self.manager.current_room_id)
         self.manager.current_room_name =self.text
+        self.manager.transition.direction = 'left'
         self.manager.current='room'
 
 
@@ -54,8 +55,13 @@ class LobbyController(Screen):
         self.manager.current_room_id = response['room_id']
         self.manager.current_room_name = room_name
         self.manager.client_game.room.join_game(self.manager.current_room_id)
+        self.manager.transition.direction = 'left'
 #        print(self.manager.client_id)
         self.manager.current='room'
+
+    def on_back(self):
+        self.manager.transition.direction = 'right'
+        self.manager.current = 'login'
 
     def on_enter(self):
         self.on_refresh()

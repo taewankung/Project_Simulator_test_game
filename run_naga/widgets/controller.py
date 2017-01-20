@@ -38,7 +38,7 @@ class Client2(Process):
         #  output = subprocess.check_output(self.command)
         #  self.output.remove('')
 
-class NagaController(FloatLayout):
+class NagaController(Screen):
     def __init__(self):
         super().__init__()
         self.file_browser = FileBrowser(self)

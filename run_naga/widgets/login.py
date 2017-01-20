@@ -25,4 +25,9 @@ class LoginController(Screen):
             self.manager.client_id = response['client_id']
             self.manager.user = args['username']
             self.manager.token = response['responses']['token']
+            self.manager.transition.direction = 'left'
             self.manager.current = 'lobby'
+
+    def on_register_user(self):
+        self.manager.transition.direction = 'left'
+        self.manager.current = 'register'

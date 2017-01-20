@@ -47,15 +47,11 @@
                     size_hint_x:0.30
                     size_hint_y:None
                     size:(200,50)
+                    on_press: root.on_register_user()
                 Button:
                     id: quit
                     text: "Quit"
                     size_hint_x:0.30
                     size_hint_y:None
                     size:(200,50)
-                Button:
-                    id: next_page
-                    text: "next_page"
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
+                    on_press: app.stop()

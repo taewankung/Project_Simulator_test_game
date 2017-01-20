@@ -15,25 +15,100 @@
                     font_size:20
                     size:(200,50)
                 Label:
-                    text:'Select_hero'
-                    size_hint_x:0.25
+                    text:'Select Hero'
+                    size_hint_x:1
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
-                TextInput:
-                    id: hero_name1
-                    text:"pepo"
-                    size_hint_x:0.25
+                Label:
+                    id:current_player_number
+                    text:'Current Player in room:0'
+                    size_hint_x:1
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
                 Button:
-                    id: select
-                    text: "Select"
+                    id: apaimanee
+                    text: "Apaimanee"
                     size_hint_x:0.30
                     size_hint_y:None
                     size:(200,50)
-                    on_press:root.manager.client_game.room.select_hero(hero_name1.text)
+                    on_press:root.on_select_hero(apaimanee.text)
+                Button:
+                    id: audsaren
+                    text: "Audsaren"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(audsaren.text)
+                Button:
+                    id: aungkurha
+                    text: "Aungkurha"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(aungkurha.text)
+                Button:
+                    id: laweng
+                    text: "Laweng"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(laweng.text)
+                Button:
+                    id: pepo
+                    text: "Pepo"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(pepo.text)
+                Button:
+                    id: sinsamut
+                    text: "Sinsamut"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(sinsamut.text)
+                Button:
+                    id: srisuwan
+                    text: "Srisuwan"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(srisuwan.text)
+                Button:
+                    id: sudsakorn
+                    text: "Sudsakorn"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(sudsakorn.text)
+                Button:
+                    id: surhang
+                    text: "Surhang"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(surhang.text)
+                Button:
+                    id: suwanmalee
+                    text: "Suwanmalee"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(suwanmalee.text)
+                Button:
+                    id: yogy
+                    text: "Yogy"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press:root.on_select_hero(yogy.text)
+                Label:
+                    text: ""
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
                 Button:
                     id: browser_code_button
                     text: "Browse"
@@ -49,12 +124,31 @@
                     size:(200,50)
                 Button:
                     id: run_client1
-                    text: "Run client1"
+                    text: "Run"
                     size_hint_x:0.25
                     size_hint_y:None
                     size:(150,50)
                     font_size: 20
                     on_press: root.run_client1()
+                Label:
+                    text:'Select_hero'
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                Label:
+                    id:select_hero
+                    text:''
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                #Button:
+                #    id: back
+                #    size_hint:(0.20,None)
+                #    size:(150,50)
+                #    text: "back"
+                #    on_press: root.on_back()
                 Label:
                     id: host_label
                     text: 'Host:'

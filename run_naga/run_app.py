@@ -5,6 +5,7 @@ from .widgets.controller import NagaController
 from .widgets.room_controller import RoomController
 from kivy.uix.screenmanager import ScreenManager, Screen
 from .widgets.login import LoginController
+from .widgets.register_controller import RegisterController
 
 sm = ScreenManager()
 sm.add_widget(LoginController(name='login'))
@@ -23,10 +24,19 @@ class MyScreenManager(ScreenManager):
         self.client_id =''
         self.token =''
 
+    def exit(self):
+        self.client_game.disconnect()
+
 class RunApp(App):
     def build(self):
-        msm = MyScreenManager()
-        msm.add_widget(LoginController(name='login'))
-        msm.add_widget(RoomController(name='room'))
-        msm.add_widget(LobbyController(name='lobby'))
-        return msm
+        self.msm = MyScreenManager()
+        self.msm.add_widget(LoginController(name='login'))
+        self.msm.add_widget(RoomController(name='room'))
+        self.msm.add_widget(LobbyController(name='lobby'))
+        self.msm.add_widget(RegisterController(name='register'))
+        return self.msm
+#        return NagaController()
+
+    def on_stop(self):
+        self.msm.exit()
+        print('exit')

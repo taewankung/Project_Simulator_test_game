@@ -110,6 +110,7 @@ class StatusLayer(cocos.layer.ColorLayer):
         mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_mana']
         max_mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_mana']
         events_status = self.ac.game_logic.game_space['hero_'+self.team][self.hero_key]['act_status']['found_event']
+        print(events_status)
         self.hp_bar.update(hp,max_hp)
         self.mana_bar.update(mana,max_mana)
         self.text_hp.element.text = 'HP: ' + str(hp)
@@ -270,7 +271,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 magic_resis = self.game_space['hero_team1'][status.hero_key]['magic_resis']
                 damage_speed = self.game_space['hero_team1'][status.hero_key]['damage_speed']
                 move_speed = self.game_space['hero_team1'][status.hero_key]['move_speed']
-                events_status = self.game_space['hero_team1'][status.hero_key]['act_status']['found_event']
+                events_status = self.game_space['hero_team1'][status.hero_key]['act_status']['action']
 
 
                 if self.game_space['hero_team1'][status.hero_key]['skills'][0]:
@@ -320,7 +321,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 damage_speed = self.game_space['hero_team2'][status.hero_key]['damage_speed']
                 move_speed = self.game_space['hero_team2'][status.hero_key]['move_speed']
 
-                events_status = self.game_space['hero_team2'][status.hero_key]['act_status']['found_event']
+                events_status = self.game_space['hero_team2'][status.hero_key]['act_status']['action']
                 if self.game_space['hero_team2'][status.hero_key]['skills'][0]:
                     skills = self.game_space['hero_team2'][status.hero_key]['skills'][0]['name']
                 if self.game_space['hero_team2'][status.hero_key]['skills'][1]:

@@ -48,29 +48,29 @@ class MapLayer(cocos.layer.Layer):
         self.ac = None
         self.sprite_creep_team1 = {}
         self.sprite_creep_team2 = {}
-        self.sprite_tower_team1 = {'t1_tower_top_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_top_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_top_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_mid_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_mid_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_mid_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_bot_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_bot_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/sqr_red.png'),
-                                   't1_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/sqr_red.png')}
+        self.sprite_tower_team1 = {'t1_tower_top_level1': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_top_level2': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_top_level3': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_mid_level1': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_mid_level2': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_mid_level3': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_bot_level1': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_bot_level2': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/tower-red.png'),
+                                   't1_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/tower-red.png')}
 
-        self.sprite_tower_team2 = {'t2_tower_top_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_top_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_top_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_mid_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_mid_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_mid_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_bot_level1': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_bot_level2': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png'),
-                                   't2_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/sqr_blue.png')}
+        self.sprite_tower_team2 = {'t2_tower_top_level1': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_top_level2': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_top_level3': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_mid_level1': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_mid_level2': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_mid_level3': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_bot_level1': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_bot_level2': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
+                                   't2_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png')}
         self.timer = 0
         # add Hero symbol
 

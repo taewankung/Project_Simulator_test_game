@@ -57,6 +57,7 @@ def initial_game():
     print(ac._client_id)
     ac.connect()
     gc.game.initial()
+#    gc.room.select_hero('audsaren')
     global send_initial
     send_initial = True
     logger.info('Apaimanee Game initial ready')

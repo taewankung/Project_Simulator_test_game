@@ -1,0 +1,57 @@
+#:kivy 1.0
+<LoginController>:
+    BoxLayout:
+        padding: 5
+        orientation: 'vertical'
+        StackLayout:
+            orientation: 'tb-lr'
+            StackLayout:
+                orientation: 'lr-tb'
+                Label:
+                    text:'User'
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                TextInput:
+                    id: user_name
+                    text:"client1"
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                Label:
+                    text:'Password'
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                TextInput:
+                    id: Password
+                    text:"client1"
+                    password:True
+                    size_hint_x:0.5
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,50)
+                Button:
+                    id: login
+                    text: "Login"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: root.on_login(user_name.text,Password.text)
+                Button:
+                    id: register
+                    text: "Register"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: root.on_register_user()
+                Button:
+                    id: quit
+                    text: "Quit"
+                    size_hint_x:0.30
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: app.stop()

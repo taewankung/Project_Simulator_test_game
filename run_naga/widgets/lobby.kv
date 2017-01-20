@@ -1,0 +1,40 @@
+#:kivy 1.0
+<LobbyController>:
+    BoxLayout:
+        orientation: 'vertical'
+        StackLayout:
+            orientation: 'tb-lr'
+            Label:
+                text:'Lobby'
+                size_hint:(1,0.1)
+            ScrollView:
+                id:scollview
+                size_hint:(1, 0.7)
+                GridLayout:
+                    id:room_list
+                    size_hint:(1,None)
+                    hight:500
+                    cols:1
+            StackLayout:
+                orientation: 'lr-tb'
+                size_hint:(1,0.1)
+                Button:
+                    id:refresh
+                    size_hint:(0.25,1)
+                    text:'Refresh'
+                    on_press: root.on_refresh()
+                TextInput:
+                    id:room_name
+                    text:'Room name to create'
+                    font_size:16
+                    size_hint:(0.20,1)
+                Button:
+                    id: create_room
+                    text: "create room"
+                    size_hint:(0.20,1)
+                    on_press: root.on_create()
+                Button:
+                    id: quit
+                    size_hint:(0.20,1)
+                    text: "Quit"
+                    on_press: app.stop()

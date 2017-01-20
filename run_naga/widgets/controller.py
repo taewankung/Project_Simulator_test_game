@@ -1,6 +1,7 @@
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.screenmanager import Screen
 from multiprocessing import Process
 from run_naga.widgets.kivy_component.file_browser import FileBrowser
 
@@ -27,17 +28,17 @@ class Client2(Process):
     def run(self):
         process = subprocess.call(self.cmd)
 
-class CommandRunner(threading.Thread):
-    def __init__(self,command):
-        super().__init__()
-        self.command = command
-        self.output = []
+#  class CommandRunner(threading.Thread):
+    #  def __init__(self,command):
+        #  super().__init__()
+        #  self.command = command
+        #  self.output = []
 
-    def run(self):
-        output = subprocess.check_output(self.command)
-        self.output.remove('')
+    #  def run(self):
+        #  output = subprocess.check_output(self.command)
+        #  self.output.remove('')
 
-class NagaController(FloatLayout):
+class NagaController(Screen):
     def __init__(self):
         super().__init__()
         self.file_browser = FileBrowser(self)

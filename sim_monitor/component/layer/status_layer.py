@@ -109,7 +109,7 @@ class StatusLayer(cocos.layer.ColorLayer):
         max_hp = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_hp']
         mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_mana']
         max_mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_mana']
-        events_status = self.ac.game_logic.game_space['hero_'+self.team][self.hero_key]['act_status']['found_event']
+        events_status = self.ac.game_logic.game_space['hero_'+self.team][self.hero_key]['act_status']['action']
         
         self.hp_bar.update(hp,max_hp)
         self.mana_bar.update(mana,max_mana)

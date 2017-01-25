@@ -37,6 +37,7 @@ class RoomController(Screen):
         self.entered =False
         self.ready = []
         self.num_player = 0
+        self.game_status = False
 #        self.event = MyEventDispatcher().do_something('check')
 #        self.game_client = aclient()
 
@@ -74,18 +75,21 @@ class RoomController(Screen):
             #self.manager
 
     def on_browse(self,text):
-        popup = self.file_browser
-        popup.open()
-        popup.client_browse=text
+        if self.active_run:
+            popup = self.file_browser
+            popup.open()
+            popup.client_browse=text
         #print(popup.file)
 
     def on_select_hero(self,text):
-        self.manager.client_game.room.select_hero(text)
-        self.ids.select_hero.text = text
+        if self.active_run:
+            self.manager.client_game.room.select_hero(text)
+            self.ids.select_hero.text = text
 
     def on_back(self):
-        self.manager.transition.direction = 'right'
-        self.manager.current = 'lobby'
+        if self.active_run:
+            self.manager.transition.direction = 'right'
+            self.manager.current = 'lobby'
 
     def run_client1(self):
         print('1.{0}\n2.{1}\n3.{2}\n4.{3}'.format(self.manager.current_room_id,

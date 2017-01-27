@@ -34,8 +34,8 @@ class RunApp(App):
         self.msm.add_widget(RoomController(name='room'))
         self.msm.add_widget(LobbyController(name='lobby'))
         self.msm.add_widget(RegisterController(name='register'))
-#        return self.msm
-        return NagaController()
+        return self.msm
+#        return NagaController()
 
     def on_stop(self):
         self.msm.exit()

@@ -30,9 +30,9 @@ class x(MyHero):
             if self.controller.rev_message == 'battle':
                 if len(hero_status['near_enemy_list']) !=0:
                     self.controller.attack(hero_status['near_enemy_list'][0],'start')
-                    self.controller.use_skill(1,hero_status["near_enemy_list"][0])
+                    self.controller.use_skill(1,hero_status["near_enemy_list"][0],'battle')
                     if self.controller.get_hp_percent()<=0.5 and 'Potion' in hero_status['item']:
-                        self.controller.use_item('Potion','start')
+                        self.controller.use_item('Potion','battle')
                 else:
                     self.controller.move(1000,1000,"end_lane")
             if self.controller.rev_message == 'reborn':

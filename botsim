@@ -1,0 +1,4 @@
+#!/bin/bash
+# Load the  mylib.sh using source comamnd
+source ../naga-env/bin/activate
+python3 run_gui.py

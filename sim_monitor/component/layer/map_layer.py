@@ -156,7 +156,7 @@ class MapLayer(cocos.layer.Layer):
                         pos = (game_space["hero_team1"][hero]['pos_x'],
                            game_space["hero_team1"][hero]['pos_y'])
                         self.hero_team1[hero].position = pos
-                        self.add(self.hero_team1[hero])
+                        self.add(self.hero_team1[hero],2)
                 for hero in game_space["hero_team2"]:
                     if hero not in self.hero_team2:
                         self.count_hero_team2 += 1
@@ -165,7 +165,7 @@ class MapLayer(cocos.layer.Layer):
                         pos = (game_space["hero_team2"][hero]['pos_x'],
                            game_space["hero_team2"][hero]['pos_y'])
                         self.hero_team2[hero].position = pos
-                        self.add(self.hero_team2[hero])
+                        self.add(self.hero_team2[hero],2)
 
                 for tw in game_space["tower_team1"]:
                     pos = (game_space["tower_team1"][tw]['pos_x'],

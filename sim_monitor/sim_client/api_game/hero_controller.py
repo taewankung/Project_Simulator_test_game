@@ -1,6 +1,7 @@
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 from sim_monitor.model.status import status
 from nagaclient import client
+import time
 '''
 warning:
     if you want to use loop for ever you must be use timer.sleep(0.001)
@@ -36,9 +37,11 @@ class HeroController:
 
     def buy_item(self,item,msg=''):
         self.ac.game_client.game.buy_item(item,msg)
+        time.sleep(0.001)
 
     def use_item(self,item,msg=''):
         self.ac.game_client.game.use_item(item,msg)
+        time.sleep(0.001)
 
     def attack(self, Enemy,msg=""):
         '''
@@ -49,6 +52,7 @@ class HeroController:
             msg is string
         '''
         self.ac.game_client.game.attack(Enemy,msg)
+        time.sleep(0.001)
 
     def upgrade_skill(self,skill_num,msg="upgrade_skill"):
         '''
@@ -59,8 +63,9 @@ class HeroController:
             skill_num is integer
             msg is string
         '''
-        if self.status["skill_point"] >=0:
+        if self.status["skill_point"] >0:
             self.ac.game_client.game.upgrade_skill(skill_num,msg)
+        time.sleep(0.001)
 
 
     def use_skill(self,skill_num,target=None,msg="use_skill"):
@@ -71,10 +76,14 @@ class HeroController:
             skill_num is integer
             msg is string
         '''
-        if skill_num in range(0,3) and self.status["skill_cooldown"][skill_num] <= 0 and self.status['skills'][skill_num]['skill_type']!='buff_passive':
+        skill = self.status['skills']
+        skill_level = self.status['skill_level'][skill_num]
+        if skill_num in range(0,3) and self.status["skill_cooldown"][skill_num] <= 0\
+                                   and skill[skill_num]['skill_type']!='buff_passive'\
+                                   and self.status['current_mana'] >= skill[skill_num]['used_mana'][skill_level]:
             self.ac.game_client.game.use_skill(skill_num,target,msg)
+        time.sleep(0.01)
 #            print('used skill:{}'.format(self.status['skills'][skill_num]['name']))
-        pass
 
     def move(self,pos_x,pos_y,msg="move"):
         '''
@@ -92,7 +101,6 @@ class HeroController:
         #print("{0},{1}".format(self.status["pos_x"],self.status["pos_y"]))
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.ac.game_client.game.move_hero(x=pos_x, y=pos_y,msg=msg)
-        pass
 
     def aliance_message(self,msg,args=dict()):
         '''
@@ -106,6 +114,7 @@ class HeroController:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.
         '''
         self.ac.game_client.game.aliance_message(msg,args)
+        time.sleep(0.001)
 
     def get_position(self):
         self.update_status()

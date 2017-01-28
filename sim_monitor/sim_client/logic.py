@@ -12,6 +12,7 @@ class GameLogic:
         self.game_client = game_client
 
         self.rev_message = ""
+        self.end_message = ''
 
     def start_game(self):
         self.status = 'play'
@@ -35,8 +36,10 @@ class GameLogic:
     def update_game(self,game_space):
         self.game_space = game_space
 
-    def end_game(self):
-        print('end_game')
+    def end_game(self,msg):
+        self.status = 'end_game'
+        self.end_message = msg
+        print('msg:'+str(msg))
 
     def complete_command(self,msg):
         self.rev_message = msg

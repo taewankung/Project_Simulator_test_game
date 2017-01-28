@@ -11,6 +11,8 @@ import cocos
 import sys
 import os
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
+from sim_monitor.component.scene.summary_scene import SummaryScene
+from sim_monitor.model.status import status
 from pyglet.gl import *
 from pyglet.window import key
 
@@ -72,7 +74,6 @@ class MapLayer(cocos.layer.Layer):
                                    't2_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
                                    't2_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
                                    't2_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png')}
-        
 
         self.base_team1 = {'Base_team1': cocos.sprite.Sprite('sim_monitor/res/castle.png')}
         for bs in self.base_team1:
@@ -149,7 +150,7 @@ class MapLayer(cocos.layer.Layer):
         if ac.game_logic.game_space["base_team2"] is not None:
             pos = (ac.game_logic.game_space["base_team2"]['pos_x'],
                 ac.game_logic.game_space["base_team2"]['pos_y'])
-            self.set_position_base(ac.game_logic.game_space["base_team2"]["name"], pos)    
+            self.set_position_base(ac.game_logic.game_space["base_team2"]["name"], pos)
         self.schedule(self.step)
 
     def set_position_tower(self, name, position):
@@ -290,3 +291,7 @@ class MapLayer(cocos.layer.Layer):
                         self.sprite_tower_team2[tw_name].visible = True
                     else:
                         self.sprite_tower_team2[tw_name].visible = False
+#///////////////////////////////////CHECK END GAME////////////////////////////////////////////////
+                if self.ac.game_logic.status =='end_game':
+                    print('end game')
+                    cocos.director.director.replace(SummaryScene())

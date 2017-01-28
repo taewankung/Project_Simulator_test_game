@@ -110,7 +110,7 @@ class StatusLayer(cocos.layer.ColorLayer):
         mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_mana']
         max_mana = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['max_mana']
         events_status = self.ac.game_logic.game_space['hero_'+self.team][self.hero_key]['act_status']['action']
-        
+
         self.hp_bar.update(hp,max_hp)
         self.mana_bar.update(mana,max_mana)
         self.text_hp.element.text = 'HP: ' + str(hp)
@@ -123,7 +123,7 @@ class StatusLayer(cocos.layer.ColorLayer):
             self.timer = 0
             self.update_status()
 
-     
+
 class Button(cocos.layer.ColorLayer):
     def __init__(self,r, b, g, a,hero_key,name,width=190, height=50):
         super().__init__(r, b, g, a, width=width, height=height)

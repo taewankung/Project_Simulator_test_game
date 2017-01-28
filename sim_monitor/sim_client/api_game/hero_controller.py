@@ -37,11 +37,11 @@ class HeroController:
 
     def buy_item(self,item,msg=''):
         self.ac.game_client.game.buy_item(item,msg)
-        time.sleep(0.001)
+        time.sleep(0.0001)
 
     def use_item(self,item,msg=''):
         self.ac.game_client.game.use_item(item,msg)
-        time.sleep(0.001)
+        time.sleep(0.0001)
 
     def attack(self, Enemy,msg=""):
         '''
@@ -52,7 +52,7 @@ class HeroController:
             msg is string
         '''
         self.ac.game_client.game.attack(Enemy,msg)
-        time.sleep(0.001)
+        time.sleep(0.0001)
 
     def upgrade_skill(self,skill_num,msg="upgrade_skill"):
         '''
@@ -82,7 +82,7 @@ class HeroController:
                                    and skill[skill_num]['skill_type']!='buff_passive'\
                                    and self.status['current_mana'] >= skill[skill_num]['used_mana'][skill_level]:
             self.ac.game_client.game.use_skill(skill_num,target,msg)
-        time.sleep(0.01)
+        time.sleep(0.001)
 #            print('used skill:{}'.format(self.status['skills'][skill_num]['name']))
 
     def move(self,pos_x,pos_y,msg="move"):
@@ -114,7 +114,7 @@ class HeroController:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.
         '''
         self.ac.game_client.game.aliance_message(msg,args)
-        time.sleep(0.001)
+        time.sleep(0.0001)
 
     def get_position(self):
         self.update_status()
@@ -127,7 +127,7 @@ class HeroController:
         return self.status["current_hp"]
 
     def get_hp_percent(self):
-        return (self.status["current_hp"]/self.status["max_hp"]*100)
+        return (self.status["current_hp"]/self.status["max_hp"])
 
     def get_max_mp(self):
         '''
@@ -148,7 +148,7 @@ class HeroController:
         return self.status["max_mana"]
 
     def get_mp_percent(self):
-        return (self.status["current_mana"]/self.status["max_mana"]*100)
+        return (self.status["current_mana"]/self.status["max_mana"])
 
     def get_item_in_hero(self):
         '''

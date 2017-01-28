@@ -23,22 +23,6 @@ logger = logging.getLogger('sim_map')
 
 if __name__ == "__main__":
     global send_initial
-    #  parser = OptionParser()
-    #  parser.add_option("-f", "--file", dest="filename",
-                  #  help="write report to FILE", metavar="FILE")
-    #  parser.add_option("-q", "--quiet",
-                  #  action="store_false", dest="verbose", default=True,
-                  #  help="don't print status messages to stdout")
-
-#    (options, args) = parser.parse_args()
-    #  parser = argparse.ArgumentParser(prog='Sim_map',
-                                     #  description='Simulation of MOBA game'
-                                    #  )
-    #  parser.add_argument('--test', nargs='?', const='test',
-                              #  default='test',
-                              #  help='ApaimaneeMOBA client_id')
-    #  args=parser.parse_args()
-    #  print(args)
     send_initial = False
     start_time = None
     connector = Connector()
@@ -56,5 +40,6 @@ if __name__ == "__main__":
     # And now, start the application, starting with main_scene
     cocos.director.director.run(first_scene)
     connector.disconnect()
+    print('exit_game')
     # or you could have written, without so many comments:
     #      director.run( cocos.scene.Scene( HelloWorld() ) )

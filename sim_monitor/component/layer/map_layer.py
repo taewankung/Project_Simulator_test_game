@@ -12,6 +12,7 @@ import sys
 import os
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 from pyglet.gl import *
+from pyglet.window import key
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 #
@@ -104,6 +105,12 @@ class MapLayer(cocos.layer.Layer):
 
         self.update_text(x, y)
 
+    def on_key_press(self,k,m):
+        if k == key.NUM_MULTIPLY:
+            self.ac.game_client.game.stop()
+        pass
+
+
     def update_text(self, x, y):
         text = 'Mouse @ %d,%d' % (x, y)
         self.text.element.text = text
@@ -149,7 +156,7 @@ class MapLayer(cocos.layer.Layer):
                         pos = (game_space["hero_team1"][hero]['pos_x'],
                            game_space["hero_team1"][hero]['pos_y'])
                         self.hero_team1[hero].position = pos
-                        self.add(self.hero_team1[hero])
+                        self.add(self.hero_team1[hero],2)
                 for hero in game_space["hero_team2"]:
                     if hero not in self.hero_team2:
                         self.count_hero_team2 += 1
@@ -158,7 +165,7 @@ class MapLayer(cocos.layer.Layer):
                         pos = (game_space["hero_team2"][hero]['pos_x'],
                            game_space["hero_team2"][hero]['pos_y'])
                         self.hero_team2[hero].position = pos
-                        self.add(self.hero_team2[hero])
+                        self.add(self.hero_team2[hero],2)
 
                 for tw in game_space["tower_team1"]:
                     pos = (game_space["tower_team1"][tw]['pos_x'],
@@ -173,7 +180,7 @@ class MapLayer(cocos.layer.Layer):
                 for creep in game_space["creep_team1"]:
                     if game_space["creep_team1"][creep]["alive"]:
                         if creep not in self.sprite_creep_team1:
-                            self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
+                            self.sprite_creep_team1[creep] = cocos.sprite.Sprite('sim_monitor/res/square_red.png')
                             self.sprite_creep_team1[creep].scale = 0.1
                             self.add(self.sprite_creep_team1[creep])
                         self.set_position(
@@ -182,13 +189,23 @@ class MapLayer(cocos.layer.Layer):
                                         game_space["creep_team1"][creep]['pos_y'])
                     else:
                         if creep in self.sprite_creep_team1:
-                            self.sprite_creep_team1[creep].visible = False
-
+                            #self.sprite_creep_team1[creep].visible = False
+                            self.remove(self.sprite_creep_team1[creep])
+                            #self.sprite_creep_team1.pop(creep)
+                new_list =[]
+                for s_creep in self.sprite_creep_team1:
+                            #self.sprite_creep_team2[creep].visible = False
+                    if s_creep not in  game_space['creep_team1']:
+                        self.remove(self.sprite_creep_team1[s_creep])
+                        new_list.append(s_creep)
+                for creep_id in new_list:
+                    self.sprite_creep_team1.pop(creep_id)
+                        #self.sprite_creep_team2.pop(creep)
 #///////////////////////////////Creep_team2/////////////////////////////////////////////
                 for creep in game_space["creep_team2"]:
                     if game_space["creep_team2"][creep]["alive"]:
                         if creep not in self.sprite_creep_team2:
-                            self.sprite_creep_team2[creep] = cocos.sprite.Sprite('sim_monitor/res/square_red.png')
+                            self.sprite_creep_team2[creep] = cocos.sprite.Sprite('sim_monitor/res/square_blue.png')
                             self.sprite_creep_team2[creep].scale = 0.1
                             self.add(self.sprite_creep_team2[creep])
                         self.set_position(
@@ -197,8 +214,15 @@ class MapLayer(cocos.layer.Layer):
                                         game_space["creep_team2"][creep]['pos_y'])
                     else:
                         if creep in self.sprite_creep_team2:
-                            self.sprite_creep_team2[creep].visible = False
-
+                            self.remove(self.sprite_creep_team2[s_creep])
+                new_list =[]
+                for s_creep in self.sprite_creep_team2:
+                    if s_creep not in  game_space['creep_team2']:
+                        self.remove(self.sprite_creep_team2[s_creep])
+                        new_list.append(s_creep)
+                for creep_id in new_list:
+                    self.sprite_creep_team2.pop(creep_id)
+                        #self.sprite_creep_team2.pop(s_creep)
 #///////////////////////////////////Hero_display////////////////////////////////////////////////
 #//////////////////////////////////Hero_team1//////////////////////////////////////////////////
                 for hero_id in game_space["hero_team1"]:

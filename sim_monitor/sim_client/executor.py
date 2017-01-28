@@ -49,9 +49,6 @@ class Executor(threading.Thread):
 
     def run(self):
         if status.connect:
-#and self.ac.game_logic.status == "play":
-            #diff_time = datetime.datetime.now() - self.ready_time
-            #if diff_time.seconds % 1 == 0 and diff_time.seconds >0:
             try:
                 self.hero.run()
             except Exception as e :

@@ -35,6 +35,9 @@ class GameLogic:
     def update_game(self,game_space):
         self.game_space = game_space
 
+    def end_game(self):
+        print('end_game')
+
     def complete_command(self,msg):
         self.rev_message = msg
         print(str(self.player['username'])+':'+msg+' '+'complete')

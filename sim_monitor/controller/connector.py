@@ -22,7 +22,7 @@ class Connector(Thread):
         self.ac.ex.load_file(self.ex_file)
 #        print(status.connect)
 #        while(status.connect):
-        self.ac.ex.run()
+        self.ac.ex.start()
             #  for hero in self.ac.game_logic.game_space["hero_team1"]:
                 #  print(self.ac.game_logic.game_space["hero_team1"][hero]["pos_x"])
 
@@ -59,9 +59,13 @@ class Connector(Thread):
 
     def disconnect(self):
         try:
+            print('???')
             self.ac.disconnect()
             status.connect = False
+            self.ac.ex.join()
+            print('join')
+            self.join()
         except Exception as e:
-            print("Exeption conector: "+e)
+            print("Exeption conector: "+str(e))
             print("apaimanee client not load or haven't connection")
 

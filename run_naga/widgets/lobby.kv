@@ -1,16 +1,27 @@
 #:kivy 1.0
 <LobbyController>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source:'./run_naga/widgets/res/backgroundkivy.png'
     BoxLayout:
         orientation: 'vertical'
+        padding: 100
         StackLayout:
             orientation: 'tb-lr'
             Label:
-                text:'Lobby'
-                size_hint:(1,0.1)
+                markup: True
+                text:'[b]LOBBY[/b]'
+                size_hint:(1,None)
+                size:(200,50)
+                font_size:42
+        
             ScrollView:
                 id:scollview
                 size_hint:(1, 0.7)
                 GridLayout:
+                    background_normal:'./run_naga/widgets/res/tab.png'
                     id:room_list
                     size_hint:(1,None)
                     hight:500
@@ -20,21 +31,33 @@
                 size_hint:(1,0.1)
                 Button:
                     id:refresh
-                    size_hint:(0.25,1)
-                    text:'Refresh'
+                    markup: True
+                    size_hint:(0.25,None)
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    text:'[b]Refresh[/b]'
+                    font_size:20
+                    size:(200,50)
                     on_press: root.on_refresh()
                 TextInput:
                     id:room_name
                     text:'Room name to create'
                     font_size:16
-                    size_hint:(0.20,1)
+                    size_hint:(0.25,1)
                 Button:
                     id: create_room
-                    text: "create room"
-                    size_hint:(0.20,1)
+                    markup: True
+                    text: "[b]Create room[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint:(0.25,None)
+                    size:(200,50)
+                    font_size:20
                     on_press: root.on_create()
                 Button:
                     id: quit
-                    size_hint:(0.20,1)
-                    text: "Quit"
+                    markup: True
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint:(0.25,None)
+                    size:(200,50)
+                    text: "[b]Quit[/b]"
+                    font_size:20
                     on_press: app.stop()

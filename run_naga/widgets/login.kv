@@ -1,57 +1,111 @@
 #:kivy 1.0
 <LoginController>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source:'./run_naga/widgets/res/backgroundkivy3.png'
     BoxLayout:
-        padding: 5
-        orientation: 'vertical'
+        padding: 150
+        orientation: 'horizontal'
         StackLayout:
             orientation: 'tb-lr'
-            StackLayout:
-                orientation: 'lr-tb'
-                Label:
-                    text:'User'
-                    size_hint_x:0.5
-                    size_hint_y:None
-                    font_size:20
-                    size:(200,50)
-                TextInput:
-                    id: user_name
-                    text:"client1"
-                    size_hint_x:0.5
-                    size_hint_y:None
-                    font_size:20
-                    size:(200,50)
-                Label:
-                    text:'Password'
-                    size_hint_x:0.5
-                    size_hint_y:None
-                    font_size:20
-                    size:(200,50)
-                TextInput:
-                    id: Password
-                    text:"client1"
-                    password:True
-                    size_hint_x:0.5
-                    size_hint_y:None
-                    font_size:20
-                    size:(200,50)
-                Button:
-                    id: login
-                    text: "Login"
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
-                    on_press: root.on_login(user_name.text,Password.text)
-                Button:
-                    id: register
-                    text: "Register"
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
-                    on_press: root.on_register_user()
-                Button:
-                    id: quit
-                    text: "Quit"
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
-                    on_press: app.stop()
+            BoxLayout:
+                orientation: 'horizontal'
+                StackLayout:
+                    orientation: 'lr-tb'
+                    Label:
+                        text:''
+                        size_hint_x:1.0
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,60)
+                    Label:
+                        markup: True
+                        text:"[b]User name[/b]"
+                        size_hint_x:1.0
+                        size_hint_y:None
+                        font_size:28
+                        size:(200,50)
+                    Label:
+                        text: ""
+                        size_hint_x:0.30
+                        size_hint_y:None
+                        size:(200, 50)
+                    TextInput:
+                        id: user_name
+                        text:"client1"
+                        size_hint_x:0.4
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,35)
+                    Label:
+                        markup: True
+                        text:'[b]Password[/b]'
+                        size_hint_x:1.0
+                        size_hint_y:None
+                        font_size:28
+                        size:(200,50)
+                    Label:
+                        text:"  "
+                        size_hint_x:0.3
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,50)
+
+                    TextInput:
+                        id: Password
+                        text:"client1"
+                        password:True
+                        size_hint_x:0.4
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,35)
+                    Label:
+                        text:"  "
+                        size_hint_x:0.33
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,5)
+                    Label:
+                        text:''
+                        size_hint_x:1.0
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,5)
+                    Label:
+                        text:''
+                        size_hint_x:0.01
+                        size_hint_y:None
+                        font_size:20
+                        size:(200,50)
+                    Button:
+                        id: login
+                        markup:True
+                        text: "[b]Login[/b]"
+                        background_normal:'./run_naga/widgets/res/runkivy2.png'
+                        size_hint_x:0.33
+                        size_hint_y:None
+                        size:(200,40)
+                        font_size: 20
+                        on_press: root.on_login(user_name.text,Password.text)
+                    Button:
+                        id: register
+                        markup:True
+                        background_normal:'./run_naga/widgets/res/runkivy2.png'
+                        text: "[b]Register[/b]"
+                        size_hint_x:0.33
+                        size_hint_y:None
+                        size:(200,40)
+                        font_size: 20
+                        on_press: root.on_register_user()
+                    Button:
+                        id: quit
+                        markup:True
+                        text: "[b]Quit[/b]"
+                        background_normal:'./run_naga/widgets/res/runkivy2.png'
+                        size_hint_x:0.33
+                        size_hint_y:None
+                        size:(200,40)
+                        font_size: 20
+                        on_press: app.stop()

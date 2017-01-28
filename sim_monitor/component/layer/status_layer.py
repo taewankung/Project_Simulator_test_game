@@ -70,11 +70,11 @@ class StatusLayer(cocos.layer.ColorLayer):
 
     def __init__(self, name, button, team, hero_key,local_x, local_y, width=200, height=200 ,r=0, b=0, g=0, a=0):
         super().__init__(r,b,g,a, width=width, height=height)
-        self.text_hero = cocos.text.Label(name, font_size = 15)
-        self.text_hp = cocos.text.Label('HP: ', font_size = 10)
+        self.text_hero = cocos.text.Label(name, font_size = 15, bold= True)
+        self.text_hp = cocos.text.Label('HP: ', font_size = 10, bold= True)
         self.hp_bar = Bar()
-        self.text_mana = cocos.text.Label('MP: ', font_size = 10)
-        self.events_status = cocos.text.Label('events: ', font_size = 10)
+        self.text_mana = cocos.text.Label('MP: ', font_size = 10, bold= True)
+        self.events_status = cocos.text.Label('events: ', font_size = 10, bold= True)
         self.mana_bar = Bar(0,0,255,100)
         self.is_event_handler = True
         self.hero_key = hero_key
@@ -131,7 +131,7 @@ class Button(cocos.layer.ColorLayer):
         self.is_event_handler = True
         self.local_x = 0
         self.local_y = 0
-        self.name = cocos.text.Label(name, font_size = 20)
+        self.name = cocos.text.Label(name, font_size = 20, bold= True)
         self.name.position = (55,5)
         self.add(self.name)
 
@@ -176,24 +176,24 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.img = pyglet.resource.image('sim_monitor/res/show_status.png')
         self.hp_bar = Bar()
         self.mana_bar = Bar(0,0,255,100)
-        self.text_team = cocos.text.Label('Team ', font_size = 20)
-        self.text_name = cocos.text.Label('Name: ', font_size = 20)
-        self.text_hp = cocos.text.Label('HP: ', font_size = 12)
-        self.text_mana = cocos.text.Label('MP: ', font_size = 12)
-        self.text_damage = cocos.text.Label('Damage: ', font_size = 12)
-        self.text_str = cocos.text.Label('Strength: ', font_size = 12)
-        self.text_armor = cocos.text.Label('Armor: ', font_size = 12)
-        self.text_magic = cocos.text.Label('Magic: ', font_size = 12)
-        self.text_level = cocos.text.Label('Level: ', font_size = 15)
-        self.text_alive = cocos.text.Label('Alive: ', font_size = 15)
-        self.text_gold = cocos.text.Label('Coin: ', font_size = 15)
+        self.text_team = cocos.text.Label('Team ', font_size = 20, bold= True)
+        self.text_name = cocos.text.Label('Name: ', font_size = 20, bold= True)
+        self.text_hp = cocos.text.Label('HP: ', font_size = 12, bold= True)
+        self.text_mana = cocos.text.Label('MP: ', font_size = 12, bold= True)
+        self.text_damage = cocos.text.Label('Damage: ', font_size = 12, bold= True)
+        self.text_str = cocos.text.Label('Strength: ', font_size = 12, bold= True)
+        self.text_armor = cocos.text.Label('Armor: ', font_size = 12, bold= True)
+        self.text_magic = cocos.text.Label('Magic: ', font_size = 12, bold= True)
+        self.text_level = cocos.text.Label('Level: ', font_size = 15, bold= True)
+        self.text_alive = cocos.text.Label('Alive: ', font_size = 15, bold= True)
+        self.text_gold = cocos.text.Label('Coin: ', font_size = 15, bold= True)
 
-        self.text_damage_critical = cocos.text.Label('Damage Critical: ', font_size = 12)
-        self.text_magic_resis = cocos.text.Label('Magic Resist: ', font_size = 12)
-        self.text_damage_speed = cocos.text.Label('Damage Speed: ', font_size = 12)
-        self.text_move_speed = cocos.text.Label('Move Speed: ', font_size = 12)
-        self.text_skills = cocos.text.Label('Skill: ', font_size = 12)
-        self.events_status = cocos.text.Label('Events: ', font_size = 12)
+        self.text_damage_critical = cocos.text.Label('Damage Critical: ', font_size = 12, bold= True)
+        self.text_magic_resis = cocos.text.Label('Magic Resist: ', font_size = 12, bold= True)
+        self.text_damage_speed = cocos.text.Label('Damage Speed: ', font_size = 12, bold= True)
+        self.text_move_speed = cocos.text.Label('Move Speed: ', font_size = 12, bold= True)
+        self.text_skills = cocos.text.Label('Skill: ', font_size = 12, bold= True)
+        self.events_status = cocos.text.Label('Events: ', font_size = 12, bold= True)
 
 
 

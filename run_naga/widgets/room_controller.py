@@ -28,7 +28,6 @@ class ClientGameProcess(Process):
                                         '--token',token]
     def run(self):
         process = subprocess.call(self.cmd)
-
 class RoomController(Screen):
     def __init__(self,name=''):
         super().__init__(name=name)
@@ -37,6 +36,8 @@ class RoomController(Screen):
         self.entered =False
         self.ready = []
         self.num_player = 0
+        self.menu_path = os.path.dirname(__file__)
+        
 #        self.event = MyEventDispatcher().do_something('check')
 #        self.game_client = aclient()
 

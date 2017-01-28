@@ -1,137 +1,169 @@
 #:kivy 1.0
 <RoomController>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source:'./run_naga/widgets/res/backgroundkivy.png'
     BoxLayout:
-        padding: 5
+        padding: 50
         orientation: 'vertical'
         StackLayout:
             orientation: 'tb-lr'
             StackLayout:
                 orientation: 'lr-tb'
+
                 Label:
                     id: room_name
-                    text:'room_name: '
+                    markup:True
+                    text:'[b]Room name: [/b]'
                     size_hint_x:1
                     size_hint_y:None
-                    font_size:20
+                    font_size:40
                     size:(200,50)
                 Label:
-                    text:'Select Hero'
+                    markup: True
+                    text:'[b][color=#556b2f]Hero Select[/color][/b]'
                     size_hint_x:1
                     size_hint_y:None
-                    font_size:20
+                    font_size:30
                     size:(200,50)
                 Label:
                     id:current_player_number
-                    text:'Current Player in room:0'
+                    markup:True
+                    text:'[b]Current Player in room:0[/b]'
                     size_hint_x:1
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
                 Button:
                     id: apaimanee
+                    markup:True
                     text: "Apaimanee"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(apaimanee.text)
                 Button:
                     id: audsaren
+                    markup:True
                     text: "Audsaren"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(audsaren.text)
                 Button:
                     id: aungkurha
+                    markup:True
                     text: "Aungkurha"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(aungkurha.text)
                 Button:
                     id: laweng
+                    markup:True
                     text: "Laweng"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(laweng.text)
                 Button:
                     id: pepo
+                    markup:True
                     text: "Pepo"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(pepo.text)
                 Button:
                     id: sinsamut
+                    markup:True
                     text: "Sinsamut"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(sinsamut.text)
                 Button:
                     id: srisuwan
+                    markup:True
                     text: "Srisuwan"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(srisuwan.text)
                 Button:
                     id: sudsakorn
+                    markup:True
                     text: "Sudsakorn"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(sudsakorn.text)
                 Button:
                     id: surhang
+                    markup:True
                     text: "Surhang"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    font_size: 18
+                    size:(200,35)
                     on_press:root.on_select_hero(surhang.text)
                 Button:
                     id: suwanmalee
+                    markup:True
                     text: "Suwanmalee"
-                    size_hint_x:0.30
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
+                    size_hint_x:0.25
                     size_hint_y:None
-                    size:(200,50)
+                    size:(200,35)
+                    font_size: 18
                     on_press:root.on_select_hero(suwanmalee.text)
                 Button:
                     id: yogy
+                    markup:True
                     text: "Yogy"
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
-                    on_press:root.on_select_hero(yogy.text)
-                Label:
-                    text: ""
-                    size_hint_x:0.30
-                    size_hint_y:None
-                    size:(200,50)
-                Button:
-                    id: browser_code_button
-                    text: "Browse"
-                    size_hint:(0.25,None)
-                    size:(200,50)
-                    on_press: root.on_browse('client1')
-                TextInput:
-                    id: file_client1
-                    text:"sim_monitor/sim_client/test.py"
-                    size_hint_x:0.5
-                    size_hint_y:None
-                    font_size:20
-                    size:(200,50)
-                Button:
-                    id: run_client1
-                    text: "Run"
+                    background_normal:'./run_naga/widgets/res/buttonkivy3.png'
                     size_hint_x:0.25
                     size_hint_y:None
-                    size:(150,50)
-                    font_size: 20
-                    on_press: root.run_client1()
+                    size:(200,35)
+                    font_size: 18
+                    on_press:root.on_select_hero(yogy.text)
+
                 Label:
-                    text:'Select_hero'
+                    text:''
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,30)
+
+                Label:
+                    text:''
+                    size_hint_x:1.0
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,30)
+
+                Label:
+                    markup:True
+                    text:'[b][color=#000000]Hero Select[/color][/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -143,6 +175,44 @@
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
+                Button:
+                    id: browser_code_button
+                    markup: True
+                    text: "[b]Browse[/b]"
+                    background_normal: './run_naga/widgets/res/selectkivy2.png'
+                    size_hint:(0.25,None)
+                    size:(200,50)
+                    font_size: 18
+                    on_press: root.on_browse('client1')
+                TextInput:
+                    id: file_client1
+                    text:"sim_monitor/sim_client/test.py"
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    font_size:18
+                    size:(200,50)
+                Button:
+                    id: back
+                    markup: True
+                    text: "[b]Back[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(200,50)
+                    on_press: root.on_back()
+
+                Button:
+                    id: run_client1
+                    markup:True
+                    text: "[b]Run[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint_x:0.25
+                    size_hint_y:None
+                    size:(150,50)
+                    font_size: 18
+                    on_press: root.run_client1()
+                    
+               
                 #Button:
                 #    id: back
                 #    size_hint:(0.20,None)
@@ -150,16 +220,22 @@
                 #    text: "back"
                 #    on_press: root.on_back()
                 Label:
+                    text:''
+                    size_hint_x:1.0
+                    size_hint_y:None
+                    font_size:20
+                    size:(200,100)
+                Label:
                     id: host_label
                     text: 'Host:'
                     size_hint_x:0.25
                     size_hint_y:None
                     font_size: 20
-                    size:(200,50)
+                    size:(200,30)
                 TextInput:
                     id: host
                     text:"localhost"
                     size_hint_x:0.5
                     size_hint_y:None
-                    font_size: 20
-                    size:(200,50)
+                    font_size: 18
+                    size:(200,30)

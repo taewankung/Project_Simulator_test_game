@@ -1,27 +1,46 @@
 #:kivy 1.0
 <RegisterController>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source:'./run_naga/widgets/res/backgroundkivy.png'
     BoxLayout:
-        padding: 5
+        padding: 100
         orientation: 'vertical'
         StackLayout:
             orientation: 'tb-lr'
             StackLayout:
                 orientation: 'lr-tb'
                 Label:
-                    text:'Firstname'
+                    markup: True
+                    text: '[b]Register[/b]'
+                    font_size: 45
+                    size_hint:(1,None)
+                    size:(200,50)
+                Label:
+                    markup: True
+                    text: ''
+                    size_hint:(1,None)
+                    size:(200,50)
+                Label:
+                    markup: True
+                    text:'[b]Firstname:[/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
                 TextInput:
                     id: firstname
+                    markup: True
                     text:"client1"
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
                 Label:
-                    text:'lastname'
+                    markup: True
+                    text:'[b]Lastname:[/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -34,7 +53,8 @@
                     font_size:20
                     size:(200,50)
                 Label:
-                    text:'username'
+                    markup: True
+                    text:'[b]Username:[/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -47,7 +67,8 @@
                     font_size:20
                     size:(200,50)
                 Label:
-                    text:'Password'
+                    markup: True
+                    text:'[b]Password:[/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -61,7 +82,8 @@
                     font_size:20
                     size:(200,50)
                 Label:
-                    text:'Email'
+                    markup: True
+                    text:'[b]Email:[/b]'
                     size_hint_x:0.5
                     size_hint_y:None
                     font_size:20
@@ -73,24 +95,37 @@
                     size_hint_y:None
                     font_size:20
                     size:(200,50)
+
+                Label:
+                    markup: True
+                    text: ''
+                    size_hint:(1,None)
+                    size:(200,50)
+
                 Button:
                     id: register
-                    text: "Register"
-                    size_hint_x:0.30
+                    markup: True
+                    text: "[b]Register[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint_x:0.33
                     size_hint_y:None
                     size:(200,50)
                     on_press: root.on_register_user(username.text,password.text,email.text,firstname.text,lastname.text)
                 Button:
                     id: back
-                    text: "Back"
-                    size_hint_x:0.30
+                    markup: True
+                    text: "[b]Back[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint_x:0.33
                     size_hint_y:None
                     size:(200,50)
                     on_press: root.on_back()
                 Button:
                     id: quit
-                    text: "Quit"
-                    size_hint_x:0.30
+                    markup: True
+                    text: "[b]Quit[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint_x:0.33
                     size_hint_y:None
                     size:(200,50)
                     on_press: app.stop()

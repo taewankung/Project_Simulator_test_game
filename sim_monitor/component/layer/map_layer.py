@@ -72,6 +72,17 @@ class MapLayer(cocos.layer.Layer):
                                    't2_tower_bot_level3': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
                                    't2_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
                                    't2_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png')}
+        
+
+        self.base_team1 = {'Base_team1': cocos.sprite.Sprite('sim_monitor/res/castle.png')}
+        for bs in self.base_team1:
+            self.base_team1[bs].scale = 0.5
+            self.add(self.base_team1[bs])
+
+        self.base_team2 = {'Base_team2': cocos.sprite.Sprite('sim_monitor/res/castle.png')}
+        for bs in self.base_team2:
+            self.base_team2[bs].scale = 0.5
+            self.add(self.base_team2[bs])
         self.timer = 0
         # add Hero symbol
 
@@ -121,13 +132,24 @@ class MapLayer(cocos.layer.Layer):
             pos = (ac.game_logic.game_space["tower_team1"][tw]['pos_x'],
                    ac.game_logic.game_space["tower_team1"][tw]['pos_y'])
             self.set_position_tower(ac.game_logic.game_space["tower_team1"][tw]["name"], pos)
+
         for tw in ac.game_logic.game_space["tower_team2"]:
             pos = (ac.game_logic.game_space["tower_team2"][tw]['pos_x'],
                    ac.game_logic.game_space["tower_team2"][tw]['pos_y'])
             self.set_position_tower(ac.game_logic.game_space["tower_team2"][tw]["name"], pos)
+
         for hero in ac.game_logic.game_space["hero_team1"]:
             pos = ( ac.game_logic.game_space["hero_team1"][hero]['pos_x'],
                      ac.game_logic.game_space["hero_team1"][hero]['pos_y'])
+        if ac.game_logic.game_space["base_team1"] is not None:
+            pos = (ac.game_logic.game_space["base_team1"]['pos_x'],
+                ac.game_logic.game_space["base_team1"]['pos_y'])
+            self.set_position_base(ac.game_logic.game_space["base_team1"]["name"], pos)
+
+        if ac.game_logic.game_space["base_team2"] is not None:
+            pos = (ac.game_logic.game_space["base_team2"]['pos_x'],
+                ac.game_logic.game_space["base_team2"]['pos_y'])
+            self.set_position_base(ac.game_logic.game_space["base_team2"]["name"], pos)    
         self.schedule(self.step)
 
     def set_position_tower(self, name, position):
@@ -137,6 +159,14 @@ class MapLayer(cocos.layer.Layer):
             self.sprite_tower_team2[name].position = position
         else:
             print("have not in game_space {0}".format(name))
+
+    def set_position_base(self,name, position):
+        if name in self.base_team1:
+            self.base_team1[name].position = position
+        elif name in self.base_team2:
+            self.base_team2[name].position = position
+        else:
+            print("have not in game_space ".format(name))
 
     def set_position(self, sprite, pos_x, pos_y):
         position = (pos_x, pos_y)

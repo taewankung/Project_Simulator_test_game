@@ -231,8 +231,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.add(self.text_magic,1)
         self.add(self.text_level,1)
         self.add(self.text_gold,1)
-        self.add(self.hp_bar,1)
-        self.add(self.mana_bar,1)
+        self.add(self.hp_bar,0)
+        self.add(self.mana_bar,0)
         self.add(self.events_status,1)
 
         self.add(self.text_damage_critical,1)

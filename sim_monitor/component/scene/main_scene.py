@@ -6,6 +6,7 @@ from sim_monitor.component.layer.map_layer import MapLayer
 from sim_monitor.component.layer.status_layer import StatusLayer
 from sim_monitor.component.layer.status_layer import StatusBackground
 from sim_monitor.component.layer.status_layer import DisplayStatusLayer
+from sim_monitor.component.layer.status_layer import DisplayTowerStatusLayer
 from pyglet.gl import *
 
 
@@ -29,7 +30,11 @@ class MainScene(cocos.scene.Scene):
         self.model = model
         self.map_layer = MapLayer(model)
         self.map_layer.scale = 0.5
+        self.tower_background_team1 = DisplayTowerStatusLayer(255,255,255,100,'team1',width=250, height=500)
+        self.tower_background_team1.position = (20, 320)
 
+        self.tower_background_team2 = DisplayTowerStatusLayer(255,255,255,100, 'team2',width=250, height=500)
+        self.tower_background_team2.position = (810, 320)
 
         self.background_sim = BackgroundSim()
         self.background = cocos.layer.ColorLayer(255, 255, 255, 100, width=1000, height=1000) #colorbackmap
@@ -70,6 +75,8 @@ class MainScene(cocos.scene.Scene):
         self.status_team1.load_hero()
         self.status_team2.load_hero()
         self.add(self.display_status, 1)
+        self.add(self.tower_background_team1, 1)
+        self.add(self.tower_background_team2, 1)
 
 
 

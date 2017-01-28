@@ -1,5 +1,6 @@
 #import bge
 import json
+from sim_monitor.model.status import status
 
 class GameLogic:
     def __init__(self, game_client):
@@ -39,6 +40,7 @@ class GameLogic:
     def end_game(self,msg):
         self.status = 'end_game'
         self.end_message = msg
+        status.connect =False
         print('msg:'+str(msg))
 
     def complete_command(self,msg):

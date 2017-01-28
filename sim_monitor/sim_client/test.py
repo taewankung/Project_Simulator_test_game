@@ -32,7 +32,7 @@ class x(MyHero):
                 if len(hero_status['near_enemy_list']) !=0:
                     self.controller.use_skill(1,hero_status["near_enemy_list"][0],'battle')
                     self.controller.attack(hero_status['near_enemy_list'][0],'start')
-                    print(item_list)
+#                    print(item_list)
                     if self.controller.get_hp_percent()<=0.5 and 'Potion' in item_list:
                         print('use_item')
                         self.controller.use_item('Potion','battle')

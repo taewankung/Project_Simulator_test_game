@@ -15,7 +15,7 @@ Builder.load_file(os.path.dirname(__file__)+'/controller.kv')
 class Client1(Process):
     def __init__(self, text='run_naga/api_code/test.py',host='localhost'):
         super().__init__()
-        self.cmd = ['python3','main.py','--load',text,'--host',host]
+        self.cmd = ['python3',os.path.expanduser("~")+'/projects/sim_map/main.py','--load',text,'--host',host]
 
     def run(self):
         process = subprocess.call(self.cmd)
@@ -23,7 +23,8 @@ class Client1(Process):
 class Client2(Process):
     def __init__(self, text='run_naga/api_code/test.py',host='localhost'):
         super().__init__()
-        self.cmd = ['python3','main.py', '--client', 'client1' ,'--token' ,'client1','--load',text,'--host',host]
+        print(os.path.dirname(__file__))
+        self.cmd = ['python3',os.path.expanduser("~")+'/projects/sim_map/main.py', '--client', 'client1' ,'--token' ,'client1','--load',text,'--host',host]
 
     def run(self):
         process = subprocess.call(self.cmd)
@@ -42,6 +43,8 @@ class NagaController(Screen):
     def __init__(self):
         super().__init__()
         self.file_browser = FileBrowser(self)
+        self.ids.file_client1.text = os.path.expanduser("~")+"/projects/sim_map/sim_monitor/sim_client/test.py"
+        self.ids.file_client2.text = os.path.expanduser("~")+"/projects/sim_map/sim_monitor/sim_client/test.py"
         pass
 
     def active_env(self):

@@ -30,7 +30,7 @@ class Executor(threading.Thread):
         #for text in module.split('.'):
         #    string = string+'/'+text
         print(module)
-        copy_file(module,str(os.getcwd())+'/sim_monitor/sim_client/ex_code')
+        copy_file(module,str(os.path.expanduser("~")+'/projects/sim_map/sim_monitor/sim_client/ex_code'))
         my_file = module.split('/')[-1]
         print(my_file.split('.')[0])
         module="sim_monitor.sim_client.ex_code."+my_file.split('.')[0]

@@ -39,23 +39,12 @@ class MainScene(cocos.scene.Scene):
         self.background_sim = BackgroundSim()
         self.background = cocos.layer.ColorLayer(255, 255, 255, 100, width=1000, height=1000) #colorbackmap
         self.background.scale = 0.5
-        
 
-        #self.team1_stat_bg = cocos.layer.ColorLayer(255, 0, 255, 100, width=1000, height=200)
-        #self.team1_stat_bg.position = (0,850)
-        #self.team1_stat_bg.scale_y = 0.2
-        #self.team1_stat_bg.transform_anchor = 0, 500
         self.status_team1 = StatusBackground(255,0,255,100, 'Team1',width=1000, height=200 )
         self.status_team1.position = (50,850)
-        #self.team1_stat_bg.add(self.status_team1)
 
-        #self.team2_stat_bg = cocos.layer.ColorLayer(255, 0, 0, 100, width=1000, height=200)
-        #self.team2_stat_bg.scale_y = 0.2
-        #self.team2_stat_bg.transform_anchor = 0, 0
         self.status_team2 = StatusBackground(255,0,0,100, 'Team2', width=1000, height=200)
         self.status_team2.position = (50,95)
-        #self.status_team2.position=(400,0)
-        #self.team2_stat_bg.add(self.status_team2)
 
 #       set display status hero
 
@@ -77,8 +66,3 @@ class MainScene(cocos.scene.Scene):
         self.add(self.display_status, 1)
         self.add(self.tower_background_team1, 1)
         self.add(self.tower_background_team2, 1)
-
-
-
-
-

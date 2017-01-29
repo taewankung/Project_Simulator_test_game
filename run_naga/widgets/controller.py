@@ -47,11 +47,6 @@ class NagaController(Screen):
         self.ids.file_client2.text = os.path.expanduser("~")+"/projects/sim_map/sim_monitor/sim_client/test.py"
         pass
 
-    def active_env(self):
-        #output = supprocess.check_output('source','../naga-env/bin/activate')
-        #print(output)
-        pass
-
     def update(self,text):
         #print(self.ids.file_client1.text)
         if text == 'client1':

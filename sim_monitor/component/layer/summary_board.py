@@ -9,8 +9,13 @@ from cocos.menu import *
 from cocos.text import *
 from cocos.layer import *
 from cocos.actions import *
+
 from sim_monitor.model.status import status
 from .bar import Bar
+
+import subprocess
+from multiprocessing import Process
+import json
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -97,6 +102,8 @@ class HeroLayer(cocos.layer.ColorLayer):
         self.add(self.text_gold, 1)
 
 
+
+
 class Button(cocos.layer.ColorLayer):
     def __init__(self,r, b, g, a,name,width=190, height=50):
         super().__init__(r, b, g, a, width=width, height=height)
@@ -126,6 +133,12 @@ class Button(cocos.layer.ColorLayer):
             self.on_quit()
 
     def on_quit(self):
+        ac = ApaimaneeMOBAClient()
+        data = dict(client_id=ac._client_id,
+                    token_id=ac.game_client.user.loggedin_info['token'],
+                    page='lobby')
+        with open('config.json', 'w') as outfile:
+            json.dump(data, outfile)
         pyglet.app.exit()
 
 

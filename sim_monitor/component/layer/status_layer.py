@@ -52,7 +52,6 @@ class StatusBackground(cocos.layer.ColorLayer):
 
                 #self.text_hero_team1[name] = cocos.text.Label(name, font_size = 20, x=50+count*200, y=1024)
                 count = count + 1
-                print(name)
 
         count = 0
         if self.team == 'Team2':
@@ -102,7 +101,6 @@ class StatusLayer(cocos.layer.ColorLayer):
         self.add(self.events_status, 1)
 
         self.schedule(self.step)
-        print(self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key])
 
     def update_status(self):
         hp = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]['current_hp']
@@ -148,10 +146,10 @@ class Button(cocos.layer.ColorLayer):
         self.local_y = local_y
 
     def on_mouse_press(self, x, y, buttons, modifiers):
-        print(str(self.local_x) +' '+ str(self.local_y))
-        print(str(x) +' '+ str(y))
+        #print(str(self.local_x) +' '+ str(self.local_y))
+        #print(str(x) +' '+ str(y))
         if (x >=self.local_x and x <=(self.local_x+150)  and y >= (self.local_y) and y <= (self.local_y+50)):
-            print(self.hero_key) 
+            #print(self.hero_key) 
             self.on_show_status()
 
             
@@ -378,7 +376,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
         self.hp = {}
         
 
-        print(self.tower_team)
+        #print(self.tower_team)
         if self.tower_team == 'team1':
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
             self.text_tower_team = cocos.text.Label('Tower Team 1', font_size=16, bold = True)
@@ -432,7 +430,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
             for tw in self.ac.game_logic.game_space['tower_team1']:
                 self.hp[tw].element.text = 'HP: '+ str(tw_team1[tw]['current_hp'])
-                print(tw_team1[tw])
+                #print(tw_team1[tw])
 
         elif self.tower_team == 'team2':
             tw_team2 = self.ac.game_logic.game_space['tower_team2']

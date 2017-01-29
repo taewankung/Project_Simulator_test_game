@@ -20,6 +20,18 @@ import cocos
 
 from cocos.director import director
 logger = logging.getLogger('sim_map')
+import subprocess
+from multiprocessing import Process
+
+class RunGUI(Process):
+    def __init__(self):
+        super().__init__()
+        process = subprocess.Popen('python3 '+os.path.expanduser("~")+'/projects/sim_map/run_gui.py',shell=True)
+        #  print(os.path.dirname(__file__))
+        #  self.cmd = ['python3',os.path.expanduser("~")+'/projects/sim_map/run_gui.py']
+
+    #  def run(self):
+        #  process = subprocess.call(self.cmd)
 
 if __name__ == "__main__":
     global send_initial
@@ -41,5 +53,7 @@ if __name__ == "__main__":
     cocos.director.director.run(first_scene)
     connector.disconnect()
     print('exit_game')
+    rungui =RunGUI()
+    #  rungui.start()
     # or you could have written, without so many comments:
     #      director.run( cocos.scene.Scene( HelloWorld() ) )

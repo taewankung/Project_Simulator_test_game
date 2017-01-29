@@ -18,16 +18,15 @@ from kivy.clock import Clock
 
 Builder.load_file(os.path.dirname(__file__)+'/room_controller.kv')
 
-class ClientGameProcess(Process):
+class ClientGameProcess:
     def __init__(self, text,room_id,client_id,token,host='localhost'):
         super().__init__()
-        self.cmd = ['python3','main.py','--load',text,
-                                        '--room_id',room_id,
-                                        '--host',host,
-                                        '--client_id',client_id,
-                                        '--token',token]
-    def run(self):
-        process = subprocess.call(self.cmd)
+        #  self.cmd = ['python3','main.py','--load',text,
+                                        #  '--room_id',room_id,
+                                        #  '--host',host,
+                                        #  '--client_id',client_id,
+                                        #  '--token',token]
+        process = subprocess.Popen('python3 '+expanduser("~")+'/projects/sim_map/main.py --load {0} --room_id {1} --host {2} --client_id {3} --token {4}'.format(text,room_id,host,client_id,token),shell=True)
 class RoomController(Screen):
     def __init__(self,name=''):
         super().__init__(name=name)
@@ -38,7 +37,6 @@ class RoomController(Screen):
         self.num_player = 0
 
         self.menu_path = os.path.dirname(__file__)
-        
 
         self.game_status = False
 
@@ -73,7 +71,6 @@ class RoomController(Screen):
             players = response['responses']['players']
             self.num_player = len(players)
             if self.num_player != old_number:
-                #print(self.num_player)
                 self.ids.current_player_number.text = 'Current Player in room:{0}'.format(self.num_player)
             pass
             #self.manager
@@ -104,10 +101,10 @@ class RoomController(Screen):
         if self.active_run and self.ids.select_hero.text !='':
             self.active_run =False
             self.manager.client_game.room.list_players()
-            ClientGameProcess(self.ids.file_client1.text,
+            c = ClientGameProcess(self.ids.file_client1.text,
                               self.manager.current_room_id,
                               self.manager.client_id,
                               self.manager.token,
-                              self.ids.host.text).start()
-            App.get_running_app().on_pause()
+                              self.ids.host.text)
+        App.get_running_app().stop()
         #  pass

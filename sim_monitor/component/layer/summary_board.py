@@ -15,7 +15,6 @@ from .bar import Bar
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 
-
 class SummaryBackground(cocos.layer.ColorLayer):
     def __init__(self, r, b, g, a, team="Team1", width=0, height=0):
         super().__init__(r,b,g,a, width=width, height=height)
@@ -29,16 +28,16 @@ class SummaryBackground(cocos.layer.ColorLayer):
 
         self.hero_team1 = {}
         self.hero_team2 = {}
-        self.img = pyglet.resource.image('sim_monitor/res/team1-1.png')
+        self.img = pyglet.resource.image('sim_monitor/res/result_team1-2.png')
 
         if self.team == 'Team2':
-            self.img = pyglet.resource.image('sim_monitor/res/team2-1.png')
+            self.img = pyglet.resource.image('sim_monitor/res/result_team2-2.png')
 
-    #  def draw(self):
-        #  glPushMatrix()
-        #  self.transform()
-        #  self.img.blit(-5, -20)
-        #  glPopMatrix()
+    def draw(self):
+        glPushMatrix()
+        self.transform()
+        self.img.blit(-5, -20)
+        glPopMatrix()
 
     def load_hero(self):
         count = 0
@@ -46,8 +45,8 @@ class SummaryBackground(cocos.layer.ColorLayer):
             for hero in self.ac.game_logic.game_space['hero_team1']:
                 name = self.ac.game_logic.game_space['hero_team1'][hero]['name']
                 #button= Button(255,100,100,100,hero,"")
-                self.status_hero_team1[name] = HeroLayer(name,'team1',hero, self.x, self.y-(100*count))
-                self.status_hero_team1[name].position = (0,600-(100*count))
+                self.status_hero_team1[name] = HeroLayer(name,'team1',hero, self.x, self.y-(50*count))
+                self.status_hero_team1[name].position = (0,600-(50*count))
                 self.add(self.status_hero_team1[name])
 
                 count = count + 1
@@ -56,8 +55,8 @@ class SummaryBackground(cocos.layer.ColorLayer):
         if self.team == 'Team2':
             for hero in self.ac.game_logic.game_space['hero_team2']:
                 name = self.ac.game_logic.game_space['hero_team2'][hero]['name']
-                self.status_hero_team2[name] = HeroLayer(name, 'team2',hero, self.x, self.y-(100*count))
-                self.status_hero_team2[name].position = (0,600-(100*count))
+                self.status_hero_team2[name] = HeroLayer(name, 'team2',hero, self.x, self.y-(50*count))
+                self.status_hero_team2[name].position = (0,600-(50*count))
                 self.add(self.status_hero_team2[name])
                 count = count + 1
 
@@ -75,19 +74,36 @@ class HeroLayer(cocos.layer.ColorLayer):
         self.local_y = local_y
         self.timer = 0
         self.data = self.ac.game_logic.game_space['hero_'+ self.team][self.hero_key]
-        self.text_hero = cocos.text.Label(name, font_size = 25)
-        self.text_level = cocos.text.Label('Level: {}'.format(self.data['level']) , font_size = 15)
-        self.text_kill = cocos.text.Label('Kill: {} '.format(self.data['kill']), font_size = 15)
-        self.text_death = cocos.text.Label('Death: {}'.format(self.data['death']) , font_size = 15)
-        self.text_gold = cocos.text.Label('Gold: {}'.format(self.data['gold']), font_size = 15)
-        self.text_item = cocos.text.Label('item: {}'.format([i['name'] for i in self.data['item']]), font_size = 15)
+        self.text_name = cocos.text.Label('Name', font_size = 17, bold= True)
+        self.text_tblv = cocos.text.Label('Level', font_size = 17, bold= True)
+        self.text_tbgold = cocos.text.Label('Gold', font_size = 17, bold= True)
+        self.text_tbkda = cocos.text.Label('K/D/A', font_size = 17, bold= True)
+        self.text_tbitem = cocos.text.Label('Item', font_size = 17, bold= True)
 
-        self.text_hero.position = (50, 150)
-        self.text_level.position = (500, 150)
-        self.text_kill.position = (600, 150)
-        self.text_death.position = (700, 150)
-        self.text_item.position = (50, 110)
-        self.text_gold.position = (700, 110)
+        self.text_hero = cocos.text.Label(name, font_size = 15)
+        self.text_level = cocos.text.Label('{}'.format(self.data['level']) , font_size = 12, bold= True)
+        self.text_kill = cocos.text.Label('{}/ '.format(self.data['kill']), font_size = 12, bold= True)
+        self.text_death = cocos.text.Label('{}/0'.format(self.data['death']) , font_size = 12, bold= True)
+        self.text_gold = cocos.text.Label('{}'.format(self.data['gold']), font_size = 12, bold=True)
+        self.text_item = cocos.text.Label('{}'.format([i['name'] for i in self.data['item']]), font_size = 12, bold= True)
+
+        self.text_name.position = (15,20)
+        self.text_tblv.position = (200, 20)
+        self.text_tbgold.position = (300, 20)
+        self.text_tbkda.position = (400, 20)
+        self.text_tbitem.position = (600, 20)
+        self.text_hero.position = (20, -40)
+        self.text_level.position = (200, -40)
+        self.text_kill.position = (400, -40)
+        self.text_death.position = (415, -40)
+        self.text_item.position = (480, -40)
+        self.text_gold.position = (290, -40)
+
+        # self.add(self.text_name,1)
+        # self.add(self.text_tblv, 1)
+        # self.add(self.text_tbgold, 1)
+        # self.add(self.text_tbkda, 1)
+        # self.add(self.text_tbitem,1)
 
         self.add(self.text_hero,1)
         self.add(self.text_level,1)
@@ -104,10 +120,10 @@ class Button(cocos.layer.ColorLayer):
         self.local_x = 0
         self.local_y = 0
         self.name = cocos.text.Label(name, font_size = 20)
-        self.name.position = (55,10)
+        self.name.position = (40,13)
         self.add(self.name)
 
-        self.img = pyglet.resource.image('sim_monitor/res/newbutton.png')
+        self.img = pyglet.resource.image('sim_monitor/res/buttonkivy.png')
 
     def draw(self):
         glPushMatrix()

@@ -11,6 +11,7 @@ from cocos.layer import *
 from cocos.actions import *
 from sim_monitor.model.status import status
 from .bar import Bar
+from collections  import OrderedDict
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -374,18 +375,16 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
         self.game_space = self.ac.game_logic.game_space
         self.name = {}
         self.hp = {}
-        
 
-        #print(self.tower_team)
         if self.tower_team == 'team1':
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
             self.text_tower_team = cocos.text.Label('Tower Team 1', font_size=16, bold = True)
             self.text_tower_team.position = (35, 470)
             self.add(self.text_tower_team, 1)
             i = 0
+            tw_team1 = OrderedDict(sorted(tw_team1.items()))
             for tw in tw_team1:
                 num = 370
-                
                 self.name[tw] = cocos.text.Label(str(tw_team1[tw]['name']), font_size =14, bold = True)
                 self.name[tw].position= (15, 440-(40*i))
                 self.add(self.name[tw],1)
@@ -396,6 +395,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
 
         if self.tower_team == 'team2':
             tw_team2 = self.ac.game_logic.game_space['tower_team2']
+            tw_team2 = OrderedDict(sorted(tw_team2.items()))
             self.text_tower_team = cocos.text.Label('Tower Team 2', font_size=16, bold = True)
             self.text_tower_team.position = (35, 470)
             self.add(self.text_tower_team, 1)

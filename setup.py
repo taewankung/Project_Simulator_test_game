@@ -12,9 +12,11 @@ COMPUTE_NODE = True
 
 requires = [
     'pygame',
+    'cocos2d',
     'Cython==0.23',
     'pilow',
     'Sphinx',
+    'sphinx_rtd_theme',
     'kivy'
 ]
 

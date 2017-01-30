@@ -77,7 +77,7 @@ class HeroController:
         for i in item:
             str_item+=i
         item = str_item
-        if item in self.item_price_dict and self.status['gold'] > self.item_pice_dict[item]:
+        if item in self.item_price_dict and self.status['gold'] > self.item_price_dict[item]:
             self.ac.game_client.game.buy_item(item,msg)
         time.sleep(0.0001)
 
@@ -121,6 +121,7 @@ class HeroController:
         have to target.
         type of parameter:
             skill_num is integer
+            target is string
             msg is string
         '''
         skill = self.status['skills']

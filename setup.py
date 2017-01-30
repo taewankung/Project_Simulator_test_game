@@ -14,7 +14,7 @@ requires = [
     'pygame',
     'cocos2d',
     'Cython==0.23',
-    'pilow',
+    'pillow',
     'Sphinx',
     'sphinx_rtd_theme',
     'kivy'

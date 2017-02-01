@@ -189,11 +189,13 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
 
         self.text_current_exp = cocos.text.Label('Current Exp: ', font_size = 15, bold= True)
         self.text_damage_critical = cocos.text.Label('Damage Critical: ', font_size = 15, bold= True)
-        self.text_magic_resis = cocos.text.Label('Magic Resist: ', font_size = 15, bold= True)
-        self.text_damage_speed = cocos.text.Label('Damage Speed: ', font_size = 15, bold= True)
-        self.text_move_speed = cocos.text.Label('Move Speed: ', font_size = 15, bold= True)
-        self.text_skills = cocos.text.Label('Skill: ', font_size = 15, bold= True)
+        self.text_magic_resis = cocos.text.Label('Magic Resist: ', font_size = 15, bold = True)
+        self.text_damage_speed = cocos.text.Label('Damage Speed: ', font_size = 15, bold = True)
+        self.text_move_speed = cocos.text.Label('Move Speed: ', font_size = 15, bold = True)
+        self.text_skills = cocos.text.Label('Skill: ', font_size = 15, bold = True)
+        self.text_item = cocos.text.Label('Item: ', font_size = 15, bold = True)
         self.events_status = cocos.text.Label('Events: ', font_size = 15, bold= True)
+
 
 
         self.is_event_handler = True
@@ -220,6 +222,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.text_magic_resis.position = (50, 390)
         self.text_move_speed.position = (50, 370)
         self.text_skills.position = (50,330)
+        self.text_item.position = (50, 310)
 
      
 #       add text        
@@ -244,6 +247,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.add(self.text_skills,1)
         self.add(self.text_alive,1)
         self.add(self.text_current_exp, 1)
+        self.add(self.text_item, 1)
 
         self.schedule(self.step)
 
@@ -276,6 +280,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 damage_speed = self.game_space['hero_team1'][status.hero_key]['damage_speed']
                 move_speed = self.game_space['hero_team1'][status.hero_key]['move_speed']
                 events_status = self.game_space['hero_team1'][status.hero_key]['act_status']['action']
+                items = [i['name'] for i in self.game_space['hero_team1'][status.hero_key]['item']]
 
                 if self.game_space['hero_team1'][status.hero_key]['skills'][0]:
                     skills = self.game_space['hero_team1'][status.hero_key]['skills'][0]['name']
@@ -306,6 +311,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.hp_bar.update(hp,max_hp)
                 self.mana_bar.update(mana,max_mana)
                 self.text_current_exp.element.text = 'Current Exp: ' + str(current_exp)
+                self.text_item.element.text = 'Items: ' + str(items)
             
             else: 
                 name = self.game_space['hero_team2'][status.hero_key]['name']
@@ -325,6 +331,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 damage_speed = self.game_space['hero_team2'][status.hero_key]['damage_speed']
                 move_speed = self.game_space['hero_team2'][status.hero_key]['move_speed']
                 current_exp = self.game_space['hero_team2'][status.hero_key]['current_exp']
+                # items = self.game_space['hero_team2'][status.hero_key]['item']['name']
 
                 events_status = self.game_space['hero_team2'][status.hero_key]['act_status']['action']
                 if self.game_space['hero_team2'][status.hero_key]['skills'][0]:
@@ -357,6 +364,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.text_current_exp.element.text = 'Current Exp: ' + str(current_exp)
                 self.hp_bar.update(hp,max_hp)
                 self.mana_bar.update(mana,max_mana)
+                # self.text_item.element.text = 'Items: ' + str(items)
 
 
     def step(self, dt):

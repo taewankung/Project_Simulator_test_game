@@ -30,10 +30,10 @@ class MainScene(cocos.scene.Scene):
         self.model = model
         self.map_layer = MapLayer(model)
         self.map_layer.scale = 0.5
-        self.tower_background_team1 = DisplayTowerStatusLayer(255,255,255,100,'team1',width=250, height=500)
+        self.tower_background_team1 = DisplayTowerStatusLayer(15,38,61,1,'team1',width=250, height=500)
         self.tower_background_team1.position = (20, 320)
 
-        self.tower_background_team2 = DisplayTowerStatusLayer(255,255,255,100, 'team2',width=250, height=500)
+        self.tower_background_team2 = DisplayTowerStatusLayer(15,38,61,1, 'team2',width=250, height=500)
         self.tower_background_team2.position = (810, 320)
 
         self.background_sim = BackgroundSim()

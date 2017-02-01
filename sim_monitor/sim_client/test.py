@@ -15,7 +15,6 @@ class x(MyHero):
         self.controller = HeroController()
 
     def move(self):
-        #if self.controller.ac.game_logic.game_space[""]
         self.controller.buy_item('Potion',"start")
         self.controller.move(1000,1000,"end lane")
         while self.controller.connection_status:
@@ -32,9 +31,7 @@ class x(MyHero):
                 if len(hero_status['near_enemy_list']) !=0:
                     self.controller.use_skill(1,hero_status["near_enemy_list"][0],'battle')
                     self.controller.attack(hero_status['near_enemy_list'][0],'start')
-#                    print(item_list)
-                    if self.controller.get_hp_percent()<=0.5 and 'Potion' in item_list:
-                        print('use_item')
+                    if self.controller.get_hp_percent()<=0.5:
                         self.controller.use_item('Potion','battle')
                 else:
                     self.controller.move(1000,1000,"end_lane")
@@ -53,7 +50,7 @@ class x(MyHero):
         time.sleep(1)
         self.controller.buy_item('Boot')
         time.sleep(2)
-        self.controller.aliance_message('go go go')
+        self.controller.alliance_message('go go go')
 
     def run(self):
         self.upgrade_skill()

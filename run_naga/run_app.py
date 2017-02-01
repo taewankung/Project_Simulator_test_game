@@ -6,6 +6,7 @@ from .widgets.room_controller import RoomController
 from kivy.uix.screenmanager import ScreenManager, Screen
 from .widgets.login import LoginController
 from .widgets.register_controller import RegisterController
+import os
 import json
 
 class MyScreenManager(ScreenManager):
@@ -25,7 +26,7 @@ class MyScreenManager(ScreenManager):
 
 class RunApp(App):
     def build(self):
-        with open('config.json') as data_file:
+        with open(os.path.expanduser('~')+'/projects/sim_map/config.json') as data_file:
             data = json.load(data_file)
         print(data['page'])
         print(data['client_id'])

@@ -19,6 +19,7 @@ class HeroController:
 #        print(self.ac.game_logic.game_space)
         if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
             self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+        self.rev_message = self.ac.game_logic.rev_message
         self.item_price_dict=dict(ArmorBoot=450,
                                   AssasinGrove=1000,
                                   BladeBoot=500,
@@ -33,8 +34,29 @@ class HeroController:
                                   Shild=250,
                                   SoulBox=500,
                                   Sword=450)
-        self.rev_message = self.ac.game_logic.rev_message
-
+        self.local_dict = dict(t1_base_left=(130,220),
+                               t1_base_right=(170,190),
+                               t1_tower_bot_level1=(820,150),
+                               t1_tower_bot_level2=(470,130),
+                               t1_tower_bot_level3=(260,140),
+                               t1_tower_mid_level1=(400,420),
+                               t1_tower_mid_level2=(295,330),
+                               t1_tower_mid_level3=(220,260),
+                               t1_tower_top_level1=(110,610),
+                               t1_tower_top_level2=(110,445),
+                               t1_tower_top_level3=(95,308),
+                               t2_base_left=(850,780),
+                               t2_base_right=(800,810),
+                               t2_tower_bot_level1=(880,380),
+                               t2_tower_bot_level2=(880,520),
+                               t2_tower_bot_level3=(880,690),
+                               t2_tower_mid_level1=(555,530),
+                               t2_tower_mid_level2=(668,650),
+                               t2_tower_mid_level3=(755,735),
+                               t2_tower_top_level1=(210,885),
+                               t2_tower_top_level2=(490,874),
+                               t2_tower_top_level3=(720,850),
+                              )
     def update_status(self):
         '''
         This method use to update status from server for HeroController.
@@ -67,9 +89,10 @@ class HeroController:
             Shild
             SoulBox
             Sword
-        type of parameter:
-            item is string
-            msg is string
+
+        Args:
+            item(str): name of item
+            msg(str): msg want to return if finish funtion
         '''
 
         str_item = ''
@@ -84,8 +107,12 @@ class HeroController:
     def use_item(self,item,msg=''):
         '''
         The use_item method is controlling the hero to use item which in hero'
+
+        Args:
+            item(str): name of item
+            msg(str): msg want to return if finish funtion
         '''
-        item_name_list = [i['name'] for i in self.get_item_in_hero]
+        item_name_list = [i['name'] for i in self.get_item_in_hero()]
         if item in  item_name_list:
             self.ac.game_client.game.use_item(item,msg)
             time.sleep(0.0001)
@@ -94,9 +121,9 @@ class HeroController:
         '''
         The attack method is controlling the actor to attack Enemy.
 
-        type of parameter:
-            Enemy is string
-            msg is string
+        Args:
+            Enemy(str): name of Enemy
+            msg(str): msg want to return if finish funtion
         '''
         self.ac.game_client.game.attack(Enemy,msg)
         time.sleep(0.001)
@@ -104,11 +131,11 @@ class HeroController:
     def upgrade_skill(self,skill_num,msg="upgrade_skill"):
         '''
         The upgrade_skill is method which used to upgrade skill of hero.
-
         Note: If u don't upgrade skill,the hero will can't use skill because his skill has level 0.
-        type of parameter:
-            skill_num is integer
-            msg is string
+
+        Args:
+            skill_num(int): skill number
+            msg(str): msg want to return if finish funtion
         '''
         if self.status["skill_point"] >0:
             self.ac.game_client.game.upgrade_skill(skill_num,msg)
@@ -119,10 +146,11 @@ class HeroController:
         '''
         The use_skill method is controlling the actor use skill which actor
         have to target.
-        type of parameter:
-            skill_num is integer
-            target is string
-            msg is string
+
+        Args:
+            skill_num (int): skill number
+            target (str): use skill to  target
+            msg (str): msg want to return if finish funtion
         '''
         skill = self.status['skills']
         skill_level = self.status['skill_level'][skill_num]
@@ -138,10 +166,10 @@ class HeroController:
         The movement method move the actor.
         argument in function have 3 argument: pos_x,pos_y
 
-        type of parameter:
-            pos_x is integer or float for position x,
-            pos_y is integer or float for position y,
-            msg is string for message which want to server send when this function finish done.
+        Args:
+            pos_x(int): integer or float for position x,
+            pos_y(int): integer or float for position y,
+            msg(str):   string for message which want to server send when this function finish done.
 
         recommend:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.
@@ -150,23 +178,33 @@ class HeroController:
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.ac.game_client.game.move_hero(x=pos_x, y=pos_y,msg=msg)
 
-    def aliance_message(self,msg,args=dict()):
+    def move_to_local(self,target,msg=""):
+        msg = 'move to {0}'.format(target)
+        self.ac.game_client.game.move_hero(x=self.local_dict[target][0],y=self.local_dict[target][1])
+
+    def move_follow(self,target,msg='follow'):
+        self.ac.game_client.game.move_hero(x=target.pos_x,y=pos_y,msg=msg)
+
+    def alliance_message(self,msg_to_team,msg_end_send='send message'):
         '''
-        The aliance_message is method for send message to hero in your team.
+        The alliance_message is method for send message to hero in your team.
         argument in function have 1 argument: msg
 
-        type of parameter:
-            msg is string,
+        Args:
+            msg(str):   string for message which want to server send when this function finish done.
 
         recommend:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.
         '''
-        self.ac.game_client.game.aliance_message(msg,args)
+        self.ac.game_client.game.alliance_message(msg_to_team,msg_end_send)
         time.sleep(0.001)
 
     def get_position(self):
         '''
         This method will return position of hero be Tuple (X,Y).
+
+        Returns:
+            position(tuple)
         '''
         self.update_status()
         return (self.status['pos_x'],self.status['pos_y'])
@@ -230,6 +268,52 @@ class HeroController:
         '''
         return self.status['near_enemy_list']
 
+    def get_gold(self):
+        '''
+            This method will return gold of hero.
+        '''
+        return self.status['gold']
+
+    def alive(self):
+        '''
+        '''
+        return self.status['alive']
+
+    def get_level(self):
+        return self.status['level']
+
+    def get_current_exp(self):
+        return self.status['current_exp']
+
+    def get_max_exp(self):
+        return self.status['max_exp']
+
+    def get_skill_cooldown(self):
+        return self.status['skill_cooldown']
+
+    def get_kill(self):
+        return self.status['kill']
+
+    def get_death(self):
+        return self.status['death']
+
+    def get_team_list(self):
+        return self.status['near_team_list']
+
+    def count_near_enemy(self):
+        return len(self.status['near_enemy_list'])
+
+    def get_skill_point(self):
+        return self.status['skill_point']
+
+    def get_armor(self):
+        return self.status['armor']
+
+    def get_damage(self):
+        return self.status['damage']
+
+    def get_name(self):
+        return self.status['name']
     #  def get_enemy_hp(self,enemy):
         #  '''
                 #  The get_enemy_hp method return hp in enemy in enemy_list attibute

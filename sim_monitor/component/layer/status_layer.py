@@ -153,7 +153,6 @@ class Button(cocos.layer.ColorLayer):
             #print(self.hero_key) 
             self.on_show_status()
 
-            
     def on_quit(self):
         pyglet.app.exit()
 
@@ -162,8 +161,6 @@ class Button(cocos.layer.ColorLayer):
         #text = '%d,%d' % (x, y)
         #self.name.element.text = text
         pass
-
-    
 
 class DisplayStatusLayer(cocos.layer.ColorLayer):
     def __init__(self,r, b, g, a,width=800, height=900):

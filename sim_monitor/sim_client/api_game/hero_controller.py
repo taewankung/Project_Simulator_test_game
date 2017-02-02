@@ -11,6 +11,10 @@ warning:
 class HeroController:
     '''
     The HeroController class is controlling the actor in serveral events.
+
+    Attibute:
+        conection_status (bool):
+        local_dict (dict):
     '''
     def __init__(self):
         self.ac = ApaimaneeMOBAClient()
@@ -57,6 +61,15 @@ class HeroController:
                                t2_tower_top_level2=(490,874),
                                t2_tower_top_level3=(720,850),
                               )
+    def get_connection(self):
+        '''
+        This method use to get connection status.
+
+        Return:
+            connection_status(bool):
+        '''
+        return self.connection_status
+
     def update_status(self):
         '''
         This method use to update status from server for HeroController.
@@ -70,6 +83,12 @@ class HeroController:
         This method use to update message from server for handle event when your hero found some event.
         '''
         self.rev_message = self.ac.game_logic.rev_message
+
+    def get_rev_message(self):
+        '''
+        This method use to get message which has recived from server.
+        '''
+        return self.rev_message
 
     def buy_item(self,item,msg=''):
         '''
@@ -112,7 +131,7 @@ class HeroController:
             item(str): name of item
             msg(str): msg want to return if finish funtion
         '''
-        item_name_list = [i['name'] for i in self.get_item_in_hero()]
+        item_name_list = self.get_item_in_hero()
         if item in  item_name_list:
             self.ac.game_client.game.use_item(item,msg)
             time.sleep(0.0001)
@@ -260,7 +279,8 @@ class HeroController:
         '''
             The get_item_in_hero method return list of item in your hero.
         '''
-        return self.status["item"]
+        item_list = [i['name'] for i in self.status['item']]
+        return item_list
 
     def get_near_enemy(self):
         '''

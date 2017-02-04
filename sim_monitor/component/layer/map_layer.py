@@ -105,17 +105,17 @@ class MapLayer(cocos.layer.Layer):
             self.add(self.sprite_tower_team2[tw])
         self.posx = 0
         self.posy = 850
-        self.text = cocos.text.Label('No mouse events yet',
-                                     font_size=30,
-                                     x=self.posx, y=self.posy)
-        self.add(self.text)
+        # self.text = cocos.text.Label('No mouse events yet',
+        #                              font_size=30,
+        #                              x=self.posx, y=self.posy)
+        # self.add(self.text)
 
-    def on_mouse_press(self, x, y, buttons, modifiers):
+    # def on_mouse_press(self, x, y, buttons, modifiers):
 
-        self.posx,
-        self.posy = cocos.director.director.get_virtual_coordinates(x, y)
+    #     self.posx,
+    #     self.posy = cocos.director.director.get_virtual_coordinates(x, y)
 
-        self.update_text(x, y)
+    #     self.update_text(x, y)
 
     def on_key_press(self,k,m):
         if k == key.NUM_MULTIPLY:
@@ -123,9 +123,9 @@ class MapLayer(cocos.layer.Layer):
         pass
 
 
-    def update_text(self, x, y):
-        text = 'Mouse @ %d,%d' % (x, y)
-        self.text.element.text = text
+    # def update_text(self, x, y):
+    #     text = 'Mouse @ %d,%d' % (x, y)
+    #     self.text.element.text = text
 
     def set_with_ac(self, ac):
         self.ac = ac

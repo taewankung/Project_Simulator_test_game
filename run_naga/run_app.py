@@ -53,7 +53,7 @@ class RunApp(App):
         with open('config.json', 'w') as outfile:
             json.dump(data, outfile)
         return self.msm
-#        return NagaController()
+        # return NagaController()
 
     def on_stop(self):
         self.msm.exit()

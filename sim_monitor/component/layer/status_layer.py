@@ -15,7 +15,7 @@ from collections  import OrderedDict
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-
+colors = ["red", "orange", "green", "blue", "yellow"]
 
 class StatusBackground(cocos.layer.ColorLayer):
     def __init__(self, r, b, g, a, team="Team1", width=0, height=0):
@@ -27,13 +27,18 @@ class StatusBackground(cocos.layer.ColorLayer):
         self.status_hero_team1 = {}
         self.status_hero_team2 = {}
         self.team = team
-
+        self.hero_pic = {}
         self.hero_team1 = {}
         self.hero_team2 = {}
+        count = 0
+        self.hero_img = [cocos.sprite.Sprite('sim_monitor/res/star_%s.png' % color) for color in colors]
+        self.hero_img2 = [cocos.sprite.Sprite('sim_monitor/res/pentagon_%s.png' % color) for color in colors]
         self.img = pyglet.resource.image('sim_monitor/res/team1-1.png')
-
         if self.team == 'Team2':
             self.img = pyglet.resource.image('sim_monitor/res/team2-1.png')
+
+
+
 
     def draw(self):
         glPushMatrix()
@@ -49,8 +54,12 @@ class StatusBackground(cocos.layer.ColorLayer):
                 button= Button(255,100,100,100,hero,"")
                 self.status_hero_team1[name] = StatusLayer(name, button, 'team1',hero, self.x+(200*count), self.y)
                 self.status_hero_team1[name].position = (200*count,0)
+                self.hero_img[count].position = (180 + (200*count),165)
+                self.hero_img[count].scale = 0.2
+                self.add(self.hero_img[count], 2)
+                
+               
                 self.add(self.status_hero_team1[name])
-
                 #self.text_hero_team1[name] = cocos.text.Label(name, font_size = 20, x=50+count*200, y=1024)
                 count = count + 1
 
@@ -62,6 +71,9 @@ class StatusBackground(cocos.layer.ColorLayer):
                 button = Button(255,100,100,100,hero,"")
                 self.status_hero_team2[name] = StatusLayer(name, button, 'team2',hero, self.x+(200*count), self.y)
                 self.status_hero_team2[name].position = (200*count,0)
+                self.hero_img2[count].position = (180 + (200*count),165)
+                self.hero_img2[count].scale = 0.2
+                self.add(self.hero_img2[count], 2)
                 self.add(self.status_hero_team2[name])
                 count = count + 1
 
@@ -192,8 +204,19 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.text_skills = cocos.text.Label('Skill: ', font_size = 15, bold = True)
         self.text_item = cocos.text.Label('Item: ', font_size = 15, bold = True)
         self.events_status = cocos.text.Label('Events: ', font_size = 15, bold= True)
+        self.text_cooldown = cocos.text.Label('Skill CoolDown: ', font_size = 15, bold= True)
+        self.text_kda = cocos.text.Label('K/D/A: ', font_size = 15, bold= True)
+        # self.text_kill = cocos.text.Label('kill', font_size = 12, bold= True)
+        # self.text_death = cocos.text.Label('') , font_size = 12, bold= True)
 
-
+        self.bs_team1 = cocos.text.Label('Team1 Base HP: ', font_size = 14, bold=True)
+        self.bs_team1.position = (50, 120)
+        self.bs_team2 = cocos.text.Label('Team2 Base HP: ', font_size = 14, bold=True)
+        self.bs_team2.position = (450, 120)
+        self.bs_t1 = self.game_space['base_team1']['current_hp']
+        self.bs_t2 = self.game_space['base_team2']['current_hp']
+        self.add(self.bs_team1, 1)
+        self.add(self.bs_team2, 1)
 
         self.is_event_handler = True
         self.timer = 0
@@ -210,16 +233,19 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.text_armor.position = (600, 630)
         self.text_level.position = (50, 660)
         self.text_gold.position = (50, 550)
-        self.events_status.position = (50, 350)
+        self.events_status.position = (50, 280)
         self.text_alive.position = (600, 550)
 
-        self.text_current_exp.position = (50, 450)
-        self.text_damage_critical.position = (50, 430)
-        self.text_damage_speed.position = (50, 410)
-        self.text_magic_resis.position = (50, 390)
-        self.text_move_speed.position = (50, 370)
-        self.text_skills.position = (50,330)
-        self.text_item.position = (50, 310)
+        self.text_cooldown.position = (50, 220)
+        self.text_current_exp.position = (50, 430)
+        self.text_damage_critical.position = (50, 400)
+        self.text_damage_speed.position = (50, 370)
+        self.text_magic_resis.position = (50, 340)
+        self.text_move_speed.position = (50, 310)
+        self.text_skills.position = (50,250)
+        self.text_item.position = (50, 190)
+        self.text_kda.position = (300, 550)
+
 
      
 #       add text        
@@ -236,6 +262,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.add(self.hp_bar,0)
         self.add(self.mana_bar,0)
         self.add(self.events_status,1)
+        self.add(self.text_cooldown, 1)
+        self.add(self.text_kda, 1)
 
         self.add(self.text_damage_critical,1)
         self.add(self.text_magic_resis,1)
@@ -270,6 +298,9 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 level = self.game_space['hero_team1'][status.hero_key]['level']
                 gold = self.game_space['hero_team1'][status.hero_key]['gold']
                 alive = self.game_space['hero_team1'][status.hero_key]['alive']
+                kill = self.game_space['hero_team1'][status.hero_key]['kill']
+                death = self.game_space['hero_team1'][status.hero_key]['death']
+                assist = self.game_space['hero_team1'][status.hero_key]['assist']
 
                 current_exp = self.game_space['hero_team1'][status.hero_key]['current_exp']
                 damage_critical = self.game_space['hero_team1'][status.hero_key]['damage_critical']
@@ -278,7 +309,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 move_speed = self.game_space['hero_team1'][status.hero_key]['move_speed']
                 events_status = self.game_space['hero_team1'][status.hero_key]['act_status']['action']
                 items = [i['name'] for i in self.game_space['hero_team1'][status.hero_key]['item']]
-
+                cooldown = [format(cd, '.2f') for cd in self.game_space['hero_team1'][status.hero_key]['skill_cooldown']] 
+                
                 if self.game_space['hero_team1'][status.hero_key]['skills'][0]:
                     skills = self.game_space['hero_team1'][status.hero_key]['skills'][0]['name']
                 if self.game_space['hero_team1'][status.hero_key]['skills'][1]:
@@ -309,6 +341,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.mana_bar.update(mana,max_mana)
                 self.text_current_exp.element.text = 'Current Exp: ' + str(current_exp)
                 self.text_item.element.text = 'Items: ' + str(items)
+                self.text_cooldown.element.text = 'Skill CoolDown: ' + str(cooldown)
+                self.text_kda.element.text = 'K/D/A:'+ str(kill) +'/'+ str(death) + '/' + str(assist)
             
             else: 
                 name = self.game_space['hero_team2'][status.hero_key]['name']
@@ -328,9 +362,10 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 damage_speed = self.game_space['hero_team2'][status.hero_key]['damage_speed']
                 move_speed = self.game_space['hero_team2'][status.hero_key]['move_speed']
                 current_exp = self.game_space['hero_team2'][status.hero_key]['current_exp']
-                # items = self.game_space['hero_team2'][status.hero_key]['item']['name']
-
+                items = [i['name'] for i in self.game_space['hero_team2'][status.hero_key]['item']]
                 events_status = self.game_space['hero_team2'][status.hero_key]['act_status']['action']
+                cooldown = [format(cd, '.2f') for cd in self.game_space['hero_team2'][status.hero_key]['skill_cooldown']]
+
                 if self.game_space['hero_team2'][status.hero_key]['skills'][0]:
                     skills = self.game_space['hero_team2'][status.hero_key]['skills'][0]['name']
                 if self.game_space['hero_team2'][status.hero_key]['skills'][1]:
@@ -361,8 +396,11 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.text_current_exp.element.text = 'Current Exp: ' + str(current_exp)
                 self.hp_bar.update(hp,max_hp)
                 self.mana_bar.update(mana,max_mana)
-                # self.text_item.element.text = 'Items: ' + str(items)
+                self.text_item.element.text = 'Items: ' + str(items)
+                self.text_cooldown.element.text = 'Skill CoolDown: ' + str(cooldown)
 
+        self.bs_team1.element.text = 'Team1 Base HP: ' + str(self.bs_t1)   
+        self.bs_team2.element.text = 'Team2 Base HP: ' + str(self.bs_t2)
 
     def step(self, dt):
         self.game_space = self.ac.game_logic.game_space
@@ -380,6 +418,8 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
         self.game_space = self.ac.game_logic.game_space
         self.name = {}
         self.hp = {}
+     
+        
 
         if self.tower_team == 'team1':
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
@@ -414,6 +454,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
                 self.hp[tw].position = (15 ,420-(40*i))
                 self.add(self.hp[tw],1)
                 i = i + 1
+
         self.timer = 0
         self.schedule(self.step)
 
@@ -431,6 +472,8 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
 
     def update_status(self):
 ################################# Tower ############################################################
+        self.bs_t1 = self.game_space['base_team1']['current_hp']
+        self.bs_t2 = self.game_space['base_team2']['current_hp']
         if self.tower_team == 'team1':
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
             for tw in self.ac.game_logic.game_space['tower_team1']:
@@ -443,6 +486,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
                 self.hp[tw].element.text = 'HP: '+ str(tw_team2[tw]['current_hp'])
         else:
             print('have not tower team!')
+        
 ####################################################################################################
 
     def step(self, dt):

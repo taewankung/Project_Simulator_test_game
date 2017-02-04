@@ -17,26 +17,31 @@ class x(MyHero):
     def move(self):
         self.controller.buy_item('Potion',"start")
         self.controller.move(1000,1000,"end lane")
-        while self.controller.connection_status:
+        while self.controller.get_connection():
             hero_status = self.controller.status
-            item_list = [i['name'] for i in hero_status['item']]
-            if self.controller.rev_message == 'start':
+            item_list = self.controller.get_item_in_hero()
+            hero_gold = self.controller.get_gold()
+            near_enemy = self.controller.get_near_enemy()
+            recive_message = self.controller.get_rev_message()
+
+            if recive_message =='start':
                 self.controller.move(1000,1000,"end lane")
-            if self.controller.rev_message == 'found_enemy':
-                if len(hero_status['near_enemy_list']) !=0:
-                    self.controller.attack(hero_status['near_enemy_list'][0],'start')
+            if recive_message == 'found_enemy':
+                if len(near_enemy) !=0:
+                    self.controller.attack(near_enemy[0],'start')
                 else:
                     self.controller.move(1000,1000,"end_lane")
-            if self.controller.rev_message == 'battle':
-                if len(hero_status['near_enemy_list']) !=0:
-                    self.controller.use_skill(1,hero_status["near_enemy_list"][0],'battle')
-                    self.controller.attack(hero_status['near_enemy_list'][0],'start')
+            if recive_message == 'battle':
+                if len(near_enemy) !=0:
+                    self.controller.use_skill(1,near_enemy[0],'battle')
+                    self.controller.attack(near_enemy[0],'start')
                     if self.controller.get_hp_percent()<=0.5:
                         self.controller.use_item('Potion','battle')
                 else:
                     self.controller.move(1000,1000,"end_lane")
-            if self.controller.rev_message == 'reborn':
-                if 'Potion' not in hero_status['item'] and hero_status['gold']>100:
+
+            if recive_message == 'reborn':
+                if 'Potion' not in item_list and hero_gold > 100:
                     self.controller.buy_item('Potion','start')
                 self.controller.move(1000,1000,"end lane")
             self.controller.update_message()
@@ -55,25 +60,3 @@ class x(MyHero):
     def run(self):
         self.upgrade_skill()
         self.move()
-
-
-            #  if self.controller.rev_message == "found_enemy":
-                #  if len(hero_status["near_enemy_list"]) !=0:
-                    #  self.controller.use_skill(1,hero_status["near_enemy_list"][0],"start")
-                    #  self.controller.attack(hero_status["near_enemy_list"][0],"start")
-            #  if self.controller.rev_message == "battle":
-                #  if hero_status['current_hp']/hero_status['max_hp']*100<=0.30:
-                    #  if 'Potion' in hero_status['item_list']:
-                        #  self.controller.use_item('Potion')
-                    #  else:
-                        #  self.controller.buy_item('Potion')
-                #  if len(hero_status["near_enemy_list"]) !=0:
-                    #  self.controller.attack(hero_status["near_enemy_list"][0],"start")
-                    #  time.sleep(0.001)
-                    #  self.controller.use_skill(1,hero_status["near_enemy_list"][0],"start")
-            #  if self.controller.rev_message == "can_not_use_skill":
-                #  if len(hero_status["near_enemy_list"]) !=0:
-                    #  self.controller.attack(hero_status["near_enemy_list"][0])
-            #  if self.controller.rev_message == 'reborn':
-                #  if hero_status['alive']:
-                    #  self.controller.move(1000,1000,"come_to_duel")

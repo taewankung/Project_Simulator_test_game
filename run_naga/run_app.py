@@ -55,6 +55,7 @@ class RunApp(App):
         return self.msm
         # return NagaController()
 
+
     def on_stop(self):
         self.msm.exit()
         print('exit')

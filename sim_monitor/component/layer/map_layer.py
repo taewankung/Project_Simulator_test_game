@@ -75,12 +75,12 @@ class MapLayer(cocos.layer.Layer):
                                    't2_tower_base_left':  cocos.sprite.Sprite('sim_monitor/res/tower-blue.png'),
                                    't2_tower_base_right': cocos.sprite.Sprite('sim_monitor/res/tower-blue.png')}
 
-        self.base_team1 = {'Base_team1': cocos.sprite.Sprite('sim_monitor/res/castle.png')}
+        self.base_team1 = {'Base_team1': cocos.sprite.Sprite('sim_monitor/res/castle-red.png')}
         for bs in self.base_team1:
             self.base_team1[bs].scale = 0.5
             self.add(self.base_team1[bs])
 
-        self.base_team2 = {'Base_team2': cocos.sprite.Sprite('sim_monitor/res/castle.png')}
+        self.base_team2 = {'Base_team2': cocos.sprite.Sprite('sim_monitor/res/castle-blue.png')}
         for bs in self.base_team2:
             self.base_team2[bs].scale = 0.5
             self.add(self.base_team2[bs])

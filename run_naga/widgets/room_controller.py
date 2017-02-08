@@ -100,7 +100,7 @@ class RoomController(Screen):
 #        self.manager.client_game.room.start_game()
         if self.active_run and self.ids.select_hero.text !='':
             self.active_run =False
-            self.manager.client_game.room.list_players()
+#            self.manager.client_game.room.list_players()
             c = ClientGameProcess(self.ids.file_client1.text,
                               self.manager.current_room_id,
                               self.manager.client_id,

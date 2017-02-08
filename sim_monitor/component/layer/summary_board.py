@@ -152,7 +152,8 @@ class Button(cocos.layer.ColorLayer):
         ac = ApaimaneeMOBAClient()
         data = dict(client_id=ac._client_id,
                     token_id=ac.game_client.user.loggedin_info['token'],
-                    page='lobby')
+                    page='lobby',
+                    host=ac.game_client._host)
         with open('config.json', 'w') as outfile:
             json.dump(data, outfile)
         pyglet.app.exit()

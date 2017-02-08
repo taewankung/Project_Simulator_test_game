@@ -32,7 +32,9 @@ def initial_game():
     parser.add_argument('--log', nargs='?', const=os.path.expanduser("~")+'/projects/sim_map/logging.conf',
                         default=os.path.expanduser("~")+'/projects/sim_map/logging.conf',
                         help='ApamneeMOBA API logging')
+
     path = os.path.expanduser("~")+'/projects/sim_map/'
+
     parser.add_argument('--load', nargs='?', const=path+'/sim_monitor/sim_client/test.py',
                         default=path+'/sim_monitor/sim_client/test.py',
                         help='load file')

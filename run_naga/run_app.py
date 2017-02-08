@@ -10,16 +10,16 @@ import os
 import json
 
 class MyScreenManager(ScreenManager):
-    def __init__(self,client_id=None,token_id=''):
+    def __init__(self,client_id=None,token_id='',host='localhost'):
         super().__init__()
-        self.client_game = NagaClient(client_id=client_id,rpc_server=True)
+        self.client_game = NagaClient(client_id=client_id,rpc_server=True,host=host)
         self.client_game.initial()
         self.current_room_id = ''
         self.current_room_name = ''
         self.status = ''
         self.user = ''
-        self.client_id =''
-        self.token =token_id
+        self.client_id = ''
+        self.token = token_id
 
     def exit(self):
         self.client_game.disconnect()
@@ -31,10 +31,12 @@ class RunApp(App):
         print(data['page'])
         print(data['client_id'])
         print(data['token_id'])
-        if data['client_id'] !='' and data['token_id']!='' :
+        client_id = data['client_id']
+
+        if client_id !='' and data['token_id']!='' :
             print(data)
-            self.msm = MyScreenManager(client_id=data['client_id'])
-            self.msm.client_id = data['client_id']
+            self.msm = MyScreenManager(client_id=client_id, host=data['host'])
+            self.msm.client_id = client_id
             self.msm.token = data['token_id']
             self.msm.client_game.user.loggedin_info = dict(token=data['token_id'],
                                           loggedin=True
@@ -53,7 +55,7 @@ class RunApp(App):
         with open('config.json', 'w') as outfile:
             json.dump(data, outfile)
         return self.msm
-        # return NagaController()
+#        return NagaController()
 
 
     def on_stop(self):

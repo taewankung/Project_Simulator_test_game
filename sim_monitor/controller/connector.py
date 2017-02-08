@@ -20,6 +20,10 @@ class Connector(Thread):
         self.ac = ApaimaneeMOBAClient()
         self.ac.game_client.game.update()
         self.ac.ex.load_file(self.ex_file)
+        my_file = self.ex_file.split('/')
+        my_file = my_file[-1].split('.')
+        self.ac.game_logic.ex_file=my_file[0]
+        self.ac.game_logic.create_file()
 #        print(status.connect)
 #        while(status.connect):
         self.ac.ex.start()

@@ -39,25 +39,41 @@ class LobbyController(Screen):
         self.room_layout.bind(minimum_height = self.room_layout.setter('height'))
 
     def on_refresh(self):
-        response = self.manager.client_game.room.list_rooms()
-        args = response['args']
-        rooms = response['responses']['rooms']
-        self.room_layout.clear_widgets()
-        for room in rooms:
-            room_name = room[1]['room_name']
-            self.room_layout.add_widget(RoomButton(room[0],self.manager,text=room_name))
+        try:
+            response = self.manager.client_game.room.list_rooms()
+            args = response['args']
+            rooms = response['responses']['rooms']
+            self.room_layout.clear_widgets()
+            for room in rooms:
+                room_name = room[1]['room_name']
+                self.room_layout.add_widget(RoomButton(room[0],self.manager,text=room_name))
+        except Exception as ex:
+            print(ex)
+            print('plz open server')
+            self.ids.report.color = [1,0,0,1]
+            self.ids.report.text ='Can not connect to server'
+            self.ids.report.font_size =30
+            self.ids.bold = True
 
     def on_create(self):
-        room_name= self.ids.room_name.text
-        responses = self.manager.client_game.room.create_room(room_name)
-        response = responses['responses']
-        args = responses['args']
-        self.manager.current_room_id = response['room_id']
-        self.manager.current_room_name = room_name
-        self.manager.client_game.room.join_game(self.manager.current_room_id)
-        self.manager.transition.direction = 'left'
+        try:
+            room_name= self.ids.room_name.text
+            responses = self.manager.client_game.room.create_room(room_name)
+            response = responses['responses']
+            args = responses['args']
+            self.manager.current_room_id = response['room_id']
+            self.manager.current_room_name = room_name
+            self.manager.client_game.room.join_game(self.manager.current_room_id)
+            self.manager.transition.direction = 'left'
 #        print(self.manager.client_id)
-        self.manager.current='room'
+            self.manager.current='room'
+        except Exception as ex:
+            print(ex)
+            print('plz open server')
+            self.ids.report.color = [1,0,0,1]
+            self.ids.report.text ='Can not connect to server'
+            self.ids.report.font_size =30
+            self.ids.bold = True
 
     def on_back(self):
         self.manager.transition.direction = 'right'

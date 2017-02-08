@@ -61,6 +61,8 @@ class ApaimaneeMOBAClient(metaclass = Singleton):
 
     def disconnect(self):
         self.game_client.disconnect_game()
+        if self.game_logic.history_file != None:
+            self.game_logic.history_file.close()
 #        if self.glm:
 #            self.glm.running = False
 #            self.glm.join()

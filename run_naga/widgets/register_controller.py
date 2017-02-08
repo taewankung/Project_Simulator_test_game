@@ -17,9 +17,18 @@ class RegisterController(Screen):
 
 #    def on_login(self):
     def on_register_user(self,user,password,email,first_name,last_name):
-        response = self.manager.client_game.user.register(user,password,email,first_name,last_name)
-        args = response['args']
-        self.manager.current = 'login'
+        try:
+            response = self.manager.client_game.user.register(user,password,email,first_name,last_name)
+            args = response['args']
+            self.manager.current = 'login'
+        except Exception as ex:
+            print(ex)
+            print('plz open server')
+            self.ids.report.color = [1,0,0,1]
+            self.ids.report.text ='Can not connect to server'
+            self.ids.report.font_size =30
+            self.ids.bold = True
+
     def on_back(self):
         self.manager.transition.direction = 'right'
         self.manager.current = 'login'

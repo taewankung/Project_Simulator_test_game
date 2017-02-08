@@ -54,7 +54,7 @@ if __name__ == "__main__":
     connector.disconnect()
     print('exit_game')
     rungui =RunGUI()
-    rungui.join()
+#    rungui.join()
     #  rungui.start()
     # or you could have written, without so many comments:
     #      director.run( cocos.scene.Scene( HelloWorld() ) )

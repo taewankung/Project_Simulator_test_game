@@ -24,6 +24,9 @@ class HeroController:
         if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
             self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message
+        self.history_dict =dict()
+        self.old_rev_message = ''
+        self.tower_event_dict=dict()
         self.item_price_dict=dict(ArmorBoot=450,
                                   AssasinGrove=1000,
                                   BladeBoot=500,
@@ -113,13 +116,13 @@ class HeroController:
             item(str): name of item
             msg(str): msg want to return if finish funtion
         '''
-
-        str_item = ''
-        item = item.split(' ')
-        for i in item:
-            str_item+=i
-        item = str_item
-        if item in self.item_price_dict and self.status['gold'] > self.item_price_dict[item]:
+        #  print(item)
+        #  str_item = ''
+        #  item = item.split(' ')
+        #  for i in item:
+            #  str_item+=i
+        #  item = str_item
+        if item in self.item_price_dict and self.status['gold'] >= self.item_price_dict[item]:
             self.ac.game_client.game.buy_item(item,msg)
         time.sleep(0.0001)
 
@@ -145,6 +148,7 @@ class HeroController:
             msg(str): msg want to return if finish funtion
         '''
         self.ac.game_client.game.attack(Enemy,msg)
+        self.ac.game_logic.counter_order +=1
         time.sleep(0.001)
 
     def upgrade_skill(self,skill_num,msg="upgrade_skill"):
@@ -171,6 +175,7 @@ class HeroController:
             target (str): use skill to  target
             msg (str): msg want to return if finish funtion
         '''
+        self.ac.game_logic.counter_order +=1
         skill = self.status['skills']
         skill_level = self.status['skill_level'][skill_num]
         if skill_num in range(0,3) and self.status["skill_cooldown"][skill_num] <= 0\
@@ -195,6 +200,7 @@ class HeroController:
         '''
         #print("{0},{1}".format(self.status["pos_x"],self.status["pos_y"]))
         self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
+        self.ac.game_logic.counter_order +=1
         self.ac.game_client.game.move_hero(x=pos_x, y=pos_y,msg=msg)
 
     def move_to_local(self,target,msg=""):
@@ -294,7 +300,7 @@ class HeroController:
         '''
         return self.status['gold']
 
-    def alive(self):
+    def get_alive(self):
         '''
         '''
         return self.status['alive']

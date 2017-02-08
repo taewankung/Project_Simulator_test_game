@@ -96,7 +96,7 @@ class RoomController(Screen):
         print('1.{0}\n2.{1}\n3.{2}\n4.{3}'.format(self.manager.current_room_id,
                           self.manager.client_id,
                           self.manager.token,
-                          self.ids.host.text))
+                          self.manager.client_game._host))
 #        self.manager.client_game.room.start_game()
         if self.active_run and self.ids.select_hero.text !='':
             self.active_run =False
@@ -105,6 +105,6 @@ class RoomController(Screen):
                               self.manager.current_room_id,
                               self.manager.client_id,
                               self.manager.token,
-                              self.ids.host.text)
+                              self.manager.client_game._host)
         App.get_running_app().stop()
         #  pass

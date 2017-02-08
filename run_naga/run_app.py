@@ -12,7 +12,8 @@ import json
 class MyScreenManager(ScreenManager):
     def __init__(self,client_id=None,token_id='',host='localhost'):
         super().__init__()
-        self.client_game = NagaClient(client_id=client_id,rpc_server=True,host=host)
+        print(host)
+        self.client_game = NagaClient(client_id=client_id,host=host,rpc_server=True)
         self.client_game.initial()
         self.current_room_id = ''
         self.current_room_name = ''
@@ -31,6 +32,7 @@ class RunApp(App):
         print(data['page'])
         print(data['client_id'])
         print(data['token_id'])
+        print(data['host'])
         client_id = data['client_id']
 
         if client_id !='' and data['token_id']!='' :
@@ -42,7 +44,7 @@ class RunApp(App):
                                           loggedin=True
                                             )
         else:
-            self.msm = MyScreenManager()
+            self.msm = MyScreenManager(host=data['host'])
 
         self.msm.add_widget(LoginController(name='login'))
         self.msm.add_widget(RoomController(name='room'))

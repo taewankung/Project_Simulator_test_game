@@ -358,6 +358,9 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 level = self.game_space['hero_team2'][status.hero_key]['level']
                 gold = self.game_space['hero_team2'][status.hero_key]['gold']
                 alive = self.game_space['hero_team2'][status.hero_key]['alive']
+                kill = self.game_space['hero_team2'][status.hero_key]['kill']
+                death = self.game_space['hero_team2'][status.hero_key]['death']
+                assist = self.game_space['hero_team2'][status.hero_key]['assist']
                 damage_critical = self.game_space['hero_team2'][status.hero_key]['damage_critical']
                 magic_resis = self.game_space['hero_team2'][status.hero_key]['magic_resis']
                 damage_speed = self.game_space['hero_team2'][status.hero_key]['damage_speed']
@@ -399,6 +402,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.mana_bar.update(mana,max_mana)
                 self.text_item.element.text = 'Items: ' + str(items)
                 self.text_cooldown.element.text = 'Skill CoolDown: ' + str(cooldown)
+                self.text_kda.element.text = 'K/D/A:'+ str(kill) +'/'+ str(death) + '/' + str(assist)
 
         self.bs_team1.element.text = 'Team1 Base HP: ' + str(self.bs_t1)   
         self.bs_team2.element.text = 'Team2 Base HP: ' + str(self.bs_t2)

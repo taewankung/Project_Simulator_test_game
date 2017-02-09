@@ -486,7 +486,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
             for tw in self.ac.game_logic.game_space['tower_team1']:
                 self.hp[tw].element.text = 'HP: '+ str(tw_team1[tw]['current_hp'])
                 if self.old_hp[tw] != tw_team1[tw]['current_hp']:
-                    self.hp[tw].element.color = (0,0,0,255)
+                    self.hp[tw].element.color = (255,145,0,255)
                     self.old_hp[tw] = tw_team1[tw]['current_hp']
                 else:
                     self.hp[tw].element.color = (255,255,255,255)

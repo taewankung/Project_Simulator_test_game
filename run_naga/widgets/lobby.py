@@ -46,7 +46,8 @@ class LobbyController(Screen):
             self.room_layout.clear_widgets()
             for room in rooms:
                 room_name = room[1]['room_name']
-                self.room_layout.add_widget(RoomButton(room[0],self.manager,text=room_name))
+                if room_name != 'test_room_name':
+                    self.room_layout.add_widget(RoomButton(room[0],self.manager,text=room_name))
         except Exception as ex:
             print(ex)
             print('plz open server')

@@ -12,6 +12,7 @@ from cocos.actions import *
 from sim_monitor.model.status import status
 from .bar import Bar
 from collections  import OrderedDict
+import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
@@ -247,8 +248,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
         self.text_kda.position = (300, 550)
 
 
-     
-#       add text        
+
+#       add text
         self.add(self.text_team,1)
         self.add(self.text_name,1)
         self.add(self.text_hp,1)
@@ -418,8 +419,8 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
         self.game_space = self.ac.game_logic.game_space
         self.name = {}
         self.hp = {}
-     
-        
+        self.old_hp ={}
+
 
         if self.tower_team == 'team1':
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
@@ -434,6 +435,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
                 self.name[tw].position= (15, 440-(40*i))
                 self.add(self.name[tw],1)
                 self.hp[tw] = cocos.text.Label('HP:' + str(tw_team1[tw]['current_hp']), font_size=12, bold = True)
+                self.old_hp[tw] = tw_team1[tw]['current_hp']
                 self.hp[tw].position = (15, 420-(40*i))
                 self.add(self.hp[tw],1)
                 i = i+1
@@ -451,6 +453,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
                 self.name[tw].position= (15, 440-(40*i))
                 self.add(self.name[tw],1)
                 self.hp[tw] = cocos.text.Label('HP: '+str(tw_team2[tw]['current_hp']), font_size=12, bold = True)
+                self.old_hp[tw] = tw_team2[tw]['current_hp']
                 self.hp[tw].position = (15 ,420-(40*i))
                 self.add(self.hp[tw],1)
                 i = i + 1
@@ -464,7 +467,7 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
 ################################position Tower###################################
         #self.text_tower_team.position = (35, 370)
 
-#################################################################################  
+#################################################################################
 
 ############################ add tower text ###################################
         # self.add(self.text_tower_team, 1)
@@ -478,15 +481,26 @@ class DisplayTowerStatusLayer(cocos.layer.ColorLayer):
             tw_team1 = self.ac.game_logic.game_space['tower_team1']
             for tw in self.ac.game_logic.game_space['tower_team1']:
                 self.hp[tw].element.text = 'HP: '+ str(tw_team1[tw]['current_hp'])
+                if self.old_hp[tw] != tw_team1[tw]['current_hp']:
+                    self.hp[tw].element.color = (0,0,0,255)
+                    self.old_hp[tw] = tw_team1[tw]['current_hp']
+                else:
+                    self.hp[tw].element.color = (255,255,255,255)
                 #print(tw_team1[tw])
 
         elif self.tower_team == 'team2':
             tw_team2 = self.ac.game_logic.game_space['tower_team2']
-            for tw in self.ac.game_logic.game_space['tower_team2']:    
+            for tw in self.ac.game_logic.game_space['tower_team2']:
                 self.hp[tw].element.text = 'HP: '+ str(tw_team2[tw]['current_hp'])
+                if self.old_hp[tw] != tw_team2[tw]['current_hp']:
+                    self.hp[tw].element.color = (255,145,0,255)
+                    self.old_hp[tw] = tw_team2[tw]['current_hp']
+                else:
+                    self.hp[tw].element.color = (255,255,255,255)
+                    #self.hp[tw].color = [0,0,0,1]
         else:
             print('have not tower team!')
-        
+
 ####################################################################################################
 
     def step(self, dt):

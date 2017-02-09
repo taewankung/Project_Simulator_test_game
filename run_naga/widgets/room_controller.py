@@ -26,7 +26,8 @@ class ClientGameProcess:
                                         #  '--host',host,
                                         #  '--client_id',client_id,
                                         #  '--token',token]
-        process = subprocess.Popen('python3 '+expanduser("~")+'/projects/sim_map/main.py --load {0} --room_id {1} --host {2} --client_id {3} --token {4}'.format(text,room_id,host,client_id,token),shell=True)
+        process = subprocess.Popen('python3 '+os.path.dirname(__file__)+'/../../main.py --load {0} --room_id {1} --host {2} --client_id {3} --token {4}'.format(text,room_id,host,client_id,token),shell=True)
+
 class RoomController(Screen):
     def __init__(self,name=''):
         super().__init__(name=name)
@@ -39,9 +40,6 @@ class RoomController(Screen):
         self.menu_path = os.path.dirname(__file__)
 
         self.game_status = False
-
-#        self.event = MyEventDispatcher().do_something('check')
-#        self.game_client = aclient()
 
     def on_leave(self):
         self.entered=False
@@ -56,6 +54,7 @@ class RoomController(Screen):
         self.ids.room_name.text += self.manager.current_room_name
         self._trigger = Clock.schedule_interval(self.step,1)
         self.ids.current_player_number.text = 'Current Player in room:{0}'.format(self.num_player)
+        self.ids.file_client1.text = os.path.dirname(__file__)+'/../../sim_monitor/sim_client/test.py'
 
     def update(self,text):
         print(self.ids.file_client1.text)

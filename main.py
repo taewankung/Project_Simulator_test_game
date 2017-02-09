@@ -39,8 +39,6 @@ if __name__ == "__main__":
     start_time = None
     connector = Connector()
     connector.start()
-    logger.info("Hello")
-
 
     # director init takes the same arguments as pyglet.window
     cocos.director.director.init(width = 1920, height=1080)

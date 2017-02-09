@@ -13,7 +13,7 @@ class ConnectionLayer(cocos.layer.Layer):
         self.model = model
         self.model.push_handlers( self.check_connecting
                                 )
-        self.label= cocos.text.Label("Connecting....",
+        self.label= cocos.text.Label("",
                                  font_size = 32,
                                  anchor_x='center',
                                  anchor_y='center')

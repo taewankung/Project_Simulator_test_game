@@ -4,4 +4,6 @@
 *.swp
 *.pyc
 *.egg-info
+*.log
+config.json
 __pycache__

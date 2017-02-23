@@ -2,6 +2,7 @@ from __future__ import division, print_function, unicode_literals
 from sim_monitor.sim_client.client_map import ApaimaneeMOBAClient
 import sys
 import os
+import datetime
 from pyglet.gl import *
 import cocos
 import pyglet
@@ -150,10 +151,19 @@ class Button(cocos.layer.ColorLayer):
 
     def on_quit(self):
         ac = ApaimaneeMOBAClient()
+        file_path = os.path.dirname(__file__)
+        time_to_create = ac.game_logic.time_created_file
         data = dict(client_id=ac._client_id,
                     token_id=ac.game_client.user.loggedin_info['token'],
-                    page='lobby',
-                    host=ac.game_client._host)
+                    page='result',
+                    host=ac.game_client._host,
+                    old_file=file_path+'/../../logging/{0}_{1}_{2}_{3}_history.log'\
+                                       .format(ac.game_logic.player['username'],
+                                               str(ac.game_logic.ex_file),
+                                               time_to_create[0],
+                                               time_to_create[1]
+                                              )
+                   )
         with open('config.json', 'w') as outfile:
             json.dump(data, outfile)
         pyglet.app.exit()
@@ -169,10 +179,3 @@ class DisplaySummaryLayer(cocos.layer.ColorLayer):
         self.img = pyglet.resource.image('sim_monitor/res/show_status.png')
         self.is_event_handler = True
         self.timer = 0
-
-
-    #  def draw(self):
-        #  glPushMatrix()
-        #  self.transform()
-        #  self.img.blit(0, 0)
-        #  glPopMatrix()

@@ -24,7 +24,7 @@ class GameLogic:
         self.alliance_message =''
         self.action_msg_history=[]
         self.alliance_msg_history=[]
-
+        self.time_created_file = None
         self.end_message =''
         #  self.history_file = open(file_path+'../logging/'+self.player['username']+'_history.log','w')
 #        self.logger = logging.basicConfig(filename=file_path+'../logging/'+self.player['username']+'history.log')
@@ -42,9 +42,19 @@ class GameLogic:
         self.game_client.game.ready()
 
     def create_file(self):
+        now_compleated = datetime.datetime.now()
+        if self.time_created_file == None:
+            time_created_file = str(now_compleated)
+            time_created_file = time_created_file.split(' ')
+            self.time_created_file = time_created_file
         if self.history_file == None:
             file_path = os.path.dirname(__file__)
-            self.history_file = open(file_path+'/../logging/{0}_{1}_history.log'.format(self.player['username'],str(self.ex_file)),'w')
+            self.history_file = open(file_path+'/../logging/{0}_{1}_{2}_{3}_history.log'\
+                                                .format(self.player['username'],\
+                                                str(self.ex_file),str(self.time_created_file[0]),\
+                                                str(self.time_created_file[1])),'w')
+
+            self.history_file.write('user name: {0}\nfile name: {1}\n'.format(self.player['username'],str(self.ex_file)))
 
     def synchronize(self, args):
         object_id = args.get('object_id', None)
@@ -68,7 +78,7 @@ class GameLogic:
                 kda = (hero_status['kill'] + hero_status['assist']) / hero_status['death']*100
             else:
                 kda = 100
-                if kill ==0:
+                if hero_status['death'] ==0:
                     kda =0
             lasthit = hero_status['lasthit']
             level=0

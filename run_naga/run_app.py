@@ -6,6 +6,8 @@ from .widgets.room_controller import RoomController
 from kivy.uix.screenmanager import ScreenManager, Screen
 from .widgets.login import LoginController
 from .widgets.register_controller import RegisterController
+from .widgets.result import ResultController
+
 import os
 import json
 
@@ -41,8 +43,8 @@ class RunApp(App):
             self.msm.client_id = client_id
             self.msm.token = data['token_id']
             self.msm.client_game.user.loggedin_info = dict(token=data['token_id'],
-                                          loggedin=True
-                                            )
+                                                           loggedin=True
+                                                          )
         else:
             self.msm = MyScreenManager(host=data['host'])
 
@@ -50,6 +52,7 @@ class RunApp(App):
         self.msm.add_widget(RoomController(name='room'))
         self.msm.add_widget(LobbyController(name='lobby'))
         self.msm.add_widget(RegisterController(name='register'))
+        self.msm.add_widget(ResultController(name='result'))
         self.msm.current = data['page']
         data['page']='login'
         data['client_id']=''

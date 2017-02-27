@@ -21,6 +21,8 @@ class HeroController:
         self.player = self.ac.game_logic.player
         self.connection_status = status.connect
 #        print(self.ac.game_logic.game_space)
+        while self.player["id"] not in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
+            print(self.ac.game_logic.game_space["hero_"+str(self.player["team"])])
         if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
             self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message

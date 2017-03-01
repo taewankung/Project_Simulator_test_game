@@ -16,11 +16,7 @@ class x(MyHero):
 
     def move(self):
         self.controller.buy_item('Potion',"start")
-<<<<<<< HEAD
-        self.controller.move(1,1,"end lane")
-=======
         self.controller.move(1000,1000,"end lane")
->>>>>>> f01e34badca75aa1af3079f06d299c98a2d299b3
         while self.controller.get_connection():
             hero_status = self.controller.status
             item_list = self.controller.get_item_in_hero()
@@ -29,20 +25,13 @@ class x(MyHero):
             recive_message = self.controller.get_rev_message()
 
             if recive_message =='start':
-<<<<<<< HEAD
                 self.controller.move(1,1,"end lane")
-=======
                 self.controller.move(1000,1000,"end lane")
->>>>>>> f01e34badca75aa1af3079f06d299c98a2d299b3
             if recive_message == 'found_enemy':
                 if len(near_enemy) !=0:
                     self.controller.attack(near_enemy[0],'start')
                 else:
-<<<<<<< HEAD
-                    self.controller.move(1,1,"end_lane")
-=======
                     self.controller.move(1000,1000,"end_lane")
->>>>>>> f01e34badca75aa1af3079f06d299c98a2d299b3
             if recive_message == 'battle':
                 if len(near_enemy) !=0:
                     self.controller.use_skill(1,near_enemy[0],'battle')
@@ -50,20 +39,12 @@ class x(MyHero):
                     if self.controller.get_hp_percent()<=0.5:
                         self.controller.use_item('Potion','battle')
                 else:
-<<<<<<< HEAD
-                    self.controller.move(1,1,"end_lane")
-=======
                     self.controller.move(1000,1000,"end_lane")
->>>>>>> f01e34badca75aa1af3079f06d299c98a2d299b3
 
             if recive_message == 'reborn':
                 if 'Potion' not in item_list and hero_gold > 100:
                     self.controller.buy_item('Potion','start')
-<<<<<<< HEAD
-                self.controller.move(1,1,"end lane")
-=======
                 self.controller.move(1000,1000,"end lane")
->>>>>>> f01e34badca75aa1af3079f06d299c98a2d299b3
             self.controller.update_message()
             self.controller.update_status()
             time.sleep(0.01)

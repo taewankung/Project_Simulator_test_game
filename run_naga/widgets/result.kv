@@ -1,0 +1,50 @@
+#:kivy 1.0
+<ResultController>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source:'./run_naga/widgets/res/backgroundkivy.png'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 100
+        StackLayout:
+            orientation: 'tb-lr'
+            Label:
+                markup: True
+                text:'[b]Result[/b]'
+                size_hint: (1,None)
+                size: (200,50)
+                font_size: 42
+            ScrollView:
+                id:scollview
+                size_hint:(1, 0.7)
+                Label:
+                    id: result_box
+                    text: ''
+                    text_size: None, None  # Set the text wrap box height
+                    size_hint_x: None
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    width: self.texture_size[0]
+            StackLayout:
+                orientation: 'lr-tb'
+                size_hint:(1,0.1)
+                Button:
+                    id: next_page
+                    markup: True
+                    text: "[b]Next[/b]"
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint:(0.25,None)
+                    size:(200,50)
+                    font_size:20
+                    on_press:root.on_next()
+                Button:
+                    id: quit
+                    markup: True
+                    background_normal:'./run_naga/widgets/res/runkivy2.png'
+                    size_hint:(0.25,None)
+                    size:(200,50)
+                    text: "[b]Quit[/b]"
+                    font_size:20
+                    on_press: app.stop()

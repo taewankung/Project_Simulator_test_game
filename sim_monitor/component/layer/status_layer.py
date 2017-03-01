@@ -58,8 +58,6 @@ class StatusBackground(cocos.layer.ColorLayer):
                 self.hero_img[count].position = (180 + (200*count),165)
                 self.hero_img[count].scale = 0.2
                 self.add(self.hero_img[count], 2)
-                
-               
                 self.add(self.status_hero_team1[name])
                 #self.text_hero_team1[name] = cocos.text.Label(name, font_size = 20, x=50+count*200, y=1024)
                 count = count + 1
@@ -311,7 +309,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 events_status = self.game_space['hero_team1'][status.hero_key]['act_status']['action']
                 items = [i['name'] for i in self.game_space['hero_team1'][status.hero_key]['item']]
                 cooldown = [format(cd, '.2f') for cd in self.game_space['hero_team1'][status.hero_key]['skill_cooldown']] 
-                
+
                 if self.game_space['hero_team1'][status.hero_key]['skills'][0]:
                     skills = self.game_space['hero_team1'][status.hero_key]['skills'][0]['name']
                 if self.game_space['hero_team1'][status.hero_key]['skills'][1]:
@@ -344,8 +342,8 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.text_item.element.text = 'Items: ' + str(items)
                 self.text_cooldown.element.text = 'Skill CoolDown: ' + str(cooldown)
                 self.text_kda.element.text = 'K/D/A:'+ str(kill) +'/'+ str(death) + '/' + str(assist)
-            
-            else: 
+
+            else:
                 name = self.game_space['hero_team2'][status.hero_key]['name']
                 hp = self.game_space['hero_team2'][status.hero_key]['current_hp']
                 max_hp = self.game_space['hero_team2'][status.hero_key]['max_hp'] 
@@ -404,7 +402,7 @@ class DisplayStatusLayer(cocos.layer.ColorLayer):
                 self.text_cooldown.element.text = 'Skill CoolDown: ' + str(cooldown)
                 self.text_kda.element.text = 'K/D/A:'+ str(kill) +'/'+ str(death) + '/' + str(assist)
 
-        self.bs_team1.element.text = 'Team1 Base HP: ' + str(self.bs_t1)   
+        self.bs_team1.element.text = 'Team1 Base HP: ' + str(self.bs_t1)
         self.bs_team2.element.text = 'Team2 Base HP: ' + str(self.bs_t2)
 
     def step(self, dt):

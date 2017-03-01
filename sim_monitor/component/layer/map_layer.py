@@ -129,28 +129,33 @@ class MapLayer(cocos.layer.Layer):
 
     def set_with_ac(self, ac):
         self.ac = ac
-        for tw in ac.game_logic.game_space["tower_team1"]:
-            pos = (ac.game_logic.game_space["tower_team1"][tw]['pos_x'],
-                   ac.game_logic.game_space["tower_team1"][tw]['pos_y'])
-            self.set_position_tower(ac.game_logic.game_space["tower_team1"][tw]["name"], pos)
+        tower_team1 = ac.game_logic.game_space["tower_team1"]
+        tower_team2 = ac.game_logic.game_space["tower_team2"]
+        hero_team1 = ac.game_logic.game_space["hero_team1"]
+        base_team1 = ac.game_logic.game_space["base_team1"]
+        base_team2 = ac.game_logic.game_space["base_team2"]
+        for tw in tower_team1:
+            pos = (tower_team1[tw]['pos_x'],
+                   tower_team1[tw]['pos_y'])
+            self.set_position_tower(tower_team1[tw]["name"], pos)
 
-        for tw in ac.game_logic.game_space["tower_team2"]:
-            pos = (ac.game_logic.game_space["tower_team2"][tw]['pos_x'],
-                   ac.game_logic.game_space["tower_team2"][tw]['pos_y'])
-            self.set_position_tower(ac.game_logic.game_space["tower_team2"][tw]["name"], pos)
+        for tw in tower_team2:
+            pos = (tower_team2[tw]['pos_x'],
+                   tower_team2[tw]['pos_y'])
+            self.set_position_tower(tower_team2[tw]["name"], pos)
 
-        for hero in ac.game_logic.game_space["hero_team1"]:
-            pos = ( ac.game_logic.game_space["hero_team1"][hero]['pos_x'],
-                     ac.game_logic.game_space["hero_team1"][hero]['pos_y'])
-        if ac.game_logic.game_space["base_team1"] is not None:
-            pos = (ac.game_logic.game_space["base_team1"]['pos_x'],
-                ac.game_logic.game_space["base_team1"]['pos_y'])
-            self.set_position_base(ac.game_logic.game_space["base_team1"]["name"], pos)
+        for hero in hero_team1:
+            pos = ( hero_team1[hero]['pos_x'],
+                    hero_team1[hero]['pos_y'])
+        if base_team1 is not None:
+            pos = (base_team1['pos_x'],
+                   base_team1['pos_y'])
+            self.set_position_base(base_team1["name"], pos)
 
-        if ac.game_logic.game_space["base_team2"] is not None:
-            pos = (ac.game_logic.game_space["base_team2"]['pos_x'],
-                ac.game_logic.game_space["base_team2"]['pos_y'])
-            self.set_position_base(ac.game_logic.game_space["base_team2"]["name"], pos)
+        if base_team2 is not None:
+            pos = (base_team2['pos_x'],
+                   base_team2['pos_y'])
+            self.set_position_base(base_team2["name"], pos)
         self.schedule(self.step)
 
     def set_position_tower(self, name, position):

@@ -21,6 +21,8 @@ class HeroController:
         self.player = self.ac.game_logic.player
         self.connection_status = status.connect
 #        print(self.ac.game_logic.game_space)
+        while self.player["id"] not in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
+            print(self.ac.game_logic.game_space["hero_"+str(self.player["team"])])
         if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
             self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message
@@ -96,6 +98,7 @@ class HeroController:
     def buy_item(self,item,msg=''):
         '''
         This method use to buy item in the game.
+
         item in the game:
             ArmorBoot
             AssasinGrove
@@ -237,17 +240,25 @@ class HeroController:
     def get_current_hp(self):
         '''
         This method return current_hp attibute  in Hero class.
+
+        Returns:
+            current_hp(int)
         '''
         return self.status["current_hp"]
 
     def get_hp_percent(self):
         '''
         This method return the hp of your hero is percent.
+
         recomend:
             This percent use Float style (1% =0.01).
+
         event example to use:
             you want to your hero use item or change action if hp lower than 10%.
             you can use this method to check.
+
+        Returns:
+            percent_hp(float)
         '''
         return (self.status["current_hp"]/self.status["max_hp"])
 
@@ -255,90 +266,189 @@ class HeroController:
         '''
         This method return mp or mana attibute in Hero class.
 
+        Returns:
+            max_mana(int)
+
         '''
         return self.status["max_mana"]
 
     def get_current_mp(self):
         '''
         This method return current mp or mana attibute in Hero class.
+
+        Returns:
+            current_mana(int)
         '''
         return self.status["current_mana"]
 
     def get_max_mp(self):
         '''
         This method return max mp or mana attibute in Hero class.
+
+        Returns:
+            max_mana(int)
         '''
         return self.status["max_mana"]
 
     def get_mp_percent(self):
         '''
         This method return the hp of hero is percent.
+
         recomend:
             This percent use Float style (1% =0.01).
+
         event example to use:
             you want to your hero use item or change action if mana or mp lower than 10%.
             you can use this method to check.
+
+        Returns:
+            pecent_mana(float)
         '''
         return (self.status["current_mana"]/self.status["max_mana"])
 
     def get_item_in_hero(self):
         '''
-            The get_item_in_hero method return list of item in your hero.
+        The get_item_in_hero method return list of item in your hero.
+
+        Returns:
+            list_of_item(list)
         '''
         item_list = [i['name'] for i in self.status['item']]
         return item_list
 
     def get_near_enemy(self):
         '''
-            This method will return lsit of enemys who are near your hero.
+        This method will return lsit of enemys who are near your hero.
+
+        Returns:
+            list_near_of_enemy(list)
         '''
         return self.status['near_enemy_list']
 
     def get_gold(self):
         '''
-            This method will return gold of hero.
+        This method will return gold of hero.
+
+        Returns:
+            gold(int)
         '''
         return self.status['gold']
 
     def get_alive(self):
         '''
+        This method use to check hero is alive.
+
+        Returns:
+            alive(bool)
         '''
         return self.status['alive']
 
     def get_level(self):
+        '''
+        This method use to get level of hero.
+
+        Returns:
+            level(int)
+        '''
         return self.status['level']
 
     def get_current_exp(self):
+        '''
+        This method use to get current of exp.
+
+        Returns:
+            current_exp(int)
+        '''
         return self.status['current_exp']
 
     def get_max_exp(self):
+        '''
+        This method use to get max exp of hero.
+
+        Returns:
+            max_exp(int)
+        '''
         return self.status['max_exp']
 
     def get_skill_cooldown(self):
+        '''
+        This method use to cooldown of hero's skill.
+
+        Returns:
+            cooldown(float)
+        '''
         return self.status['skill_cooldown']
 
     def get_kill(self):
+        '''
+        This method use to get kill score of hero.
+
+        Returns:
+            kill(int)
+        '''
         return self.status['kill']
 
     def get_death(self):
+        '''
+        This method use to get death score of hero.
+
+        Returns:
+            death(int)
+        '''
         return self.status['death']
 
     def get_team_list(self):
+        '''
+        This method use to get list of alliance unit is near the hero.
+
+        Returns:
+            list_of_alliance(list)
+        '''
         return self.status['near_team_list']
 
     def count_near_enemy(self):
+        '''
+        This method use to count enemys are near the hero.
+
+        Returns:
+            list_of_near_hero(list)
+        '''
         return len(self.status['near_enemy_list'])
 
     def get_skill_point(self):
+        '''
+        This method use to get skill point from hero.
+
+        Returns:
+            skill_point(int)
+        '''
         return self.status['skill_point']
 
     def get_armor(self):
+        '''
+        This method use to get armor of hero.
+
+        Returns:
+            armor(int)
+        '''
         return self.status['armor']
 
     def get_damage(self):
+        '''
+        This method use to get damage of hero.
+
+        Returns:
+            damage(int)
+        '''
         return self.status['damage']
 
     def get_name(self):
+        '''
+        This method use to get name of hero.
+
+        Returns:
+            name(str)
+        '''
         return self.status['name']
     #  def get_enemy_hp(self,enemy):
         #  '''

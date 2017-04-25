@@ -157,11 +157,8 @@ class Button(cocos.layer.ColorLayer):
                     token_id=ac.game_client.user.loggedin_info['token'],
                     page='result',
                     host=ac.game_client._host,
-                    old_file=file_path+'/../../logging/{0}_{1}_{2}_{3}_history.log'\
-                                       .format(ac.game_logic.player['username'],
-                                               str(ac.game_logic.ex_file),
-                                               time_to_create[0],
-                                               time_to_create[1]
+                    old_file=file_path+'/../../logging/{0}.log'\
+                                       .format(status.hash_file
                                               )
                    )
         with open('config.json', 'w') as outfile:

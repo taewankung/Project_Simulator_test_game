@@ -26,7 +26,7 @@ class HeroController:
         if self.player["id"] in self.ac.game_logic.game_space["hero_"+str(self.player["team"])]:
             self.status = self.ac.game_logic.game_space["hero_"+str(self.player["team"])][self.player["id"]]
         self.rev_message = self.ac.game_logic.rev_message
-        self.history_dict =dict()
+        self.history_dict =[]
         self.old_rev_message = ''
         self.tower_event_dict=dict()
         self.item_price_dict=dict(ArmorBoot=450,
@@ -140,7 +140,7 @@ class HeroController:
         item_name_list = self.get_item_in_hero()
         if item in  item_name_list:
             self.ac.game_client.game.use_item(item,msg)
-            time.sleep(0.0001)
+            time.sleep(0.001)
 
     def attack(self, Enemy,msg=""):
         '''
@@ -150,6 +150,8 @@ class HeroController:
             Enemy(str): name of Enemy
             msg(str): msg want to return if finish funtion
         '''
+        #  if self.ac.game_logic.old_rev_message != self.ac.game_logic.rev_message:
+            #  self.ac.game_logic.old_rev_message = self.ac.game_logic.rev_message
         self.ac.game_client.game.attack(Enemy,msg)
         self.ac.game_logic.counter_order +=1
         time.sleep(0.001)
@@ -196,7 +198,7 @@ class HeroController:
         Args:
             pos_x(int): integer or float for position x,
             pos_y(int): integer or float for position y,
-            msg(str):   string for message which want to server send when this function finish done.
+            msg(str)  : string for message which want to server send when this function finish done.
 
         recommend:
             Server will send message "found enemy" when unit found enemy for you want to handle that event.
@@ -207,11 +209,31 @@ class HeroController:
         self.ac.game_client.game.move_hero(x=pos_x, y=pos_y,msg=msg)
 
     def move_to_local(self,target,msg=""):
-        msg = 'move to {0}'.format(target)
-        self.ac.game_client.game.move_hero(x=self.local_dict[target][0],y=self.local_dict[target][1])
+        '''
+        The movement method move the actor to the local with string.
 
-    def move_follow(self,target,msg='follow'):
-        self.ac.game_client.game.move_hero(x=target.pos_x,y=pos_y,msg=msg)
+        Args:
+            target(str): string is local in game for move.
+            msg(str)   : string for message which want to server send when this function finish done.
+
+        recommend:
+            Server will send message "found enemy" when unit found enemy for you want to handle that event.
+        '''
+        msgs = 'move to {0}. {1}'.format(target,msg)
+        self.ac.game_client.game.move_hero(x=self.local_dict[target][0],y=self.local_dict[target][1],msg=msgs)
+
+    #  def move_follow(self,target,msg='follow'):
+        #  '''
+        #  The move_follow method use to move character follow the target.
+
+        #  Args:
+            #  target(): string is local in game for move.
+            #  msg(str)   : string for message which want to server send when this function finish done.
+
+        #  recommend:
+            #  Server will send message "found enemy" when unit found enemy for you want to handle that event.
+        #  '''
+        #  self.ac.game_client.game.move_hero(x=target.pos_x,y=pos_y,msg=msg)
 
     def alliance_message(self,msg_to_team,msg_end_send='send message'):
         '''
@@ -226,6 +248,37 @@ class HeroController:
         '''
         self.ac.game_client.game.alliance_message(msg_to_team,msg_end_send)
         time.sleep(0.001)
+
+    def send_item_can_use(self):
+        '''
+        The method can send message for item which can use in the time.
+        '''
+        items = self.status['item']
+        for i in items:
+            if i['type'] ==1:
+                self.alliance_message('{0} can use'.format(i['name']))
+
+    def send_message_when_die(self,msg_to_team,msg_end_send='when i die,i send message'):
+        '''
+        The method send message when the hero controlled die.
+        '''
+        alive = self.status['alive']
+        if alive:
+            self.alliance_message(msg_to_team,msg_end_send)
+
+    def send_skill_can_use(self,skill_num,msg_end_send='end_send_skill_can_use'):
+        '''
+        The method can send message for skill which can use in the time.
+        '''
+        skill_cooldown = self.status['skill_cooldown'][skill_num]
+        if skill_cooldown == 0:
+            self.alliance_message('skill{0}:'.format(skill_num),msg_end_send)
+
+    def send_found_enemy_at(self,pos_x,pos_y,msg_end_send='send enemy\'s position'):
+        '''
+        The method can send message for tell enemy's position for hero in team.
+        '''
+        self.alliance_message('{0} {1}'.format(pos_x,pos_y),msg_end_send)
 
     def get_position(self):
         '''

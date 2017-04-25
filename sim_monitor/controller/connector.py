@@ -24,6 +24,8 @@ class Connector(Thread):
         my_file = my_file[-1].split('.')
         self.ac.game_logic.ex_file=my_file[0]
         self.ac.game_logic.create_file()
+        start_game_time = datetime.datetime.now().strftime("%H:%M:%S")
+        self.ac.game_logic.history_file.write('{0}: {1}\n'.format(start_game_time,'begin'))
 #        print(status.connect)
 #        while(status.connect):
         self.ac.ex.start()

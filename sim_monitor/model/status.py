@@ -6,6 +6,8 @@ class Status:
         self.message = ""
         self.ac = None
         self.hero_key = None
+        self.hash_file =''
+        self.hero_command =''
 
 status = Status()
 ac = status.ac

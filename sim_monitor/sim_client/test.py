@@ -25,19 +25,18 @@ class x(MyHero):
             recive_message = self.controller.get_rev_message()
 
             if recive_message =='start':
-                self.controller.move(1,1,"end lane")
                 self.controller.move(1000,1000,"end lane")
             if recive_message == 'found_enemy':
                 if len(near_enemy) !=0:
                     self.controller.attack(near_enemy[0],'start')
                 else:
                     self.controller.move(1000,1000,"end_lane")
-            if recive_message == 'battle':
+            if recive_message == 'atk':
                 if len(near_enemy) !=0:
-                    self.controller.use_skill(1,near_enemy[0],'battle')
+                    self.controller.use_skill(1,near_enemy[0],'atk')
                     self.controller.attack(near_enemy[0],'start')
                     if self.controller.get_hp_percent()<=0.5:
-                        self.controller.use_item('Potion','battle')
+                        self.controller.use_item('Potion','atk')
                 else:
                     self.controller.move(1000,1000,"end_lane")
 

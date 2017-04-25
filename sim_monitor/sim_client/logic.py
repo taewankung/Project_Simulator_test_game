@@ -20,6 +20,7 @@ class GameLogic:
         self.game_client = game_client
         self.history_file = None
         self.rev_message =''
+        self.old_rev_message =''
         self.tower_message =''
         self.alliance_message =''
         self.action_msg_history=[]
@@ -29,6 +30,7 @@ class GameLogic:
         #  self.history_file = open(file_path+'../logging/'+self.player['username']+'_history.log','w')
 #        self.logger = logging.basicConfig(filename=file_path+'../logging/'+self.player['username']+'history.log')
         #logging.basicConfig(filename=)
+        self.msg_dict =['dead','atk','use_skill']
 
     def start_game(self):
         self.status = 'play'
@@ -43,17 +45,15 @@ class GameLogic:
 
     def create_file(self):
         now_compleated = datetime.datetime.now()
+        print('flie begin created:'+status.hash_file)
         if self.time_created_file == None:
             time_created_file = str(now_compleated)
             time_created_file = time_created_file.split(' ')
             self.time_created_file = time_created_file
         if self.history_file == None:
-            file_path = os.path.dirname(__file__)
-            self.history_file = open(file_path+'/../logging/{0}_{1}_{2}_{3}_history.log'\
-                                                .format(self.player['username'],\
-                                                str(self.ex_file),str(self.time_created_file[0]),\
-                                                str(self.time_created_file[1])),'w')
-
+            file_path = os.path.dirname(__file__)+'/../logging/{0}.log'\
+                                                .format(status.hash_file)
+            self.history_file = open(file_path,'w')
             self.history_file.write('user name: {0}\nfile name: {1}\n'.format(self.player['username'],str(self.ex_file)))
 
     def synchronize(self, args):
@@ -83,6 +83,7 @@ class GameLogic:
             lasthit = hero_status['lasthit']
             level=0
             lasthit_level=''
+            now_compleated = datetime.datetime.now().strftime("%H:%M:%S")
             if kda >= 80:
                 level = 'A'
             elif kda >= 75:
@@ -105,38 +106,40 @@ class GameLogic:
                 lasthit_level ='Good'
             else:
                 lasthit_level ='Bad'
-
+            self.history_file.write('{0}: {1}\n'.format(now_compleated,self.end_message))
             self.history_file.write('\nResult of Code:\n'.format(self.player['username'],kda))
             self.history_file.write('{0} kda: {1}\n'.format(self.player['username'],kda))
-            self.history_file.write('level of kda:{0}\n'.format(level))
+            self.history_file.write('level of kda: {0}\n'.format(level))
             self.history_file.write('\n{0} Lasthit: {1}\n'.format(self.player['username'],lasthit))
             self.history_file.write('level of Lasthit:{0}\n'.format(lasthit_level))
 
     def complete_command(self,msg):
         if self.old_message !=msg:
             self.old_message = msg
-            print(self.counter_order)
+            #print(self.counter_order)
             self.counter_order = 0
             self.has_change_msg = True
         else:
             self.has_change_msg = False
         self.rev_message = msg
-        now_compleated = datetime.datetime.now()
-        self.history_file.write(str(now_compleated)+str(' '+self.player['username'])+':'+msg+'\n')
+        #now_compleated = datetime.datetime.now()
+        now_compleated = datetime.datetime.now().strftime("%H:%M:%S")
+        if msg in self.msg_dict:
+            self.history_file.write(str(now_compleated)+':'+msg+'\n')
         if msg not in self.action_msg_history:
             self.action_msg_history.append(msg)
         print(str(self.player['username'])+':'+msg)
 
     def rev_tower_message(self,msg):
         self.tower_message = msg
-        now_compleated = datetime.datetime.now()
-        self.history_file.write(str(now_compleated)+str(' '+self.player['username'])+':'+msg+'\n')
+        now_compleated = datetime.datetime.now().strftime("%H:%M:%S")
+        self.history_file.write(str(now_compleated)+':'+msg+'\n')
         print(str(self.player['username'])+':'+msg)
 
     def rev_alliance_message(self,msg):
         self.alliance_message = msg
-        now_compleated = datetime.datetime.now()
-        self.history_file.write(str(now_compleated)+str(' '+self.player['username'])+':'+msg+'\n')
+        now_compleated = datetime.datetime.now().strftime("%H:%M:%S")
+        #self.history_file.write(str(now_compleated)+':'+msg+'\n')
         if msg not in self.alliance_msg_history:
             self.alliance_msg_history.append(msg)
         print('alliance: {0} {1}'.format(self.player['username'],msg))

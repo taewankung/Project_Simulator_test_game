@@ -45,6 +45,7 @@ class ResultController(Screen):
         result_file = open(my_path)
         result_text = str(result_file.read())
         #  result_label = ResultLabel(text=result_text)
+        #self.result_box.
         self.result_box.text = result_text
         result_file.close()
         pass
